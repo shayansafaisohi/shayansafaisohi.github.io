@@ -113,7 +113,7 @@
         </div>
         <div>
           <span class="font-bold tracking-tight text-white block text-sm sm:text-base leading-tight">Shayan Safai Sohi</span>
-          <span class="text-xs text-slate-400 font-mono">@shayansafaisohi</span>
+          <span class="text-xs text-slate-400 font-mono">Senior Systems Architect</span>
         </div>
       </div>
 
@@ -180,10 +180,10 @@
           <i data-lucide="printer" class="w-4 h-4"></i>
           <span class="hidden lg:inline" data-i18n="btnSavePdf">Save PDF</span>
         </button>
-        <a href="https://github.com/shayansafaisohi" target="_blank" class="p-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all flex items-center gap-1.5 text-xs font-semibold">
-          <i data-lucide="github" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">GitHub</span>
-        </a>
+        <button onclick="copyContact()" class="p-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all flex items-center gap-1.5 text-xs font-semibold">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span class="hidden sm:inline" data-i18n="navContactBtn">Contact</span>
+        </button>
       </div>
     </nav>
   </header>
@@ -216,7 +216,7 @@
           <i data-lucide="layers" class="w-4 h-4"></i>
           <span data-i18n="heroCtaProjects">Explore Architecture</span>
         </a>
-        <button onclick="copyEmail()" id="copy-btn" class="px-6 py-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-medium text-sm border border-slate-700/80 hover:border-slate-600 transition-all flex items-center gap-2">
+        <button onclick="copyContact()" id="copy-btn" class="px-6 py-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-medium text-sm border border-slate-700/80 hover:border-slate-600 transition-all flex items-center gap-2">
           <i data-lucide="mail" class="w-4 h-4"></i>
           <span data-i18n="heroCtaContact">Copy Contact</span>
         </button>
@@ -267,14 +267,14 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" data-i18n="p1Tag">AI Intelligence & WebRTC</span>
-              <a href="https://github.com/shayansafaisohi/HamNeshin" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-                <i data-lucide="external-link" class="w-5 h-5"></i>
-              </a>
+              <span class="flex items-center gap-1.5 text-[11px] font-mono text-amber-300/90 bg-amber-500/10 border border-amber-500/25 px-2.5 py-1 rounded-full">
+                <i data-lucide="shield" class="w-3 h-3 text-amber-400"></i>
+                <span data-i18n="badgeEnterprise">Private / Enterprise</span>
+              </span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+            <h3 class="text-2xl font-bold text-white">
               <span data-i18n="p1Title">HamNeshin (هم‌نشین)</span>
-              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Private</span>
             </h3>
 
             <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p1Desc">
@@ -312,14 +312,14 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20" data-i18n="p2Tag">High-Concurrency ERP</span>
-              <a href="https://github.com/shayansafaisohi/AdvertisingPanel" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-                <i data-lucide="external-link" class="w-5 h-5"></i>
-              </a>
+              <span class="flex items-center gap-1.5 text-[11px] font-mono text-amber-300/90 bg-amber-500/10 border border-amber-500/25 px-2.5 py-1 rounded-full">
+                <i data-lucide="shield" class="w-3 h-3 text-amber-400"></i>
+                <span data-i18n="badgeEnterprise">Private / Enterprise</span>
+              </span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+            <h3 class="text-2xl font-bold text-white">
               <span data-i18n="p2Title">AdvertisingPanel</span>
-              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Private</span>
             </h3>
 
             <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p2Desc">
@@ -357,14 +357,14 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20" data-i18n="p3Tag">Monorepo & Zero-Trust</span>
-              <a href="https://github.com/shayansafaisohi/qaf" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-                <i data-lucide="external-link" class="w-5 h-5"></i>
-              </a>
+              <span class="flex items-center gap-1.5 text-[11px] font-mono text-amber-300/90 bg-amber-500/10 border border-amber-500/25 px-2.5 py-1 rounded-full">
+                <i data-lucide="shield" class="w-3 h-3 text-amber-400"></i>
+                <span data-i18n="badgeEnterprise">Private / Enterprise</span>
+              </span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+            <h3 class="text-2xl font-bold text-white">
               <span data-i18n="p3Title">Qaf LegalTech (قاف)</span>
-              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Monorepo</span>
             </h3>
 
             <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p3Desc">
@@ -401,14 +401,14 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" data-i18n="p4Tag">Corporate PWA & Services</span>
-              <a href="https://github.com/shayansafaisohi/refahi" target="_blank" class="text-slate-400 hover:text-white transition-colors">
-                <i data-lucide="external-link" class="w-5 h-5"></i>
-              </a>
+              <span class="flex items-center gap-1.5 text-[11px] font-mono text-amber-300/90 bg-amber-500/10 border border-amber-500/25 px-2.5 py-1 rounded-full">
+                <i data-lucide="shield" class="w-3 h-3 text-amber-400"></i>
+                <span data-i18n="badgeEnterprise">Private / Enterprise</span>
+              </span>
             </div>
 
-            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+            <h3 class="text-2xl font-bold text-white">
               <span data-i18n="p4Title">Refahi Portal (سامانه رفاهی)</span>
-              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Next.js 16</span>
             </h3>
 
             <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p4Desc">
@@ -515,13 +515,9 @@
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-        <a href="https://github.com/shayansafaisohi" target="_blank" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-sm border border-slate-700 transition-all flex items-center gap-2">
-          <i data-lucide="github" class="w-4 h-4"></i>
-          <span data-i18n="contactGithub">GitHub Profile</span>
-        </a>
-        <button onclick="copyEmail()" class="px-6 py-3 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-semibold text-sm border border-cyan-500/40 transition-all flex items-center gap-2">
-          <i data-lucide="copy" class="w-4 h-4"></i>
-          <span data-i18n="contactCopy">Copy Contact Info</span>
+        <button onclick="copyContact()" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:opacity-95 text-white font-semibold text-sm shadow-xl shadow-cyan-500/25 transition-all flex items-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span data-i18n="contactCopy">Get in Touch / Contact</span>
         </button>
       </div>
 
@@ -545,7 +541,7 @@
     const translations = {
       en: {
         dir: 'ltr', flag: '🇺🇸', code: 'EN',
-        navAbout: 'About', navProjects: 'Projects', navStack: 'Stack', navContact: 'Contact', btnSavePdf: 'Save PDF',
+        navAbout: 'About', navProjects: 'Projects', navStack: 'Stack', navContact: 'Contact', btnSavePdf: 'Save PDF', navContactBtn: 'Contact',
         heroBadge: 'Available for High-Impact Roles & Contracts',
         heroTitle1: 'Building Resilient', heroTitle2: 'Full-Stack & AI Systems',
         heroBio: 'Senior Engineer specializing in Real-Time WebRTC, Edge ML Inference, and Enterprise ERP Architectures. Obsessed with bulletproof type safety, zero-trust security (RLS), and automated E2E testing.',
@@ -556,6 +552,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: 'Modular Architecture',
         projTag: 'Selected Engineering Works', projTitle: 'Featured Production Systems',
         filterAll: 'All', filterAi: 'AI & Streaming', filterErp: 'Enterprise ERP', filterMonorepo: 'Monorepo / SaaS',
+        badgeEnterprise: 'Private / Enterprise',
         p1Tag: 'AI Intelligence & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
         p1Desc: 'Persian RTL conference intelligence platform for real-time recording, high-fidelity speech transcription, speaker identification, and automated action-item summarization.',
         p1B1: '<strong>LiveKit Client & Server SDK:</strong> Low-latency bidirectional WebRTC audio/video streaming.',
@@ -581,13 +578,13 @@
         stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'High-throughput microservices, WebSockets, and real-time audio/video pipelines.',
         stackDevopsTitle: 'Data, Security & DevOps', stackDevopsDesc: 'Strict data isolation, automated CI/CD pipelines, and end-to-end browser testing.',
         contactTitle: 'Let’s Build Something Exceptional', contactDesc: 'Interested in collaborating on real-time systems, AI products, or scaling your enterprise stack? Reach out directly.',
-        contactGithub: 'GitHub Profile', contactCopy: 'Copy Contact Info',
-        toastMsg: 'Contact copied to clipboard!',
+        contactCopy: 'Get in Touch / Contact',
+        toastMsg: 'Contact info copied to clipboard!',
         footerText: 'Designed & Architected by Shayan Safai Sohi • Built with Modern Web Standards'
       },
       fa: {
         dir: 'rtl', flag: '🇮🇷', code: 'FA',
-        navAbout: 'درباره من', navProjects: 'پروژه‌ها', navStack: 'مهارت‌ها', navContact: 'ارتباط', btnSavePdf: 'ذخیره PDF',
+        navAbout: 'درباره من', navProjects: 'پروژه‌ها', navStack: 'مهارت‌ها', navContact: 'ارتباط', btnSavePdf: 'ذخیره PDF', navContactBtn: 'ارتباط',
         heroBadge: 'آماده همکاری در موقعیت‌های شغلی و پروژه‌های بزرگ',
         heroTitle1: 'طراحی و توسعه سیستم‌های تاب‌آور', heroTitle2: 'فول‌استک و هوش مصنوعی',
         heroBio: 'مهندس ارشد نرم‌افزار متخصص در سامانه‌های بلادرنگ WebRTC، استنتاج هوش مصنوعی لبه (Edge ML) و معماری‌های پیشرفته ERP سازمانی. متعهد به تایپ ایمن (Type-Safe)، امنیت Zero-Trust در دیتابیس (RLS) و تست‌های خودکار E2E.',
@@ -598,6 +595,7 @@
         m4Val: 'مونوریپو با pnpm', m4Lbl: 'معماری ماژولار و مقیاس‌پذیر',
         projTag: 'گزیده آثار مهندسی', projTitle: 'پروژه‌های شاخص در مقیاس سازمانی',
         filterAll: 'همه', filterAi: 'هوش مصنوعی و استریم', filterErp: 'سامانه‌های ERP', filterMonorepo: 'مونوریپو و SaaS',
+        badgeEnterprise: 'سازمانی / محرمانه',
         p1Tag: 'هوش مصنوعی و WebRTC', p1Title: 'هم‌نشین (HamNeshin)',
         p1Desc: 'سامانه هوشمند ضبط، رونویسی، تفکیک گویندگان و خلاصه‌سازی خودکار جلسات سازمانی به زبان فارسی با رابط راست‌چین.',
         p1B1: '<strong>کلاینت و سرور LiveKit:</strong> استریم بلادرنگ و پایدار صوت و تصویر مبتنی بر WebRTC با کمترین تاخیر.',
@@ -623,13 +621,13 @@
         stackBackendTitle: 'بک‌اند و استریمینگ', stackBackendDesc: 'میکروسرویس‌های توان‌بالا، ارتباط بلادرنگ سوکت و پایپ‌لاین‌های پردازش صوت و تصویر.',
         stackDevopsTitle: 'داده، امنیت و دواپس', stackDevopsDesc: 'جداسازی داده‌ها، تست‌های خودکار یکپارچه و استقرار کانتینری در محیط پروداکشن.',
         contactTitle: 'بیایید پروژه‌ای خارق‌العاده خلق کنیم', contactDesc: 'اگر به دنبال پیاده‌سازی سامانه‌های بلادرنگ، هوش مصنوعی، یا مقیاس‌پذیری ساختار نرم‌افزاری خود هستید، در ارتباط باشید.',
-        contactGithub: 'پروفایل گیت‌هاب', contactCopy: 'کپی اطلاعات تماس',
-        toastMsg: 'اطلاعات تماس در کلیپ‌بورد کپی شد!',
+        contactCopy: 'ارتباط مستقیم و ارسال پیام',
+        toastMsg: 'اطلاعات ارتباطی در کلیپ‌بورد کپی شد!',
         footerText: 'طراحی و توسعه توسط شایان صفایی سوهی • پیاده‌سازی بر اساس استانداردهای مدرن وب'
       },
       de: {
         dir: 'ltr', flag: '🇩🇪', code: 'DE',
-        navAbout: 'Über mich', navProjects: 'Projekte', navStack: 'Stack', navContact: 'Kontakt', btnSavePdf: 'PDF Speichern',
+        navAbout: 'Über mich', navProjects: 'Projekte', navStack: 'Stack', navContact: 'Kontakt', btnSavePdf: 'PDF Speichern', navContactBtn: 'Kontakt',
         heroBadge: 'Verfügbar für anspruchsvolle Rollen & Verträge',
         heroTitle1: 'Entwicklung robuster', heroTitle2: 'Full-Stack & KI-Systeme',
         heroBio: 'Senior Engineer spezialisiert auf Echtzeit-WebRTC, Edge-ML-Inferenz und Enterprise-ERP-Architekturen. Höchster Fokus auf Typsicherheit, Zero-Trust-Sicherheit (RLS) und automatisierte E2E-Tests.',
@@ -640,6 +638,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: 'Modulare Architektur',
         projTag: 'Ausgewählte Ingenieurarbeiten', projTitle: 'Herausragende Produktionssysteme',
         filterAll: 'Alle', filterAi: 'KI & Streaming', filterErp: 'Enterprise ERP', filterMonorepo: 'Monorepo / SaaS',
+        badgeEnterprise: 'Unternehmen / Vertraulich',
         p1Tag: 'KI-Intelligenz & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
         p1Desc: 'Konferenz-Intelligenzplattform für Echtzeitaufnahme, Transkription, Sprechererkennung und automatisierte KI-Zusammenfassungen.',
         p1B1: '<strong>LiveKit SDK:</strong> Latenzarmes bidirektionales WebRTC-Audio/Video-Streaming.',
@@ -665,13 +664,13 @@
         stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'Hochdurchsatz-Microservices, WebSockets und Audio-/Videoverarbeitung.',
         stackDevopsTitle: 'Daten, Sicherheit & DevOps', stackDevopsDesc: 'Strikte Datenisolation, automatisierte CI/CD-Pipelines und Browser-Tests.',
         contactTitle: 'Lassen Sie uns Großes erschaffen', contactDesc: 'Interesse an einer Zusammenarbeit bei Echtzeitsystemen, KI-Produkten oder Skalierung? Kontaktieren Sie mich.',
-        contactGithub: 'GitHub Profil', contactCopy: 'Kontakt Kopieren',
+        contactCopy: 'Kontakt Aufnehmen',
         toastMsg: 'Kontakt in die Zwischenablage kopiert!',
         footerText: 'Konzipiert & Entwickelt von Shayan Safai Sohi • Gebaut mit modernen Webstandards'
       },
       fr: {
         dir: 'ltr', flag: '🇫🇷', code: 'FR',
-        navAbout: 'À propos', navProjects: 'Projets', navStack: 'Compétences', navContact: 'Contact', btnSavePdf: 'Enregistrer PDF',
+        navAbout: 'À propos', navProjects: 'Projets', navStack: 'Compétences', navContact: 'Contact', btnSavePdf: 'Enregistrer PDF', navContactBtn: 'Contact',
         heroBadge: 'Disponible pour rôles stratégiques & contrats',
         heroTitle1: 'Concevoir des Systèmes Résilients', heroTitle2: 'Full-Stack & Intelligence Artificielle',
         heroBio: 'Ingénieur Senior spécialisé en WebRTC temps réel, inférence ML en périphérie (Edge) et architectures ERP d’entreprise. Passionné par la sécurité Zero-Trust (RLS) et les tests automatisés E2E.',
@@ -682,6 +681,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: 'Architecture Modulaire',
         projTag: 'Travaux d’Ingénierie Choisis', projTitle: 'Systèmes de Production Phares',
         filterAll: 'Tous', filterAi: 'IA & Streaming', filterErp: 'ERP d’Entreprise', filterMonorepo: 'Monorepo / SaaS',
+        badgeEnterprise: 'Entreprise / Confidentiel',
         p1Tag: 'Intelligence IA & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
         p1Desc: 'Plateforme d’intelligence de conférence en temps réel pour l’enregistrement, transcription fidèle, identification des intervenants et synthèse automatique.',
         p1B1: '<strong>SDK LiveKit:</strong> Streaming audio/vidéo WebRTC bidirectionnel à très faible latence.',
@@ -707,13 +707,13 @@
         stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'Microservices à haut débit, WebSockets et flux multimédias en temps réel.',
         stackDevopsTitle: 'Données, Sécurité & DevOps', stackDevopsDesc: 'Isolation stricte des données, pipelines CI/CD automatisés et tests E2E.',
         contactTitle: 'Construisons Quelque Chose d’Exceptionnel', contactDesc: 'Intéressé par une collaboration sur des systèmes temps réel, des produits IA ou la mise à l’échelle de vos apps ? Contactez-moi.',
-        contactGithub: 'Profil GitHub', contactCopy: 'Copier Contact',
+        contactCopy: 'Prendre Contact',
         toastMsg: 'Contact copié dans le presse-papiers !',
         footerText: 'Conçu & Développé par Shayan Safai Sohi • Normes Web Modernes'
       },
       ar: {
         dir: 'rtl', flag: '🇸🇦', code: 'AR',
-        navAbout: 'عني', navProjects: 'المشاريع', navStack: 'التقنيات', navContact: 'اتصل بي', btnSavePdf: 'حفظ PDF',
+        navAbout: 'عني', navProjects: 'المشاريع', navStack: 'التقنيات', navContact: 'اتصل بي', btnSavePdf: 'حفظ PDF', navContactBtn: 'اتصل بي',
         heroBadge: 'متاح للفرص الاستراتيجية وعقود المشاريع الكبرى',
         heroTitle1: 'بناء وتطوير أنظمة مرنة', heroTitle2: 'فل ستاك وذكاء اصطناعي',
         heroBio: 'مهندس برمجيات أول متخصص في تقنيات WebRTC الفورية، استدلال نماذج الذكاء الاصطناعي على الحافة (Edge ML)، وبنى نظم ERP للمؤسسات. تركيز كامل على أمان Zero-Trust (RLS) والاختبارات الآلية E2E.',
@@ -724,6 +724,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: 'معمارية معيارية قابلة للتوسع',
         projTag: 'أعمال هندسية مختارة', projTitle: 'أنظمة إنتاجية مؤسسية بارزة',
         filterAll: 'الكل', filterAi: 'ذكاء اصطناعي وبث', filterErp: 'أنظمة ERP', filterMonorepo: 'مونوريبو و SaaS',
+        badgeEnterprise: 'مؤسسي / خاص',
         p1Tag: 'ذكاء اصطناعي و WebRTC', p1Title: 'هم‌نشین (HamNeshin)',
         p1Desc: 'منصة ذكاء اجتماعات لتسجيل وتفريغ الصوت بدقة عالية والتعرف على المتحدثين وتلخيص مخرجات الجلسات تلقائياً.',
         p1B1: '<strong>حزم LiveKit للعميل والخادم:</strong> بث صوتي ومرئي ثنائي الاتجاه منخفض زمن الاستجابة عبر WebRTC.',
@@ -749,13 +750,13 @@
         stackBackendTitle: 'الخلفية والبث الفوري', stackBackendDesc: 'خدمات مصغرة عالية السرعة، قنوات WebSockets ومعالجة الوسائط المتعددة.',
         stackDevopsTitle: 'البيانات، الأمان والعمليات', stackDevopsDesc: 'عزل صارم للبيانات، خطوط أنابيب CI/CD آلية واختبارات متكاملة للمتصفحات.',
         contactTitle: 'لنصنع معاً شيئاً استثنائياً', contactDesc: 'مهتم بالتعاون في مشاريع البث الفوري، تطبيقات الذكاء الاصطناعي أو توسيع أنظمتكم؟ تواصل معي مباشرة.',
-        contactGithub: 'ملف GitHub', contactCopy: 'نسخ معلومات الاتصال',
+        contactCopy: 'التواصل المباشر',
         toastMsg: 'تم نسخ معلومات الاتصال بنجاح!',
         footerText: 'تصميم وهندسة: شايان صفايي سوهي • مبني وفق أحدث معايير الويب'
       },
       es: {
         dir: 'ltr', flag: '🇪🇸', code: 'ES',
-        navAbout: 'Sobre mí', navProjects: 'Proyectos', navStack: 'Habilidades', navContact: 'Contacto', btnSavePdf: 'Guardar PDF',
+        navAbout: 'Sobre mí', navProjects: 'Proyectos', navStack: 'Habilidades', navContact: 'Contacto', btnSavePdf: 'Guardar PDF', navContactBtn: 'Contacto',
         heroBadge: 'Disponible para roles de alto impacto y contratos',
         heroTitle1: 'Construyendo Sistemas Resilientes', heroTitle2: 'Full-Stack e Inteligencia Artificial',
         heroBio: 'Ingeniero Senior especializado en WebRTC en tiempo real, inferencia Edge ML y arquitecturas ERP empresariales. Enfoque riguroso en seguridad Zero-Trust (RLS) y pruebas E2E automatizadas.',
@@ -766,6 +767,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: 'Arquitectura Modular',
         projTag: 'Obras de Ingeniería Seleccionadas', projTitle: 'Sistemas de Producción Destacados',
         filterAll: 'Todos', filterAi: 'IA y Streaming', filterErp: 'ERP Empresarial', filterMonorepo: 'Monorepo / SaaS',
+        badgeEnterprise: 'Empresarial / Privado',
         p1Tag: 'Inteligencia IA y WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
         p1Desc: 'Plataforma de inteligencia de conferencias para grabación, transcripción precisa, identificación de ponentes y resúmenes automáticos con IA.',
         p1B1: '<strong>SDK LiveKit:</strong> Streaming bidireccional WebRTC de audio y video con mínima latencia.',
@@ -791,13 +793,13 @@
         stackBackendTitle: 'Backend y Streaming', stackBackendDesc: 'Microservicios de alto rendimiento, WebSockets y procesamiento multimedia.',
         stackDevopsTitle: 'Datos, Seguridad y DevOps', stackDevopsDesc: 'Aislamiento estricto de datos, pipelines CI/CD y pruebas automatizadas de navegador.',
         contactTitle: 'Construyamos Algo Extraordinario', contactDesc: '¿Interesado en colaborar en sistemas de tiempo real, productos de IA o escalar sus aplicaciones? Contácteme directamente.',
-        contactGithub: 'Perfil de GitHub', contactCopy: 'Copiar Contacto',
+        contactCopy: 'Ponerse en Contacto',
         toastMsg: '¡Contacto copiado al portapapeles!',
         footerText: 'Diseñado y Desarrollado por Shayan Safai Sohi • Creado con Estándares Web Modernos'
       },
       it: {
         dir: 'ltr', flag: '🇮🇹', code: 'IT',
-        navAbout: 'Chi sono', navProjects: 'Progetti', navStack: 'Competenze', navContact: 'Contatto', btnSavePdf: 'Salva PDF',
+        navAbout: 'Chi sono', navProjects: 'Progetti', navStack: 'Competenze', navContact: 'Contatto', btnSavePdf: 'Salva PDF', navContactBtn: 'Contatto',
         heroBadge: 'Disponibile per ruoli ad alto impatto & contratti',
         heroTitle1: 'Creazione di Sistemi Resilienti', heroTitle2: 'Full-Stack & Intelligenza Artificiale',
         heroBio: 'Senior Software Engineer specializzato in WebRTC in tempo reale, inferenza Edge ML e architetture ERP enterprise. Forte attenzione alla sicurezza Zero-Trust (RLS) e ai test E2E automatizzati.',
@@ -808,6 +810,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: 'Architettura Modulare',
         projTag: 'Opere Ingegneristiche Selezionate', projTitle: 'Sistemi di Produzione di Rilievo',
         filterAll: 'Tutti', filterAi: 'IA & Streaming', filterErp: 'ERP Enterprise', filterMonorepo: 'Monorepo / SaaS',
+        badgeEnterprise: 'Aziendale / Riservato',
         p1Tag: 'Intelligenza IA & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
         p1Desc: 'Piattaforma di conferenza intelligente per registrazione in tempo reale, trascrizione ad alta fedeltà, diarizzazione vocale e sintesi automatica con IA.',
         p1B1: '<strong>SDK LiveKit:</strong> Streaming audio/video WebRTC bidirezionale a bassissima latenza.',
@@ -833,13 +836,13 @@
         stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'Microservizi ad alto throughput, WebSockets e streaming multimediale.',
         stackDevopsTitle: 'Dati, Sicurezza & DevOps', stackDevopsDesc: 'Isolamento rigoroso dei dati, pipeline CI/CD automatizzate e test browser E2E.',
         contactTitle: 'Costruiamo Insieme Qualcosa di Straordinario', contactDesc: 'Interessato a collaborare su sistemi in tempo reale, prodotti AI o a scalare la tua infrastruttura? Contattami direttamente.',
-        contactGithub: 'Profilo GitHub', contactCopy: 'Copia Contatto',
+        contactCopy: 'Mettiti in Contatto',
         toastMsg: 'Contatto copiato negli appunti!',
         footerText: 'Progettato e Sviluppato da Shayan Safai Sohi • Creato con Moderni Standard Web'
       },
       ru: {
         dir: 'ltr', flag: '🇷🇺', code: 'RU',
-        navAbout: 'Обо мне', navProjects: 'Проекты', navStack: 'Стек', navContact: 'Контакты', btnSavePdf: 'Сохранить PDF',
+        navAbout: 'Обо мне', navProjects: 'Проекты', navStack: 'Стек', navContact: 'Контакты', btnSavePdf: 'Сохранить PDF', navContactBtn: 'Контакты',
         heroBadge: 'Открыт для интересных предложений и контрактов',
         heroTitle1: 'Создание отказоустойчивых', heroTitle2: 'Full-Stack и AI систем',
         heroBio: 'Ведущий инженер, специализирующийся на WebRTC в реальном времени, локальном выводе моделей машинного обучения (Edge ML) и архитектуре корпоративных ERP. Фокус на безопасности Zero-Trust (RLS) и автоматизированном E2E тестировании.',
@@ -850,6 +853,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: 'Модульная масштабируемая архитектура',
         projTag: 'Инженерные проекты', projTitle: 'Ключевые production-системы',
         filterAll: 'Все', filterAi: 'ИИ и Стриминг', filterErp: 'ERP Системы', filterMonorepo: 'Монорепо / SaaS',
+        badgeEnterprise: 'Корпоративный / Приватный',
         p1Tag: 'ИИ и WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
         p1Desc: 'Платформа аналитики встреч для записи в реальном времени, точной транскрипции, разделения дикторов и автоматического создания итогов встреч.',
         p1B1: '<strong>LiveKit SDK:</strong> Двунаправленный WebRTC аудио/видео стриминг с минимальной задержкой.',
@@ -875,13 +879,13 @@
         stackBackendTitle: 'Бэкенд и стриминг', stackBackendDesc: 'Высокопроизводительные микросервисы, WebSockets и потоковая обработка медиа.',
         stackDevopsTitle: 'Базы данных, безопасность и DevOps', stackDevopsDesc: 'Строгая изоляция данных, автоматизированные CI/CD пайплайны и сквозное тестирование.',
         contactTitle: 'Давайте создадим что-то выдающееся', contactDesc: 'Заинтересованы в сотрудничестве по проектам реального времени, ИИ или масштабированию инфраструктуры? Пишите напрямую.',
-        contactGithub: 'Профиль GitHub', contactCopy: 'Скопировать контакт',
+        contactCopy: 'Связаться со мной',
         toastMsg: 'Контакт скопирован в буфер обмена!',
         footerText: 'Архитектура и разработка: Шаян Сафаи Сохи • Создано по современным веб-стандартам'
       },
       zh: {
         dir: 'ltr', flag: '🇨🇳', code: 'ZH',
-        navAbout: '关于', navProjects: '项目', navStack: '技术栈', navContact: '联系', btnSavePdf: '保存 PDF',
+        navAbout: '关于', navProjects: '项目', navStack: '技术栈', navContact: '联系', btnSavePdf: '保存 PDF', navContactBtn: '联系',
         heroBadge: '开放接受高价值全职与项目合作',
         heroTitle1: '构建高韧性', heroTitle2: '全栈与人工智能系统',
         heroBio: '资深全栈工程师，专注于实时 WebRTC 流媒体、边缘端机器学习推理（Edge ML）以及企业级 ERP 架构。深度践行类型安全、零信任安全（RLS）和全自动端到端（E2E）测试。',
@@ -892,6 +896,7 @@
         m4Val: 'pnpm Monorepo', m4Lbl: '模块化高可扩展架构',
         projTag: '精选工程作品', projTitle: '核心企业级生产系统',
         filterAll: '全部', filterAi: 'AI 与流媒体', filterErp: '企业级 ERP', filterMonorepo: 'Monorepo / SaaS',
+        badgeEnterprise: '企业级 / 私有项目',
         p1Tag: 'AI 智能与 WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
         p1Desc: '波斯语右至左（RTL）会议智能平台，具备实时会议录制、高精度语音转写、说话人辨识及自动化要点总结功能。',
         p1B1: '<strong>LiveKit SDK 客户端与服务端：</strong> 基于 WebRTC 的超低延迟双向音视频流传输。',
@@ -917,7 +922,7 @@
         stackBackendTitle: '后端与流式架构', stackBackendDesc: '高吞吐微服务、WebSockets 实时双向通讯与多媒体音视频处理管道。',
         stackDevopsTitle: '数据、安全与运维', stackDevopsDesc: '严格的数据隔离、自动化 CI/CD 交付流水线与浏览器端到端测试。',
         contactTitle: '携手创造卓越工程', contactDesc: '希望在实时流媒体系统、人工智能应用或高并发企业架构方面展开合作？欢迎直接与我联系。',
-        contactGithub: 'GitHub 主页', contactCopy: '复制联系方式',
+        contactCopy: '取得联系',
         toastMsg: '联系方式已复制至剪贴板！',
         footerText: '由 Shayan Safai Sohi 架构设计与开发 • 基于现代 Web 规范构建'
       }
@@ -930,11 +935,10 @@
       menu.classList.toggle('hidden');
     }
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       const langBtn = document.getElementById('lang-btn');
       const langMenu = document.getElementById('lang-menu');
-      if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+      if (langBtn && langMenu && !langBtn.contains(e.target) && !langMenu.contains(e.target)) {
         langMenu.classList.add('hidden');
       }
     });
@@ -946,15 +950,12 @@
 
       const data = translations[lang];
 
-      // Update HTML attributes
       document.documentElement.lang = lang;
       document.documentElement.dir = data.dir;
 
-      // Update button visual
       document.getElementById('current-flag').textContent = data.flag;
       document.getElementById('current-lang-code').textContent = data.code;
 
-      // Update all data-i18n elements
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (data[key]) {
@@ -962,25 +963,20 @@
         }
       });
 
-      // Update toast message default
       document.getElementById('toast-msg').textContent = data.toastMsg;
-
-      // Close menu
       document.getElementById('lang-menu').classList.add('hidden');
       
-      // Re-trigger lucide icons
       lucide.createIcons();
     }
 
-    // Load saved language on init
     window.addEventListener('DOMContentLoaded', () => {
       const saved = localStorage.getItem('preferred_lang') || 'en';
       setLanguage(saved);
     });
 
-    // Copy to Clipboard
-    function copyEmail() {
-      navigator.clipboard.writeText("https://github.com/shayansafaisohi");
+    function copyContact() {
+      const contactUrl = window.location.href;
+      navigator.clipboard.writeText(contactUrl);
       const toast = document.getElementById("toast");
       toast.classList.remove("translate-y-20", "opacity-0");
       setTimeout(() => {
@@ -988,7 +984,6 @@
       }, 3000);
     }
 
-    // Project Category Filtering
     function filterProjects(category) {
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active', 'bg-cyan-500/20', 'text-cyan-300', 'font-semibold');
