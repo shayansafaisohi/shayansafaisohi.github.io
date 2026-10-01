@@ -343,7 +343,7 @@
     .project-card .chip:nth-child(4) { transition-delay: 90ms; } .project-card .chip:nth-child(5) { transition-delay: 120ms; }
     .project-card .chip:nth-child(6) { transition-delay: 150ms; }
     /* the other cards step back while one is in focus */
-    .projects-grid:has(.project-card:hover) .project-card:not(:hover):not(.is-filtered-out) { opacity: 0.45; filter: saturate(0.5) brightness(0.8); }
+    .projects-grid:has(.project-card:hover) .project-card:not(:hover) { opacity: 0.45; filter: saturate(0.5) brightness(0.8); }
 
     .accent-cyan    { --accent: 34, 211, 238; }
     .accent-indigo  { --accent: 129, 140, 248; }
@@ -414,19 +414,7 @@
     #lang-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
     .chev { transition: transform 0.3s var(--ease-out); }
 
-    /* ---------- Filters ---------- */
-    .filter-wrap { position: relative; }
-    .filter-indicator {
-      position: absolute; top: 6px; bottom: 6px; left: 0; width: 0; border-radius: 0.5rem; z-index: 0;
-      background: linear-gradient(120deg, rgba(34, 211, 238, 0.22), rgba(129, 140, 248, 0.22));
-      border: 1px solid rgba(34, 211, 238, 0.35);
-      transition: transform 0.45s var(--ease-out), width 0.45s var(--ease-out);
-    }
-    .filter-btn { position: relative; z-index: 1; transition: color 0.25s ease; }
-    .filter-btn.active { color: #cffafe; }
-
     .project-card { transition: opacity 0.4s var(--ease-out), transform 0.5s var(--ease-out), box-shadow 0.4s ease, filter 0.4s ease; }
-    .project-card.is-filtered-out { opacity: 0; transform: scale(0.96) translateY(10px); }
 
     .chip { transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease-out); border: 1px solid rgba(148, 163, 184, 0.08); }
     .chip:hover { background: rgba(34, 211, 238, 0.12); color: #a5f3fc; border-color: rgba(34, 211, 238, 0.3); transform: translateY(-1px); }
@@ -638,7 +626,7 @@
           <i data-lucide="printer" class="w-4 h-4"></i>
           <span class="hidden lg:inline" data-i18n="btnSavePdf">Save PDF</span>
         </button>
-        <a href="https://github.com/shayansafaisohi" target="_blank" rel="noopener" class="h-9 px-3 rounded-xl bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 transition-colors flex items-center gap-1.5 text-xs font-semibold">
+        <a href="mailto:shayan.safai.sohi@gmail.com" class="h-9 px-3 rounded-xl bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 transition-colors flex items-center gap-1.5 text-xs font-semibold">
           <i data-lucide="mail" class="w-4 h-4"></i>
           <span class="hidden sm:inline" data-i18n="navContactBtn">Contact</span>
         </a>
@@ -684,9 +672,9 @@
           <span data-i18n="heroCtaProjects">Explore Architecture</span>
           <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
         </a>
-        <a href="https://github.com/shayansafaisohi" target="_blank" rel="noopener" class="btn-ghost magnetic px-6 py-3.5 rounded-xl text-slate-200 font-medium text-sm flex items-center gap-2">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
-          <span data-i18n="heroCtaContact">GitHub</span>
+        <a href="https://t.me/shayansafai" target="_blank" rel="noopener" class="btn-ghost magnetic px-6 py-3.5 rounded-xl text-slate-200 font-medium text-sm flex items-center gap-2">
+          <i data-lucide="send" class="w-4 h-4 text-sky-300"></i>
+          <span data-i18n="heroCtaContact">Telegram</span>
         </a>
       </div>
 
@@ -732,14 +720,6 @@
             <span class="text-xs font-mono uppercase tracking-[0.18em] text-cyan-300" data-i18n="projTag">Selected work</span>
           </div>
           <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-3" data-i18n="projTitle">Projects</h2>
-        </div>
-
-        <div data-reveal style="--d:120ms" class="filter-wrap self-start md:self-auto flex flex-wrap items-center gap-1 p-1.5 rounded-xl bg-slate-900/70 backdrop-blur border border-white/10 text-xs font-medium">
-          <span class="filter-indicator" aria-hidden="true"></span>
-          <button onclick="filterProjects('all')" class="filter-btn active px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200" data-cat="all" data-i18n="filterAll">All</button>
-          <button onclick="filterProjects('ai')" class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200" data-cat="ai" data-i18n="filterAi">AI & Streaming</button>
-          <button onclick="filterProjects('erp')" class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200" data-cat="erp" data-i18n="filterErp">Enterprise ERP</button>
-          <button onclick="filterProjects('monorepo')" class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200" data-cat="monorepo" data-i18n="filterMonorepo">Monorepo / SaaS</button>
         </div>
       </div>
 
@@ -948,8 +928,7 @@
           <span class="h-px w-10 bg-gradient-to-r rtl:bg-gradient-to-l from-violet-400 to-transparent"></span>
           <span class="text-xs font-mono uppercase tracking-[0.18em] text-violet-300" data-i18n="showTag">In motion</span>
         </div>
-        <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mt-3" data-i18n="showTitle">Watch the systems at work</h2>
-        <p class="text-slate-400 text-sm sm:text-base leading-relaxed mt-4 max-w-2xl" data-i18n="showDesc"></p>
+        <p class="font-display text-white text-xl sm:text-2xl font-bold leading-relaxed mt-3 max-w-3xl" data-i18n="showDesc"></p>
       </div>
 
       <div data-reveal style="--d:120ms" class="spot accent-violet relative rounded-[1.75rem] p-[6px] bg-slate-900/60 backdrop-blur shadow-[0_40px_120px_-40px_rgba(124,58,237,0.6)]">
@@ -962,20 +941,14 @@
       </div>
     </section>
 
-    <footer class="pt-10 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer class="pt-10 border-t border-white/5 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
       <div class="text-xs text-slate-500 font-mono" data-i18n="footerText">© 2026 Shayan Safai Sohi</div>
-      <div id="contact-links" class="flex flex-wrap items-center gap-2">
-        <a href="https://github.com/shayansafaisohi" target="_blank" rel="noopener" aria-label="GitHub" class="btn-ghost w-10 h-10 rounded-xl text-slate-300 hover:text-white grid place-items-center">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+      <div id="contact-links" class="flex items-center gap-2">
+        <a href="mailto:shayan.safai.sohi@gmail.com" aria-label="Email" title="Email" class="btn-ghost w-11 h-11 rounded-xl text-cyan-300 hover:text-white grid place-items-center">
+          <i data-lucide="mail" class="w-5 h-5"></i>
         </a>
-        <button data-contact="email" onclick="copyEmail()" aria-label="Email" class="hidden btn-ghost w-10 h-10 rounded-xl text-slate-300 hover:text-white place-items-center">
-          <i data-lucide="mail" class="w-4 h-4"></i>
-        </button>
-        <a data-contact="linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="hidden btn-ghost w-10 h-10 rounded-xl text-slate-300 hover:text-white place-items-center">
-          <i data-lucide="linkedin" class="w-4 h-4"></i>
-        </a>
-        <a data-contact="telegram" target="_blank" rel="noopener" aria-label="Telegram" class="hidden btn-ghost w-10 h-10 rounded-xl text-slate-300 hover:text-white place-items-center">
-          <i data-lucide="send" class="w-4 h-4"></i>
+        <a href="https://t.me/shayansafai" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram" class="btn-ghost w-11 h-11 rounded-xl text-sky-300 hover:text-white grid place-items-center">
+          <i data-lucide="send" class="w-5 h-5"></i>
         </a>
       </div>
     </footer>
@@ -1103,10 +1076,9 @@
         heroBadge: 'Open to full-time roles and freelance projects',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: '& <bdi class="whitespace-nowrap">Full-Stack</bdi> Development',
         heroBio: 'I find the manual, repetitive work in a business that AI or Python can take over — and build the system that runs it end to end: n8n workflows, backend & APIs, admin panels and web apps, and AI integration with LLMs and agents.',
-        heroCtaProjects: 'See projects', heroCtaContact: 'GitHub',
+        heroCtaProjects: 'See projects', heroCtaContact: 'Telegram',
         m1Lbl: 'production systems', m2Lbl: 'user roles in one workflow', m3Lbl: 'automated security tests', m4Lbl: 'roles tested in parallel',
         projTag: 'Selected work', projTitle: 'Projects',
-        filterAll: 'All', filterAi: 'AI & real-time', filterErp: 'Business systems', filterMonorepo: 'Web platforms',
         badgeEnterprise: 'Private code',
         p1Tag: 'AI · Real-time', p1Title: 'HamNeshin',
         p1Desc: 'Records Persian-language meetings, transcribes them, identifies who said what, and delivers a summary with action items.',
@@ -1133,12 +1105,9 @@
         stackBackendTitle: 'Backend & real-time', stackBackendDesc: 'APIs, WebSockets and real-time audio / video pipelines.',
         stackDevopsTitle: 'Data, security & delivery', stackDevopsDesc: 'PostgreSQL with row-level security, containerised deploys and end-to-end tests.',
         stackAutoTitle: 'Automation & AI', stackAutoDesc: 'n8n workflows that connect APIs, webhooks and LLMs to remove repetitive work.',
-        showTag: 'In motion', showTitle: 'Watch the systems at work',
+        showTag: 'In motion',
         showDesc: 'A 30-second walkthrough of five projects — from an AI automation workflow to the panels and apps built on top of it.',
         chatTitle: 'Ask about Shayan', chatSub: 'AI assistant · instant replies', chatPlaceholder: 'Type your question…', chatGreeting: 'Hi! I can tell you about Shayan’s projects and skills, or how he could automate a process in your business. What would you like to know?', chatQ1: 'What does Shayan specialise in?', chatQ2: 'Tell me about HamNeshin', chatQ3: 'Can he automate my workflow with n8n?', chatError: 'Something went wrong. Please try again in a moment.', chatBusy: 'Too many messages — please wait a minute.', chatOffline: 'The assistant is not connected yet.',
-        contactTitle: 'Have a project or a role in mind?',
-        contactDesc: 'I’m open to full-time positions and freelance work on web platforms and automation. My code and activity are on GitHub.',
-        contactCopy: 'GitHub profile', contactEmail: 'Copy email',
         toastMsg: 'Copied to clipboard',
         footerText: '© 2026 Shayan Safai Sohi'
       },
@@ -1148,10 +1117,9 @@
         heroBadge: 'آماده همکاری تمام‌وقت و پروژه‌ای',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: 'و توسعه <bdi class="whitespace-nowrap">Full-Stack</bdi>',
         heroBio: 'فرایندهای دستی و تکراری کسب‌وکار را که با AI یا Python قابل خودکارسازی‌اند شناسایی می‌کنم و سیستم کاملش را می‌سازم: از طراحی Workflow در n8n و توسعه Backend و API، تا Admin Panel و Web App، و در نهایت AI Integration با LLM و AI Agent روی سامانه‌های موجود.',
-        heroCtaProjects: 'دیدن پروژه‌ها', heroCtaContact: 'گیت‌هاب',
+        heroCtaProjects: 'دیدن پروژه‌ها', heroCtaContact: 'تلگرام',
         m1Lbl: 'سامانه در محیط عملیاتی', m2Lbl: 'نقش کاربری در یک گردش کار', m3Lbl: 'تست خودکار امنیتی', m4Lbl: 'نقش هم‌زمان در تست E2E',
         projTag: 'نمونه‌کارها', projTitle: 'پروژه‌ها',
-        filterAll: 'همه', filterAi: 'هوش مصنوعی و بلادرنگ', filterErp: 'سیستم‌های سازمانی', filterMonorepo: 'پلتفرم‌های وب',
         badgeEnterprise: 'کد خصوصی',
         p1Tag: 'هوش مصنوعی · بلادرنگ', p1Title: 'هم‌نشین',
         p1Desc: 'جلسات فارسی را ضبط و پیاده می‌کند، مشخص می‌کند هر جمله را چه کسی گفته و در پایان خلاصه جلسه و فهرست اقدام‌ها را تحویل می‌دهد.',
@@ -1178,12 +1146,9 @@
         stackBackendTitle: 'بک‌اند و بلادرنگ', stackBackendDesc: 'API، وب‌سوکت و پایپ‌لاین‌های صوت و تصویر بلادرنگ.',
         stackDevopsTitle: 'داده، امنیت و استقرار', stackDevopsDesc: 'PostgreSQL با امنیت سطح سطر، استقرار کانتینری و تست end-to-end.',
         stackAutoTitle: 'اتوماسیون و هوش مصنوعی', stackAutoDesc: 'ورک‌فلوهای n8n که APIها، وب‌هوک‌ها و مدل‌های زبانی را به هم وصل می‌کنند تا کارهای تکراری حذف شوند.',
-        showTag: 'نمایش زنده', showTitle: 'سیستم‌ها را در حال کار ببینید',
+        showTag: 'نمایش زنده',
         showDesc: 'مروری ۳۰ ثانیه‌ای بر پنج پروژه؛ از یک Workflow اتوماسیون با AI تا پنل‌ها و اپلیکیشن‌هایی که روی آن ساخته شده‌اند.',
         chatTitle: 'از شایان بپرسید', chatSub: 'دستیار هوش مصنوعی · پاسخ فوری', chatPlaceholder: 'سؤالتان را بنویسید…', chatGreeting: 'سلام! می‌توانم درباره پروژه‌ها و مهارت‌های شایان بگویم، یا اینکه چطور می‌شود یک فرایند کسب‌وکار شما را خودکار کرد. چه چیزی می‌خواهید بدانید؟', chatQ1: 'تخصص اصلی شایان چیست؟', chatQ2: 'درباره پروژه هم‌نشین بگو', chatQ3: 'می‌تواند فرایند کاری من را با n8n خودکار کند؟', chatError: 'مشکلی پیش آمد. لطفاً چند لحظه دیگر دوباره امتحان کنید.', chatBusy: 'پیام‌ها زیاد شد؛ لطفاً یک دقیقه صبر کنید.', chatOffline: 'دستیار هنوز متصل نشده است.',
-        contactTitle: 'پروژه یا موقعیت شغلی در نظر دارید؟',
-        contactDesc: 'برای موقعیت تمام‌وقت و پروژه‌های فریلنس در حوزه پلتفرم وب و اتوماسیون آماده همکاری هستم. نمونه کد و فعالیت‌هایم در گیت‌هاب است.',
-        contactCopy: 'پروفایل گیت‌هاب', contactEmail: 'کپی ایمیل',
         toastMsg: 'کپی شد',
         footerText: '© ۲۰۲۶ شایان صفایی سوهی'
       },
@@ -1193,10 +1158,9 @@
         heroBadge: 'Offen für Festanstellung und Freelance-Projekte',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: '& <bdi class="whitespace-nowrap">Full-Stack-Entwicklung</bdi>',
         heroBio: 'Ich finde die manuellen, wiederkehrenden Prozesse eines Unternehmens, die sich mit AI oder Python automatisieren lassen – und baue das komplette System dafür: n8n-Workflows, Backend & APIs, Admin-Panels und Web-Apps sowie AI-Integration mit LLMs und Agents.',
-        heroCtaProjects: 'Projekte ansehen', heroCtaContact: 'GitHub',
+        heroCtaProjects: 'Projekte ansehen', heroCtaContact: 'Telegram',
         m1Lbl: 'Systeme im Produktivbetrieb', m2Lbl: 'Benutzerrollen in einem Workflow', m3Lbl: 'automatisierte Sicherheitstests', m4Lbl: 'parallel getestete Rollen',
         projTag: 'Ausgewählte Arbeiten', projTitle: 'Projekte',
-        filterAll: 'Alle', filterAi: 'KI & Echtzeit', filterErp: 'Business-Systeme', filterMonorepo: 'Web-Plattformen',
         badgeEnterprise: 'Privater Code',
         p1Tag: 'KI · Echtzeit', p1Title: 'HamNeshin',
         p1Desc: 'Zeichnet persischsprachige Meetings auf, transkribiert sie, erkennt, wer was gesagt hat, und liefert eine Zusammenfassung mit Aufgaben.',
@@ -1223,12 +1187,9 @@
         stackBackendTitle: 'Backend & Echtzeit', stackBackendDesc: 'APIs, WebSockets und Audio-/Video-Pipelines in Echtzeit.',
         stackDevopsTitle: 'Daten, Sicherheit & Delivery', stackDevopsDesc: 'PostgreSQL mit Row-Level-Security, Container-Deployments und End-to-End-Tests.',
         stackAutoTitle: 'Automatisierung & KI', stackAutoDesc: 'n8n-Workflows, die APIs, Webhooks und LLMs verbinden und wiederkehrende Arbeit eliminieren.',
-        showTag: 'In Aktion', showTitle: 'Die Systeme in Aktion',
+        showTag: 'In Aktion',
         showDesc: 'Ein 30-Sekunden-Rundgang durch fünf Projekte – vom AI-Automation-Workflow bis zu den Panels und Apps, die darauf aufbauen.',
         chatTitle: 'Frag zu Shayan', chatSub: 'KI-Assistent · antwortet sofort', chatPlaceholder: 'Deine Frage…', chatGreeting: 'Hallo! Ich erzähle dir gern von Shayans Projekten und Skills – oder wie er einen Prozess in deinem Unternehmen automatisieren könnte. Was möchtest du wissen?', chatQ1: 'Worauf ist Shayan spezialisiert?', chatQ2: 'Erzähl mir von HamNeshin', chatQ3: 'Kann er meinen Workflow mit n8n automatisieren?', chatError: 'Etwas ist schiefgelaufen. Bitte versuche es gleich noch einmal.', chatBusy: 'Zu viele Nachrichten – bitte warte eine Minute.', chatOffline: 'Der Assistent ist noch nicht verbunden.',
-        contactTitle: 'Ein Projekt oder eine Stelle im Kopf?',
-        contactDesc: 'Ich bin offen für Festanstellungen und Freelance-Projekte rund um Web-Plattformen und Automatisierung. Code und Aktivität findest du auf GitHub.',
-        contactCopy: 'GitHub-Profil', contactEmail: 'E-Mail kopieren',
         toastMsg: 'Kopiert',
         footerText: '© 2026 Shayan Safai Sohi'
       },
@@ -1238,10 +1199,9 @@
         heroBadge: 'Disponible pour un poste à temps plein ou des missions freelance',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: '& développement <bdi class="whitespace-nowrap">Full-Stack</bdi>',
         heroBio: 'J’identifie les tâches manuelles et répétitives qu’une entreprise peut confier à l’IA ou à Python, puis je construis le système complet : workflows n8n, backend et API, panneaux d’administration et applications web, et intégration de l’IA avec des LLM et des agents.',
-        heroCtaProjects: 'Voir les projets', heroCtaContact: 'GitHub',
+        heroCtaProjects: 'Voir les projets', heroCtaContact: 'Telegram',
         m1Lbl: 'systèmes en production', m2Lbl: 'rôles dans un seul workflow', m3Lbl: 'tests de sécurité automatisés', m4Lbl: 'rôles testés en parallèle',
         projTag: 'Travaux choisis', projTitle: 'Projets',
-        filterAll: 'Tous', filterAi: 'IA & temps réel', filterErp: 'Systèmes métier', filterMonorepo: 'Plateformes web',
         badgeEnterprise: 'Code privé',
         p1Tag: 'IA · Temps réel', p1Title: 'HamNeshin',
         p1Desc: 'Enregistre les réunions en persan, les transcrit, identifie qui a dit quoi et produit un résumé avec les actions à mener.',
@@ -1268,12 +1228,9 @@
         stackBackendTitle: 'Backend & temps réel', stackBackendDesc: 'API, WebSockets et pipelines audio / vidéo en temps réel.',
         stackDevopsTitle: 'Données, sécurité & livraison', stackDevopsDesc: 'PostgreSQL avec sécurité au niveau des lignes, déploiements conteneurisés et tests end-to-end.',
         stackAutoTitle: 'Automatisation & IA', stackAutoDesc: 'Workflows n8n qui relient API, webhooks et LLM pour supprimer les tâches répétitives.',
-        showTag: 'En action', showTitle: 'Les systèmes en action',
+        showTag: 'En action',
         showDesc: 'Un tour de 30 secondes de cinq projets — du workflow d’automatisation IA aux panneaux et applications construits dessus.',
         chatTitle: 'Questions sur Shayan', chatSub: 'Assistant IA · réponse immédiate', chatPlaceholder: 'Écrivez votre question…', chatGreeting: 'Bonjour ! Je peux vous parler des projets et compétences de Shayan, ou de la façon dont il pourrait automatiser un processus de votre entreprise. Que voulez-vous savoir ?', chatQ1: 'Quelle est la spécialité de Shayan ?', chatQ2: 'Parlez-moi de HamNeshin', chatQ3: 'Peut-il automatiser mon workflow avec n8n ?', chatError: 'Une erreur est survenue. Réessayez dans un instant.', chatBusy: 'Trop de messages — patientez une minute.', chatOffline: 'L’assistant n’est pas encore connecté.',
-        contactTitle: 'Un projet ou un poste en tête ?',
-        contactDesc: 'Je suis ouvert aux postes à temps plein et aux missions freelance autour des plateformes web et de l’automatisation. Mon code et mon activité sont sur GitHub.',
-        contactCopy: 'Profil GitHub', contactEmail: 'Copier l’e-mail',
         toastMsg: 'Copié',
         footerText: '© 2026 Shayan Safai Sohi'
       },
@@ -1283,10 +1240,9 @@
         heroBadge: 'متاح للعمل بدوام كامل والمشاريع الحرة',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: 'وتطوير <bdi class="whitespace-nowrap">Full-Stack</bdi>',
         heroBio: 'أحدّد العمليات اليدوية والمتكررة في المؤسسة التي يمكن أن يتولاها الذكاء الاصطناعي أو Python، ثم أبني النظام الكامل لتنفيذها: سير عمل n8n، والـ Backend والـ API، ولوحات الإدارة وتطبيقات الويب، ودمج الذكاء الاصطناعي عبر LLM و AI Agents.',
-        heroCtaProjects: 'عرض المشاريع', heroCtaContact: 'GitHub',
+        heroCtaProjects: 'عرض المشاريع', heroCtaContact: 'تيليجرام',
         m1Lbl: 'أنظمة قيد التشغيل', m2Lbl: 'أدوار في سير عمل واحد', m3Lbl: 'اختبار أمان آلي', m4Lbl: 'أدوار مختبرة بالتوازي',
         projTag: 'أعمال مختارة', projTitle: 'المشاريع',
-        filterAll: 'الكل', filterAi: 'الذكاء الاصطناعي والوقت الفعلي', filterErp: 'أنظمة الأعمال', filterMonorepo: 'منصات الويب',
         badgeEnterprise: 'شيفرة خاصة',
         p1Tag: 'ذكاء اصطناعي · وقت فعلي', p1Title: 'هم‌نشين (HamNeshin)',
         p1Desc: 'يسجّل الاجتماعات باللغة الفارسية ويفرّغها نصيًا ويحدد من قال ماذا، ثم يقدّم ملخصًا مع قائمة المهام.',
@@ -1313,12 +1269,9 @@
         stackBackendTitle: 'الخلفية والوقت الفعلي', stackBackendDesc: 'واجهات API و WebSockets ومعالجة الصوت والفيديو في الوقت الفعلي.',
         stackDevopsTitle: 'البيانات والأمان والنشر', stackDevopsDesc: 'PostgreSQL مع أمان على مستوى الصفوف، ونشر بالحاويات، واختبارات شاملة.',
         stackAutoTitle: 'الأتمتة والذكاء الاصطناعي', stackAutoDesc: 'سير عمل في n8n يربط واجهات API والـ Webhooks ونماذج اللغة للتخلص من المهام المتكررة.',
-        showTag: 'عرض حي', showTitle: 'شاهد الأنظمة وهي تعمل',
+        showTag: 'عرض حي',
         showDesc: 'جولة مدتها 30 ثانية في خمسة مشاريع — من سير عمل أتمتة بالذكاء الاصطناعي إلى اللوحات والتطبيقات المبنية عليه.',
         chatTitle: 'اسأل عن شايان', chatSub: 'مساعد ذكاء اصطناعي · رد فوري', chatPlaceholder: 'اكتب سؤالك…', chatGreeting: 'مرحبًا! يمكنني إخبارك عن مشاريع شايان ومهاراته، أو كيف يمكنه أتمتة عملية في شركتك. ماذا تريد أن تعرف؟', chatQ1: 'ما تخصص شايان؟', chatQ2: 'حدّثني عن مشروع HamNeshin', chatQ3: 'هل يمكنه أتمتة سير عملي باستخدام n8n؟', chatError: 'حدث خطأ. حاول مرة أخرى بعد قليل.', chatBusy: 'رسائل كثيرة — انتظر دقيقة من فضلك.', chatOffline: 'المساعد غير متصل بعد.',
-        contactTitle: 'لديك مشروع أو وظيفة في ذهنك؟',
-        contactDesc: 'متاح للوظائف بدوام كامل والمشاريع الحرة في مجال منصات الويب والأتمتة. الشيفرة والنشاط على GitHub.',
-        contactCopy: 'ملف GitHub', contactEmail: 'نسخ البريد',
         toastMsg: 'تم النسخ',
         footerText: '© 2026 Shayan Safai Sohi'
       },
@@ -1328,10 +1281,9 @@
         heroBadge: 'Disponible para empleo a tiempo completo y proyectos freelance',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: 'y desarrollo <bdi class="whitespace-nowrap">Full-Stack</bdi>',
         heroBio: 'Detecto el trabajo manual y repetitivo de una empresa que puede asumir la IA o Python, y construyo el sistema completo que lo ejecuta: workflows en n8n, backend y APIs, paneles de administración y aplicaciones web, e integración de IA con LLM y agentes.',
-        heroCtaProjects: 'Ver proyectos', heroCtaContact: 'GitHub',
+        heroCtaProjects: 'Ver proyectos', heroCtaContact: 'Telegram',
         m1Lbl: 'sistemas en producción', m2Lbl: 'roles en un mismo flujo', m3Lbl: 'pruebas de seguridad automatizadas', m4Lbl: 'roles probados en paralelo',
         projTag: 'Trabajo seleccionado', projTitle: 'Proyectos',
-        filterAll: 'Todos', filterAi: 'IA y tiempo real', filterErp: 'Sistemas de negocio', filterMonorepo: 'Plataformas web',
         badgeEnterprise: 'Código privado',
         p1Tag: 'IA · Tiempo real', p1Title: 'HamNeshin',
         p1Desc: 'Graba reuniones en persa, las transcribe, identifica quién dijo qué y entrega un resumen con las tareas pendientes.',
@@ -1358,12 +1310,9 @@
         stackBackendTitle: 'Backend y tiempo real', stackBackendDesc: 'APIs, WebSockets y pipelines de audio y vídeo en tiempo real.',
         stackDevopsTitle: 'Datos, seguridad y despliegue', stackDevopsDesc: 'PostgreSQL con seguridad a nivel de fila, despliegues en contenedores y pruebas end-to-end.',
         stackAutoTitle: 'Automatización e IA', stackAutoDesc: 'Flujos de n8n que conectan APIs, webhooks y LLM para eliminar el trabajo repetitivo.',
-        showTag: 'En acción', showTitle: 'Mira los sistemas en acción',
+        showTag: 'En acción',
         showDesc: 'Un recorrido de 30 segundos por cinco proyectos: desde un workflow de automatización con IA hasta los paneles y apps construidos sobre él.',
         chatTitle: 'Pregunta sobre Shayan', chatSub: 'Asistente IA · respuesta inmediata', chatPlaceholder: 'Escribe tu pregunta…', chatGreeting: '¡Hola! Puedo contarte sobre los proyectos y habilidades de Shayan, o cómo podría automatizar un proceso de tu empresa. ¿Qué te gustaría saber?', chatQ1: '¿En qué se especializa Shayan?', chatQ2: 'Háblame de HamNeshin', chatQ3: '¿Puede automatizar mi flujo de trabajo con n8n?', chatError: 'Algo salió mal. Inténtalo de nuevo en un momento.', chatBusy: 'Demasiados mensajes: espera un minuto.', chatOffline: 'El asistente aún no está conectado.',
-        contactTitle: '¿Tienes un proyecto o un puesto en mente?',
-        contactDesc: 'Estoy abierto a puestos a tiempo completo y proyectos freelance sobre plataformas web y automatización. Mi código y actividad están en GitHub.',
-        contactCopy: 'Perfil de GitHub', contactEmail: 'Copiar correo',
         toastMsg: 'Copiado',
         footerText: '© 2026 Shayan Safai Sohi'
       },
@@ -1373,10 +1322,9 @@
         heroBadge: 'Disponibile per posizioni full-time e progetti freelance',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: '& sviluppo <bdi class="whitespace-nowrap">Full-Stack</bdi>',
         heroBio: 'Individuo i processi manuali e ripetitivi di un’azienda che possono essere affidati all’IA o a Python, e costruisco il sistema completo che li gestisce: workflow n8n, backend e API, pannelli di amministrazione e web app, e integrazione dell’IA con LLM e agenti.',
-        heroCtaProjects: 'Vedi i progetti', heroCtaContact: 'GitHub',
+        heroCtaProjects: 'Vedi i progetti', heroCtaContact: 'Telegram',
         m1Lbl: 'sistemi in produzione', m2Lbl: 'ruoli in un unico workflow', m3Lbl: 'test di sicurezza automatizzati', m4Lbl: 'ruoli testati in parallelo',
         projTag: 'Lavori selezionati', projTitle: 'Progetti',
-        filterAll: 'Tutti', filterAi: 'IA e tempo reale', filterErp: 'Sistemi aziendali', filterMonorepo: 'Piattaforme web',
         badgeEnterprise: 'Codice privato',
         p1Tag: 'IA · Tempo reale', p1Title: 'HamNeshin',
         p1Desc: 'Registra riunioni in persiano, le trascrive, riconosce chi ha detto cosa e produce un riepilogo con le azioni da svolgere.',
@@ -1403,12 +1351,9 @@
         stackBackendTitle: 'Backend e tempo reale', stackBackendDesc: 'API, WebSocket e pipeline audio / video in tempo reale.',
         stackDevopsTitle: 'Dati, sicurezza e rilascio', stackDevopsDesc: 'PostgreSQL con sicurezza a livello di riga, deploy in container e test end-to-end.',
         stackAutoTitle: 'Automazione e IA', stackAutoDesc: 'Workflow n8n che collegano API, webhook e LLM per eliminare il lavoro ripetitivo.',
-        showTag: 'In azione', showTitle: 'Guarda i sistemi all’opera',
+        showTag: 'In azione',
         showDesc: 'Un tour di 30 secondi in cinque progetti: dal workflow di automazione con IA ai pannelli e alle app costruiti sopra.',
         chatTitle: 'Chiedi di Shayan', chatSub: 'Assistente IA · risposta immediata', chatPlaceholder: 'Scrivi la tua domanda…', chatGreeting: 'Ciao! Posso parlarti dei progetti e delle competenze di Shayan, o di come potrebbe automatizzare un processo della tua azienda. Cosa vuoi sapere?', chatQ1: 'In cosa è specializzato Shayan?', chatQ2: 'Parlami di HamNeshin', chatQ3: 'Può automatizzare il mio workflow con n8n?', chatError: 'Qualcosa è andato storto. Riprova tra un momento.', chatBusy: 'Troppi messaggi: attendi un minuto.', chatOffline: 'L’assistente non è ancora collegato.',
-        contactTitle: 'Hai in mente un progetto o una posizione?',
-        contactDesc: 'Sono disponibile per posizioni full-time e progetti freelance su piattaforme web e automazione. Codice e attività sono su GitHub.',
-        contactCopy: 'Profilo GitHub', contactEmail: 'Copia e-mail',
         toastMsg: 'Copiato',
         footerText: '© 2026 Shayan Safai Sohi'
       },
@@ -1418,10 +1363,9 @@
         heroBadge: 'Открыт к работе в штате и фриланс-проектам',
         heroTitle1: '<bdi class="whitespace-nowrap">AI Automation</bdi>', heroTitle2: 'и <bdi class="whitespace-nowrap">Full-Stack</bdi> разработка',
         heroBio: 'Нахожу в бизнесе ручные и повторяющиеся процессы, которые можно передать AI или Python, и строю систему целиком: workflow в n8n, бэкенд и API, админ-панели и веб-приложения, а также AI-интеграцию с LLM и агентами.',
-        heroCtaProjects: 'Смотреть проекты', heroCtaContact: 'GitHub',
+        heroCtaProjects: 'Смотреть проекты', heroCtaContact: 'Telegram',
         m1Lbl: 'системы в продакшене', m2Lbl: 'ролей в одном процессе', m3Lbl: 'автотестов безопасности', m4Lbl: 'ролей в параллельных тестах',
         projTag: 'Избранные работы', projTitle: 'Проекты',
-        filterAll: 'Все', filterAi: 'ИИ и реальное время', filterErp: 'Бизнес-системы', filterMonorepo: 'Веб-платформы',
         badgeEnterprise: 'Закрытый код',
         p1Tag: 'ИИ · Реальное время', p1Title: 'HamNeshin',
         p1Desc: 'Записывает встречи на персидском, расшифровывает их, определяет, кто что сказал, и готовит резюме со списком задач.',
@@ -1448,12 +1392,9 @@
         stackBackendTitle: 'Бэкенд и реальное время', stackBackendDesc: 'API, WebSocket и аудио/видео-конвейеры в реальном времени.',
         stackDevopsTitle: 'Данные, безопасность и доставка', stackDevopsDesc: 'PostgreSQL с row-level security, деплой в контейнерах и end-to-end тесты.',
         stackAutoTitle: 'Автоматизация и ИИ', stackAutoDesc: 'Workflow в n8n, которые связывают API, вебхуки и LLM и убирают рутинную работу.',
-        showTag: 'В действии', showTitle: 'Системы в работе',
+        showTag: 'В действии',
         showDesc: '30-секундный обзор пяти проектов — от AI-автоматизации в n8n до панелей и приложений поверх неё.',
         chatTitle: 'Спросите о Шаяне', chatSub: 'AI-ассистент · отвечает сразу', chatPlaceholder: 'Напишите вопрос…', chatGreeting: 'Здравствуйте! Я расскажу о проектах и навыках Шаяна или о том, как он может автоматизировать процесс в вашей компании. Что вас интересует?', chatQ1: 'На чём специализируется Шаян?', chatQ2: 'Расскажи о HamNeshin', chatQ3: 'Может ли он автоматизировать мой процесс в n8n?', chatError: 'Что-то пошло не так. Попробуйте ещё раз чуть позже.', chatBusy: 'Слишком много сообщений — подождите минуту.', chatOffline: 'Ассистент пока не подключён.',
-        contactTitle: 'Есть проект или вакансия?',
-        contactDesc: 'Открыт к работе в штате и фриланс-проектам в области веб-платформ и автоматизации. Код и активность — на GitHub.',
-        contactCopy: 'Профиль на GitHub', contactEmail: 'Скопировать e-mail',
         toastMsg: 'Скопировано',
         footerText: '© 2026 Shayan Safai Sohi'
       },
@@ -1463,10 +1404,9 @@
         heroBadge: '可接受全职职位与自由职业项目',
         heroTitle1: 'AI 自动化', heroTitle2: '与全栈开发',
         heroBio: '我擅长找出企业中可以交给 AI 或 Python 完成的手工、重复性流程，并搭建完整的系统来执行：n8n 工作流、后端与 API、管理后台与 Web 应用，以及基于 LLM 和 AI Agent 的智能化集成。',
-        heroCtaProjects: '查看项目', heroCtaContact: 'GitHub',
+        heroCtaProjects: '查看项目', heroCtaContact: 'Telegram',
         m1Lbl: '个上线运行的系统', m2Lbl: '个角色共用一个流程', m3Lbl: '项自动化安全测试', m4Lbl: '个角色并行测试',
         projTag: '精选作品', projTitle: '项目',
-        filterAll: '全部', filterAi: 'AI 与实时', filterErp: '业务系统', filterMonorepo: 'Web 平台',
         badgeEnterprise: '私有代码',
         p1Tag: 'AI · 实时', p1Title: 'HamNeshin',
         p1Desc: '录制波斯语会议并转写成文字，识别每句话的说话人，最后生成包含待办事项的摘要。',
@@ -1493,27 +1433,17 @@
         stackBackendTitle: '后端与实时', stackBackendDesc: 'API、WebSocket 以及实时音视频处理流程。',
         stackDevopsTitle: '数据、安全与交付', stackDevopsDesc: '带行级安全的 PostgreSQL、容器化部署和端到端测试。',
         stackAutoTitle: '自动化与 AI', stackAutoDesc: '用 n8n 工作流连接 API、Webhook 和大语言模型，消除重复性工作。',
-        showTag: '实际演示', showTitle: '看看这些系统如何运行',
+        showTag: '实际演示',
         showDesc: '30 秒带你浏览五个项目——从 AI 自动化工作流到构建在其上的管理后台与应用。',
         chatTitle: '向 AI 了解 Shayan', chatSub: 'AI 助手 · 即时回复', chatPlaceholder: '输入你的问题…', chatGreeting: '你好！我可以介绍 Shayan 的项目和技能，或者他如何帮你把业务流程自动化。你想了解什么？', chatQ1: 'Shayan 的专长是什么？', chatQ2: '介绍一下 HamNeshin', chatQ3: '他能用 n8n 自动化我的工作流程吗？', chatError: '出了点问题，请稍后再试。', chatBusy: '消息太多了，请等一分钟。', chatOffline: '助手尚未连接。',
-        contactTitle: '有项目或职位想聊聊？',
-        contactDesc: '我对 Web 平台与自动化方向的全职职位和自由职业项目持开放态度。代码和动态都在 GitHub 上。',
-        contactCopy: 'GitHub 主页', contactEmail: '复制邮箱',
         toastMsg: '已复制',
         footerText: '© 2026 Shayan Safai Sohi'
       }
     };
 
-    // Contact channels: fill these in and the matching buttons appear automatically
     // Cloudflare Worker URL from tools/chat-worker (after `npx wrangler deploy`)
     const CHAT_ENDPOINT = 'https://portfolio-chat.shayan-safai-sohi.workers.dev';
 
-    const CONTACT = {
-      github: 'https://github.com/shayansafaisohi',
-      email: '',
-      linkedin: '',
-      telegram: '',
-    };
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const finePointer = window.matchMedia('(pointer: fine)').matches;
@@ -1586,7 +1516,6 @@
 
       document.querySelectorAll('#lang-menu [data-lang]').forEach(b => b.classList.toggle('is-current', b.dataset.lang === currentLang));
       lucide.createIcons();
-      requestAnimationFrame(moveFilterIndicator);
     }
 
     function setLanguage(lang) {
@@ -1618,15 +1547,6 @@
     }
 
     // ---------- Contact / toast ----------
-    (function renderContacts() {
-      const show = (el) => { el.classList.remove('hidden'); el.classList.add('grid'); };
-      const email = document.querySelector('[data-contact="email"]');
-      const linkedin = document.querySelector('[data-contact="linkedin"]');
-      const telegram = document.querySelector('[data-contact="telegram"]');
-      if (CONTACT.email) show(email);
-      if (CONTACT.linkedin) { linkedin.href = CONTACT.linkedin; show(linkedin); }
-      if (CONTACT.telegram) { telegram.href = CONTACT.telegram; show(telegram); }
-    })();
 
     // ---------- Count-up metrics (rendered with the active language's digits) ----------
     function formatCount(n) {
@@ -1768,45 +1688,7 @@
       if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); sendChat(chatInput.value); }
     });
 
-    let toastTimer;
-    function copyEmail() {
-      if (navigator.clipboard && CONTACT.email) navigator.clipboard.writeText(CONTACT.email).catch(() => {});
-      const toast = document.getElementById('toast');
-      toast.classList.add('is-shown');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('is-shown'), 2800);
-    }
 
-    // ---------- Project filter ----------
-    function moveFilterIndicator() {
-      const active = document.querySelector('.filter-btn.active');
-      const indicator = document.querySelector('.filter-indicator');
-      if (!active || !indicator) return;
-      indicator.style.width = active.offsetWidth + 'px';
-      indicator.style.transform = `translate(${active.offsetLeft}px, ${active.offsetTop - 6}px)`;
-      indicator.style.height = active.offsetHeight + 'px';
-      indicator.style.bottom = 'auto';
-    }
-
-    function filterProjects(category) {
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-cat') === category);
-      });
-      moveFilterIndicator();
-
-      document.querySelectorAll('.project-card').forEach(card => {
-        const show = category === 'all' || card.getAttribute('data-category') === category;
-        clearTimeout(card._filterTimer);
-        if (show) {
-          card.style.display = 'flex';
-          requestAnimationFrame(() => requestAnimationFrame(() => card.classList.remove('is-filtered-out')));
-        } else {
-          card.classList.add('is-filtered-out');
-          card._filterTimer = setTimeout(() => { card.style.display = 'none'; }, 350);
-        }
-      });
-    }
-    window.addEventListener('resize', moveFilterIndicator);
 
     // ---------- Tech marquee ----------
     (function buildMarquee() {
@@ -1961,7 +1843,7 @@
       });
       window.addEventListener('pointerup', () => root.classList.remove('cursor-down'));
 
-      const hoverSel = 'a, button, [role="button"], .chip, .filter-btn, .project-card';
+      const hoverSel = 'a, button, [role="button"], .chip, .project-card';
       const textSel = 'p, h1, h2, h3, li';
       document.addEventListener('pointerover', (e) => {
         const isHover = !!e.target.closest(hoverSel);
@@ -2015,9 +1897,7 @@
       setLanguage(saved);
       isInitialLoad = false;
       onScroll();
-      moveFilterIndicator();
     });
-    if (document.fonts) document.fonts.ready.then(moveFilterIndicator);
 
     // ---------- Particle network ----------
     const canvas = document.getElementById('particles-canvas');
