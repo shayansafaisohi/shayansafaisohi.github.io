@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600;700&display=block" rel="stylesheet">
+<style>
+@font-face { font-family: 'Estedad'; src: url('https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@8.5/fonts/Estedad%5Bwght%5D.woff2') format('woff2'); font-weight: 100 900; font-display: block; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1280px; height: 720px; overflow: hidden; background: #05070d; }
+body { font-family: 'Space Grotesk', 'Estedad', sans-serif; color: #e7ecf3; -webkit-font-smoothing: antialiased; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+.fa { direction: rtl; font-family: 'Estedad', sans-serif; }
+#stage { position: relative; width: 1280px; height: 720px; overflow: hidden; background: #05070d; }
+.blob { position: absolute; border-radius: 50%; filter: blur(110px); mix-blend-mode: screen; }
+#grid { position: absolute; inset: -64px; background-image: linear-gradient(rgba(148,163,184,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.07) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 45%, #000 20%, transparent 75%); }
+#stars { position: absolute; inset: 0; }
+
+.scene { position: absolute; left: 140px; top: 44px; width: 1000px; height: 552px; transform-origin: 50% 50%; }
+.win { position: absolute; inset: 0; border-radius: 18px; background: linear-gradient(180deg, #0e1527, #0a0f1c); border: 1px solid rgba(255,255,255,.1); overflow: hidden;
+  box-shadow: 0 50px 120px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.03), 0 0 80px -20px var(--glow, rgba(34,211,238,.25)); }
+.bar { height: 40px; display: flex; align-items: center; gap: 8px; padding: 0 16px; border-bottom: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.025); }
+.bar i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+.url { position: absolute; left: 50%; transform: translateX(-50%); font: 12px 'JetBrains Mono'; color: #94a3b8; background: rgba(255,255,255,.05); padding: 5px 16px; border-radius: 8px; min-width: 340px; text-align: center; }
+.url b { color: #67e8f9; font-weight: 400; }
+.content { position: absolute; top: 40px; left: 0; right: 0; bottom: 0; }
+.abs { position: absolute; }
+
+/* n8n scene */
+.dots { background-image: radial-gradient(rgba(148,163,184,.22) 1px, transparent 1.2px); background-size: 22px 22px; }
+.node { position: absolute; width: 150px; height: 66px; border-radius: 13px; background: #141b2d; border: 1.5px solid rgba(255,255,255,.12); display: flex; align-items: center; gap: 10px; padding: 0 12px; }
+.node .ic { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; font: 700 12px 'JetBrains Mono'; color: #0b1020; flex-shrink: 0; }
+.node .t { font-size: 13px; font-weight: 700; color: #f1f5f9; }
+.node .s { font: 10.5px 'JetBrains Mono'; color: #94a3b8; margin-top: 2px; white-space: nowrap; }
+.node .ok { position: absolute; top: -9px; right: -9px; width: 20px; height: 20px; border-radius: 50%; background: #22c55e; color: #fff; font-size: 12px; display: grid; place-items: center; font-weight: 700; box-shadow: 0 0 12px rgba(34,197,94,.7); }
+.node .cnt { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font: 10px 'JetBrains Mono'; color: #86efac; white-space: nowrap; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border-radius: 9px; font-weight: 700; font-size: 13px; padding: 8px 14px; }
+
+/* generic panel bits */
+.card { background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; }
+.pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 3px 9px; border-radius: 999px; }
+.av { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #0b1020; border: 2px solid #0e1527; }
+
+/* caption */
+.cap { position: absolute; left: 140px; top: 612px; width: 760px; }
+.cap .num { font: 600 12px 'JetBrains Mono'; color: #67e8f9; letter-spacing: .18em; }
+.cap .title { font: 700 30px 'Space Grotesk'; color: #fff; margin-top: 2px; white-space: nowrap; letter-spacing: -0.02em; }
+.cap .title span { display: inline-block; white-space: pre; }
+.cap .sub { font: 14px 'JetBrains Mono'; color: #94a3b8; margin-top: 4px; white-space: nowrap; }
+#dots { position: absolute !important; right: 140px; top: 648px; display: flex; gap: 8px; }
+#dots div { width: 22px; height: 5px; border-radius: 4px; background: rgba(255,255,255,.12); overflow: hidden; }
+#dots div b { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #22d3ee, #a78bfa); }
+#brand { position: absolute !important; right: 140px; top: 616px; font: 600 12px 'JetBrains Mono'; color: #64748b; letter-spacing: .12em; }
+#fx { position: absolute; inset: 0; pointer-events: none; z-index: 20; }
+#caps, #dots, #brand { position: relative; z-index: 10; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bgwrap">
+    <div class="blob" id="b1" style="width:620px;height:620px;background:#0891b2"></div>
+    <div class="blob" id="b2" style="width:540px;height:540px;background:#7c3aed"></div>
+    <div class="blob" id="b3" style="width:480px;height:480px;background:#2563eb"></div>
+    <div class="blob" id="b4" style="width:300px;height:300px;background:#db2777"></div>
+    <div id="grid"></div>
+    <canvas id="stars" width="1280" height="720"></canvas>
+  </div>
+  <div id="scenes"></div>
+  <div id="caps"></div>
+  <div id="brand">SHAYAN SAFAI SOHI</div>
+  <div id="dots"></div>
+  <canvas id="fx" width="1280" height="720"></canvas>
+</div>
+
+<script>
+const W = 1280, H = 720;
+const D = 6;            // seconds per project
+const N = 5;            // number of projects
+const TOTAL = D * N;    // loop length
+const TD = 1.0;         // transition duration
+const SCENE_X = 140, SCENE_Y = 44, CONTENT_Y = SCENE_Y + 40;
+
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const prog = (t, a, b) => clamp((t - a) / (b - a), 0, 1);
+const lerp = (a, b, p) => a + (b - a) * p;
+const eIO = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const eOut = p => 1 - Math.pow(1 - p, 3);
+const eOut5 = p => 1 - Math.pow(1 - p, 5);
+const eBack = p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const TAU = Math.PI * 2;
+
+function win(url, glow, inner) {
+  return `<div class="win" style="--glow:${glow}"><div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><div class="url">${url}</div></div><div class="content">${inner}</div></div>`;
+}
+
+/* ===================== SCENE 0 · n8n AI workflow ===================== */
+const NODES = [
+  { id: 'n1', x: 30,  y: 215, ic: 'WH', c: '#fb923c', t: 'Webhook',   s: 'POST /invoice' },
+  { id: 'n2', x: 230, y: 125, ic: 'AI', c: '#c084fc', t: 'AI Agent',  s: 'LLM · classify' },
+  { id: 'n3', x: 230, y: 305, ic: 'Py', c: '#facc15', t: 'Code',      s: 'Python · extract' },
+  { id: 'n4', x: 430, y: 215, ic: 'IF', c: '#4ade80', t: 'IF',        s: 'amount > 50M' },
+  { id: 'n5', x: 630, y: 125, ic: 'PG', c: '#60a5fa', t: 'Postgres',  s: 'insert row' },
+  { id: 'n6', x: 630, y: 305, ic: 'TG', c: '#38bdf8', t: 'Telegram',  s: 'notify manager' },
+  { id: 'n7', x: 822, y: 215, ic: 'UI', c: '#22d3ee', t: 'Admin Panel', s: 'live dashboard' },
+];
+const RUN = { n1: [0.95, 1.1], n2: [1.6, 2.05], n3: [1.6, 2.1], n4: [2.5, 2.75], n5: [3.15, 3.45], n6: [3.15, 3.5], n7: [3.9, 4.15] };
+const EDGES = [['n1','n2',1.1,1.6],['n1','n3',1.1,1.6],['n2','n4',2.1,2.5],['n3','n4',2.1,2.5],['n4','n5',2.75,3.15],['n4','n6',2.75,3.15],['n5','n7',3.5,3.9],['n6','n7',3.5,3.9]];
+function scene0() {
+  const nodeById = Object.fromEntries(NODES.map(n => [n.id, n]));
+  const paths = EDGES.map(([a, b], i) => {
+    const A = nodeById[a], B = nodeById[b];
+    const x1 = A.x + 150, y1 = A.y + 33, x2 = B.x, y2 = B.y + 33;
+    const d = `M${x1} ${y1} C${x1 + 55} ${y1}, ${x2 - 55} ${y2}, ${x2} ${y2}`;
+    return `<path d="${d}" stroke="rgba(148,163,184,.3)" stroke-width="2" fill="none"/><path id="e${i}" d="${d}" stroke="url(#eg)" stroke-width="2.5" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`;
+  }).join('');
+  const nodes = NODES.map(n => `<div class="node" id="${n.id}" style="left:${n.x}px;top:${n.y}px"><div class="ic" style="background:${n.c}">${n.ic}</div><div><div class="t">${n.t}</div><div class="s">${n.s}</div></div><div class="ok">✓</div><div class="cnt">1 item</div></div>`).join('');
+  const packets = EDGES.map((e, i) => `<div class="abs" id="pk${i}" style="width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;box-shadow:0 0 12px 4px rgba(103,232,249,.9)"></div>`).join('');
+  return win('n8n.local/workflow/<b>invoice-ai-triage</b>', 'rgba(255,109,90,.28)', `
+    <div class="abs dots" style="inset:0"></div>
+    <div class="abs" style="left:18px;top:14px;right:18px;height:36px;display:flex;align-items:center;gap:12px">
+      <div style="font-weight:700;font-size:15px">Invoice intake → AI triage</div>
+      <div class="pill mono" style="background:rgba(34,197,94,.12);color:#86efac;border:1px solid rgba(34,197,94,.3)">● Active</div>
+      <div style="flex:1"></div>
+      <div class="pill mono" style="color:#94a3b8">Last run · <span id="s0-last">2m ago</span></div>
+      <div class="btn" id="s0-exec" style="background:#ff6d5a;color:#fff;box-shadow:0 8px 24px -8px rgba(255,109,90,.8)"><span id="s0-exec-t">▶ Execute workflow</span></div>
+    </div>
+    <svg class="abs" style="left:0;top:0" width="1000" height="512"><defs><linearGradient id="eg" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/></linearGradient></defs>${paths}</svg>
+    ${nodes}${packets}
+    <div class="abs" id="s0-toast" style="left:50%;bottom:22px;transform:translateX(-50%);background:#0f1a2e;border:1px solid rgba(34,197,94,.45);border-radius:12px;padding:10px 16px;display:flex;gap:10px;align-items:center;font-size:13px;box-shadow:0 20px 40px -10px rgba(0,0,0,.7)">
+      <span style="width:22px;height:22px;border-radius:50%;background:#22c55e;display:grid;place-items:center;font-weight:700">✓</span>
+      <span>Workflow executed successfully</span><span class="mono" style="color:#94a3b8">7 nodes · 1.9s</span>
+    </div>`);
+}
+function update0(L, root) {
+  const exec = root.querySelector('#s0-exec');
+  const press = L > 0.9 && L < 1.05 ? 0.93 : 1;
+  exec.style.transform = `scale(${press})`;
+  root.querySelector('#s0-exec-t').textContent = (L > 0.9 && L < 4.2) ? '◌ Running…' : '▶ Execute workflow';
+  root.querySelector('#s0-last').textContent = L > 4.2 ? 'just now' : '2m ago';
+  NODES.forEach(n => {
+    const el = root.querySelector('#' + n.id);
+    const [a, b] = RUN[n.id];
+    const running = L >= a && L < b, done = L >= b;
+    const pulse = running ? 0.5 + 0.5 * Math.sin(L * 30) : 0;
+    el.style.borderColor = running ? n.c : done ? 'rgba(74,222,128,.7)' : 'rgba(255,255,255,.12)';
+    el.style.boxShadow = running ? `0 0 ${18 + 14 * pulse}px ${n.c}` : done ? '0 0 16px -4px rgba(74,222,128,.6)' : 'none';
+    const okp = eBack(prog(L, b, b + 0.25));
+    const ok = el.querySelector('.ok');
+    ok.style.transform = `scale(${okp})`;
+    el.querySelector('.cnt').style.opacity = prog(L, b, b + 0.3);
+    el.style.transform = running ? `translateY(${-2 * pulse}px)` : 'none';
+  });
+  EDGES.forEach(([a, b, s, e], i) => {
+    const p = eIO(prog(L, s, e));
+    const path = root.querySelector('#e' + i);
+    path.setAttribute('stroke-dashoffset', String(1 - p));
+    const pk = root.querySelector('#pk' + i);
+    if (p > 0 && p < 1) {
+      const len = path.getTotalLength();
+      const pt = path.getPointAtLength(len * p);
+      pk.style.left = pt.x + 'px'; pk.style.top = pt.y + 'px'; pk.style.opacity = 1;
+    } else pk.style.opacity = 0;
+  });
+  const tp = eOut(prog(L, 4.25, 4.6));
+  const toast = root.querySelector('#s0-toast');
+  toast.style.opacity = tp;
+  toast.style.transform = `translateX(-50%) translateY(${(1 - tp) * 24}px) scale(${0.95 + 0.05 * tp})`;
+}
+
+/* ===================== SCENE 1 · HamNeshin ===================== */
+const SPK = [
+  { n: 'سارا', c: '#22d3ee', bg: 'linear-gradient(135deg,#0e3a4a,#0b1a2e)' },
+  { n: 'امیر', c: '#a78bfa', bg: 'linear-gradient(135deg,#2e1a4a,#0b1428)' },
+  { n: 'نگار', c: '#f472b6', bg: 'linear-gradient(135deg,#4a1a36,#120f22)' },
+  { n: 'رضا', c: '#4ade80', bg: 'linear-gradient(135deg,#123a26,#0b1722)' },
+];
+const LINES = [
+  [0, 'بودجه کمپین پاییز رو امروز نهایی کنیم.', 0.35],
+  [1, 'گزارش فروش تا پنجشنبه آماده می‌شه.', 1.05],
+  [2, 'طراحی صفحه فرود جدید با من.', 1.75],
+  [3, 'جلسه بعدی شنبه ساعت ۱۰ صبح.', 2.45],
+];
+const ACTIONS = ['نهایی‌سازی بودجه کمپین — سارا', 'گزارش فروش تا پنجشنبه — امیر', 'طراحی صفحه فرود — نگار'];
+function scene1() {
+  const tiles = SPK.map((s, i) => {
+    const x = 396 + (i % 2) * 301, y = 16 + Math.floor(i / 2) * 192;
+    return `<div class="abs" id="t${i}" style="left:${x}px;top:${y}px;width:285px;height:176px;border-radius:14px;background:${s.bg};border:1px solid rgba(255,255,255,.08);overflow:hidden">
+      <div class="abs fa" style="left:50%;top:44%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;background:${s.c};color:#0b1020;display:grid;place-items:center;font-size:26px;font-weight:800">${s.n[0]}</div>
+      <div class="abs fa pill" style="right:10px;bottom:10px;background:rgba(0,0,0,.45);color:#e2e8f0;font-size:12px">${s.n}</div>
+      <div class="abs ring" style="inset:0;border-radius:14px;border:2.5px solid ${s.c};opacity:0"></div>
+    </div>`;
+  }).join('');
+  const bars = Array.from({ length: 58 }, (_, i) => `<div class="wb" style="width:5px;border-radius:3px;background:linear-gradient(#67e8f9,#818cf8)"></div>`).join('');
+  const lines = LINES.map(([s, txt], i) => `<div class="line fa" id="l${i}" style="display:flex;gap:10px;align-items:flex-start;margin-bottom:14px">
+      <div style="width:8px;height:8px;border-radius:50%;background:${SPK[s].c};margin-top:8px;flex-shrink:0"></div>
+      <div style="font-size:13.5px;line-height:1.7"><b style="color:${SPK[s].c}">${SPK[s].n}</b><br><span class="tx" data-full="${txt}"></span></div></div>`).join('');
+  const acts = ACTIONS.map((a, i) => `<div class="fa act" style="display:flex;gap:10px;align-items:center;padding:8px 0;font-size:13px;border-top:1px solid rgba(255,255,255,.06)"><div class="cb" style="width:18px;height:18px;border-radius:5px;border:1.5px solid #64748b;display:grid;place-items:center;font-size:11px;font-weight:800;color:#0b1020"></div><span>${a}</span></div>`).join('');
+  return win('hamneshin.app/meeting/<b>live</b>', 'rgba(34,211,238,.28)', `
+    ${tiles}
+    <div class="abs" id="wave" style="left:396px;top:404px;width:586px;height:44px;display:flex;align-items:center;justify-content:space-between">${bars}</div>
+    <div class="abs fa" style="left:396px;top:458px;width:586px;height:44px;display:flex;align-items:center;gap:10px">
+      <div class="btn" id="s1-sum" style="background:linear-gradient(120deg,#7c3aed,#22d3ee);color:#fff;box-shadow:0 8px 24px -8px rgba(124,58,237,.8)">✦ خلاصه با AI</div>
+      <div style="flex:1"></div>
+      <div class="pill mono" style="background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.35);font-size:12px">● REC <span id="s1-timer">00:12:34</span></div>
+      <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:15px">🎙</div>
+      <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:15px">📷</div>
+    </div>
+    <div class="abs card" style="left:16px;top:16px;width:362px;height:486px;overflow:hidden">
+      <div class="fa" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06)">
+        <b style="font-size:14px">رونویسی زنده</b><span class="pill mono" style="background:rgba(239,68,68,.15);color:#fca5a5">● LIVE</span>
+      </div>
+      <div style="padding:16px">${lines}</div>
+      <div class="abs" id="s1-thinking" style="left:16px;right:16px;bottom:16px;height:40px;border-radius:10px;background:linear-gradient(90deg,rgba(124,58,237,.15),rgba(34,211,238,.25),rgba(124,58,237,.15));background-size:200% 100%;display:grid;place-items:center;font-size:12.5px" ><span class="fa">✦ AI در حال تحلیل جلسه…</span></div>
+      <div class="abs" id="s1-summary" style="left:10px;right:10px;bottom:10px;border-radius:12px;background:#121a30;border:1px solid rgba(167,139,250,.4);padding:14px 16px;box-shadow:0 -20px 40px -10px rgba(0,0,0,.6)">
+        <div class="fa" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="font-size:14px;color:#c4b5fd">✦ خلاصه و اقدام‌ها</b><span class="pill mono" style="color:#94a3b8;background:rgba(255,255,255,.05)">LLM</span></div>
+        ${acts}
+      </div>
+    </div>`);
+}
+function update1(L, root) {
+  const cur = LINES.reduce((acc, l, i) => (L >= l[2] ? i : acc), -1);
+  const speaking = L < 3.1 ? cur : -1;
+  SPK.forEach((s, i) => {
+    const r = root.querySelector(`#t${i} .ring`);
+    const on = i === LINES[speaking]?.[0];
+    r.style.opacity = on ? 0.6 + 0.4 * Math.sin(L * 9) : 0;
+    root.querySelector(`#t${i}`).style.boxShadow = on ? `0 0 30px -6px ${s.c}` : 'none';
+  });
+  root.querySelectorAll('.wb').forEach((b, i) => {
+    const amp = speaking >= 0 ? 1 : 0.25;
+    const v = Math.abs(Math.sin(L * 7.3 + i * 0.83) * Math.sin(L * 3.1 + i * 0.29)) * amp;
+    b.style.height = (5 + 36 * v) + 'px';
+    b.style.opacity = 0.45 + 0.55 * v;
+  });
+  LINES.forEach(([s, txt, at], i) => {
+    const el = root.querySelector('#l' + i);
+    const p = prog(L, at, at + 0.15);
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - eOut(p)) * 10}px)`;
+    const n = Math.round(txt.length * prog(L, at + 0.05, at + 0.6));
+    el.querySelector('.tx').textContent = txt.slice(0, n);
+  });
+  const secs = 12 * 60 + 34 + Math.floor(L * 2);
+  root.querySelector('#s1-timer').textContent = `00:${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
+  const sum = root.querySelector('#s1-sum');
+  sum.style.transform = `scale(${L > 3.2 && L < 3.33 ? 0.93 : 1})`;
+  const th = root.querySelector('#s1-thinking');
+  const thp = prog(L, 3.22, 3.32) * (1 - prog(L, 3.5, 3.6));
+  th.style.opacity = thp;
+  th.style.backgroundPosition = `${-L * 300}% 0`;
+  const sp = eOut5(prog(L, 3.5, 3.95));
+  const sm = root.querySelector('#s1-summary');
+  sm.style.opacity = sp;
+  sm.style.transform = `translateY(${(1 - sp) * 60}px)`;
+  root.querySelectorAll('.act').forEach((a, i) => {
+    const cp = eBack(prog(L, 3.95 + i * 0.35, 4.15 + i * 0.35));
+    const cb = a.querySelector('.cb');
+    cb.style.background = cp > 0.01 ? '#4ade80' : 'transparent';
+    cb.style.borderColor = cp > 0.01 ? '#4ade80' : '#64748b';
+    cb.textContent = cp > 0.01 ? '✓' : '';
+    cb.style.transform = `scale(${cp > 0.01 ? cp : 1})`;
+    a.style.opacity = 0.35 + 0.65 * prog(L, 3.7 + i * 0.12, 3.9 + i * 0.12);
+  });
+}
+
+/* ===================== SCENE 2 · AdvertisingPanel kanban ===================== */
+const COLS = ['سناریو', 'فیلم‌نامه', 'طراحی بنر', 'تأیید سرپرست', 'منتشر شده'];
+const COLX = i => 22 + (4 - i) * 194;
+const SLOTY = k => 104 + k * 96;
+const KCARDS = [
+  [0, 0, 'CMP-1051', 'کمپین نوروز', '#22d3ee'], [0, 1, 'CMP-1053', 'معرفی محصول B', '#a78bfa'],
+  [1, 0, 'CMP-1049', 'جشنواره پاییز', '#f472b6'], [1, 1, 'CMP-1050', 'تخفیف شب یلدا', '#facc15'],
+  [2, 1, 'CMP-1046', 'اپ موبایل', '#4ade80'], [2, 2, 'CMP-1047', 'بنر صفحه اصلی', '#60a5fa'],
+  [3, 0, 'CMP-1044', 'ویدیو تبلیغاتی', '#fb923c'],
+  [4, 0, 'CMP-1041', 'کمپین تابستان', '#4ade80'], [4, 1, 'CMP-1039', 'همکاری با برند', '#22d3ee'], [4, 2, 'CMP-1037', 'خبرنامه ماهانه', '#a78bfa'],
+];
+function kcard(id, code, title, c, extra = '') {
+  return `<div class="abs card fa kc" id="${id}" style="width:180px;height:86px;padding:10px 12px;background:#131b2e">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span class="mono" style="font-size:10.5px;color:#94a3b8;direction:ltr">${code}</span><span style="width:8px;height:8px;border-radius:50%;background:${c}"></span></div>
+    <div style="font-size:13px;font-weight:700;margin-top:6px">${title}</div>${extra}</div>`;
+}
+function scene2() {
+  const heads = COLS.map((c, i) => `<div class="abs fa" style="left:${COLX(i)}px;top:66px;width:180px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:#cbd5e1"><b>${c}</b><span class="mono k-cnt" id="kc${i}" style="color:#64748b;font-size:11px"></span></div>
+    <div class="abs" style="left:${COLX(i)}px;top:94px;width:180px;height:404px;border-radius:12px;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.06)"></div>`).join('');
+  const cards = KCARDS.map(([col, slot, code, title, c], i) => kcard('k' + i, code, title, c).replace('style="', `style="left:${COLX(col)}px;top:${SLOTY(slot)}px;`)).join('');
+  const roles = ['س', 'ف', 'ب', 'ط', 'م', 'ا', 'ن'].map((r, i) => `<div class="av fa" style="background:${['#22d3ee','#a78bfa','#f472b6','#facc15','#4ade80','#60a5fa','#fb923c'][i]};margin-left:-8px">${r}</div>`).join('');
+  const mover = kcard('kmove', 'CMP-1048', 'کمپین یلدا', '#f43f5e', `
+    <div class="abs" id="kapprove" style="left:10px;bottom:9px;font-size:11px;padding:3px 10px;border-radius:7px;background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.35)">تأیید</div>
+    <div class="abs" id="kbadge" style="left:10px;bottom:9px;font-size:11px;padding:3px 10px;border-radius:7px;background:#22c55e;color:#04120a;font-weight:700">✓ تأیید شد</div>`).replace('style="', `style="left:${COLX(2)}px;top:${SLOTY(0)}px;z-index:5;`);
+  return win('ads.panel/<b>campaigns</b>', 'rgba(167,139,250,.3)', `
+    <div class="abs fa" style="right:22px;left:22px;top:16px;height:36px;display:flex;align-items:center;gap:10px">
+      <b style="font-size:17px">کمپین‌ها</b>
+      <span class="pill" style="background:rgba(34,211,238,.12);color:#67e8f9">فعال ۲۴</span>
+      <span class="pill" style="background:rgba(250,204,21,.12);color:#fde68a">در انتظار تأیید <span id="kwait">۷</span></span>
+      <span class="pill" style="background:rgba(34,197,94,.12);color:#86efac">منتشر شده <span id="kpub">۱۳۱</span></span>
+      <div style="flex:1"></div>
+      <div style="display:flex;direction:ltr;padding-left:8px">${roles}</div><span class="mono" style="font-size:11px;color:#64748b;direction:ltr">7 roles</span>
+    </div>
+    ${heads}${cards}${mover}
+    <div class="abs fa" id="ktoast" style="left:50%;bottom:20px;transform:translateX(-50%);background:#0f1a2e;border:1px solid rgba(34,197,94,.45);border-radius:12px;padding:10px 16px;font-size:13px;white-space:nowrap;box-shadow:0 20px 40px -10px rgba(0,0,0,.7);z-index:6">🚀 کمپین <span class="mono">CMP-1048</span> منتشر شد</div>`);
+}
+const DROP = { x: COLX(3), y: SLOTY(1) };
+function update2(L, root, cursorAt) {
+  const m = root.querySelector('#kmove');
+  const base = { x: COLX(2), y: SLOTY(0) };
+  let x = base.x, y = base.y, rot = 0, lift = 0;
+  if (L >= 1.0 && L < 1.95) {
+    const c = cursorAt(L);   // stage coords of the orb
+    x = c.x - SCENE_X - 90; y = c.y - CONTENT_Y - 43;
+    rot = 3; lift = 1;
+  } else if (L >= 1.95 && L < 3.3) {
+    const c = cursorAt(1.95);
+    const p = eOut(prog(L, 1.95, 2.15));
+    x = lerp(c.x - SCENE_X - 90, DROP.x, p); y = lerp(c.y - CONTENT_Y - 43, DROP.y, p);
+    rot = 3 * (1 - p); lift = 1 - p;
+  } else if (L >= 3.3) {
+    const p = eIO(prog(L, 3.3, 3.9));
+    x = lerp(DROP.x, COLX(4), p); y = lerp(DROP.y, SLOTY(0), p) - Math.sin(p * Math.PI) * 50;
+    lift = Math.sin(p * Math.PI) * 0.8;
+  }
+  m.style.left = x + 'px'; m.style.top = y + 'px';
+  m.style.transform = `rotate(${rot}deg) scale(${1 + 0.05 * lift})`;
+  m.style.boxShadow = `0 ${10 + 30 * lift}px ${20 + 40 * lift}px -10px rgba(0,0,0,.8), 0 0 ${30 * lift}px -6px rgba(244,63,94,.6)`;
+  m.style.borderColor = lift > 0.05 ? 'rgba(244,63,94,.6)' : 'rgba(255,255,255,.08)';
+  const ap = prog(L, 2.7, 2.85);
+  root.querySelector('#kapprove').style.opacity = L < 2.15 ? 0 : 1 - ap;
+  root.querySelector('#kapprove').style.transform = `scale(${L > 2.68 && L < 2.82 ? 0.9 : 1})`;
+  const bp = eBack(prog(L, 2.8, 3.05));
+  root.querySelector('#kbadge').style.opacity = prog(L, 2.8, 2.9);
+  root.querySelector('#kbadge').style.transform = `scale(${bp})`;
+  // column 2 cards slide up once the dragged card leaves; column 4 cards make room
+  const up = eOut(prog(L, 1.3, 1.65));
+  const down = eOut(prog(L, 3.35, 3.75));
+  KCARDS.forEach(([col, slot], i) => {
+    const el = root.querySelector('#k' + i);
+    let dy = 0;
+    if (col === 2) dy = -96 * up;
+    if (col === 4) dy = 96 * down;
+    el.style.transform = `translateY(${dy}px)`;
+  });
+  const counts = [2, 2, L < 1.3 ? 3 : 2, 1 + (L >= 1.95 && L < 3.6 ? 1 : 0), 3 + (L >= 3.6 ? 1 : 0)];
+  counts.forEach((c, i) => root.querySelector('#kc' + i).textContent = fa(c));
+  root.querySelector('#kwait').textContent = fa(L >= 2.85 ? 6 : 7);
+  root.querySelector('#kpub').textContent = fa(L >= 3.9 ? 132 : 131);
+  const tp = eOut(prog(L, 4.0, 4.35));
+  const toast = root.querySelector('#ktoast');
+  toast.style.opacity = tp;
+  toast.style.transform = `translateX(-50%) translateY(${(1 - tp) * 24}px)`;
+}
+
+/* ===================== SCENE 3 · Qaf LegalTech ===================== */
+const CASES = [
+  ['۱۴۰۵/۲۱۸', 'شرکت نوآوران', 'دکتر کریمی', 'در جریان', '#60a5fa'],
+  ['۱۴۰۵/۲۲۴', 'آقای رحیمی', 'خانم احمدی', 'جلسه دادگاه', '#facc15'],
+  ['۱۴۰۵/۲۳۱', 'شرکت آریا', 'دکتر کریمی', 'بررسی اسناد', '#a78bfa'],
+  ['۱۴۰۵/۲۳۵', 'خانم صادقی', 'آقای نوری', 'در جریان', '#60a5fa'],
+  ['۱۴۰۵/۲۴۰', 'گروه صنعتی پارس', 'خانم احمدی', 'مختومه', '#4ade80'],
+];
+const DOCS = [['قرارداد همکاری.pdf', '#f87171'], ['وکالت‌نامه.pdf', '#f87171'], ['صورتجلسه.docx', '#60a5fa'], ['لایحه دفاعیه.pdf', '#f87171']];
+function scene3() {
+  const nav = ['داشبورد', 'پرونده‌ها', 'موکلین', 'اسناد', 'تقویم جلسات'].map((n, i) => `<div style="padding:9px 14px;border-radius:9px;font-size:13px;margin-bottom:4px;${i === 0 ? 'background:rgba(167,139,250,.15);color:#ddd6fe' : 'color:#94a3b8'}">${n}</div>`).join('');
+  const stats = [['پرونده‌های فعال', 128, '#a78bfa'], ['جلسات این هفته', 14, '#22d3ee'], ['اسناد امضاشده', 342, '#4ade80']].map(([l, v, c], i) => `
+    <div class="abs card fa" id="st${i}" style="left:${18 + (2 - i) * 264}px;top:16px;width:248px;height:84px;padding:14px 16px">
+      <div style="font-size:12px;color:#94a3b8">${l}</div><div class="sv" data-v="${v}" style="font:700 28px 'Space Grotesk';color:${c};margin-top:4px;direction:ltr;text-align:right"></div></div>`).join('');
+  const rows = CASES.map((r, i) => `<div class="abs fa row" id="r${i}" style="left:18px;top:${292 + i * 42}px;width:776px;height:40px;display:grid;grid-template-columns:110px 1fr 1fr 120px;align-items:center;padding:0 16px;font-size:13px;border-radius:8px">
+      <span class="mono" style="color:#cbd5e1">${r[0]}</span><span>${r[1]}</span><span style="color:#94a3b8">${r[2]}</span><span><span class="pill" style="background:${r[4]}22;color:${r[4]}">${r[3]}</span></span></div>`).join('');
+  const docs = DOCS.map((d, i) => `<div class="fa doc" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);margin-bottom:8px;font-size:13px"><span class="mono" style="width:30px;height:30px;border-radius:7px;background:${d[1]}22;color:${d[1]};display:grid;place-items:center;font-size:10px;font-weight:700">${d[0].split('.')[1].toUpperCase()}</span><span>${d[0]}</span></div>`).join('');
+  return win('qaf.law/<b>dashboard</b>', 'rgba(167,139,250,.28)', `
+    <div class="abs fa" style="right:0;top:0;bottom:0;width:186px;background:rgba(0,0,0,.25);border-left:1px solid rgba(255,255,255,.06);padding:18px 14px">
+      <div style="font-size:22px;font-weight:900;color:#c4b5fd;margin-bottom:18px;padding-right:6px">قاف <span style="font-size:11px;color:#64748b;font-weight:400">LegalTech</span></div>${nav}
+    </div>
+    ${stats}
+    <div class="abs card" style="left:18px;top:114px;width:776px;height:128px;overflow:hidden">
+      <svg width="776" height="128" viewBox="0 0 776 128"><defs><linearGradient id="cg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#a78bfa" stop-opacity=".35"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></linearGradient></defs>
+        <path id="carea" d="M0 100 C80 92,120 70,190 74 S320 40,390 52 S520 22,600 30 S720 14,776 10 L776 128 L0 128Z" fill="url(#cg)"/>
+        <path id="cline" d="M0 100 C80 92,120 70,190 74 S320 40,390 52 S520 22,600 30 S720 14,776 10" stroke="#a78bfa" stroke-width="2.5" fill="none" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></svg>
+    </div>
+    <div class="abs fa" style="left:18px;top:256px;width:776px;display:grid;grid-template-columns:110px 1fr 1fr 120px;padding:0 16px;font-size:11.5px;color:#64748b"><span>شماره پرونده</span><span>موکل</span><span>وکیل</span><span>وضعیت</span></div>
+    <div class="abs" id="rowhl" style="left:18px;width:776px;height:40px;border-radius:8px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3)"></div>
+    ${rows}
+    <div class="abs" id="drawer" style="left:0;top:0;bottom:0;width:350px;background:#0f1729;border-right:1px solid rgba(167,139,250,.35);box-shadow:30px 0 60px -10px rgba(0,0,0,.8);padding:20px 18px">
+      <div class="fa" style="font-size:12px;color:#94a3b8">پرونده <span class="mono">۱۴۰۵/۲۳۱</span></div>
+      <div class="fa" style="font-size:19px;font-weight:800;margin:4px 0 16px">شرکت آریا</div>
+      ${docs}
+      <div class="abs fa" id="rls" style="left:18px;right:18px;bottom:20px;padding:12px 14px;border-radius:12px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);font-size:12.5px;color:#bbf7d0;display:flex;gap:10px;align-items:center">
+        <span style="font-size:18px">🛡</span><span><b class="mono" style="direction:ltr">RLS</b> · فقط موکل و وکیل این پرونده دسترسی دارند</span></div>
+    </div>`);
+}
+function update3(L, root, cursorAt) {
+  root.querySelectorAll('.sv').forEach((el, i) => {
+    const v = +el.dataset.v * eOut(prog(L, 0.2 + i * 0.12, 1.4 + i * 0.12));
+    el.textContent = fa(Math.round(v));
+  });
+  const lp = eIO(prog(L, 0.3, 1.7));
+  root.querySelector('#cline').setAttribute('stroke-dashoffset', String(1 - lp));
+  root.querySelector('#carea').style.opacity = prog(L, 0.9, 1.8);
+  // row highlight follows the orb while it is over the table
+  const c = cursorAt(L);
+  const cy = c.y - CONTENT_Y, cx = c.x - SCENE_X;
+  const hl = root.querySelector('#rowhl');
+  let row = -1;
+  for (let i = 0; i < CASES.length; i++) if (cy >= 292 + i * 42 && cy < 292 + i * 42 + 42 && cx > 18 && cx < 794) row = i;
+  if (L >= 3.0) row = 2;
+  hl.style.top = (292 + Math.max(row, 0) * 42) + 'px';
+  hl.style.opacity = row >= 0 ? 1 : 0;
+  root.querySelector('#r2').style.transform = `scale(${L > 3.0 && L < 3.12 ? 0.985 : 1})`;
+  const dp = eOut5(prog(L, 3.1, 3.55));
+  const dr = root.querySelector('#drawer');
+  dr.style.transform = `translateX(${(dp - 1) * 370}px)`;
+  dr.style.opacity = dp > 0 ? 1 : 0;
+  root.querySelectorAll('.doc').forEach((d, i) => {
+    const p = eOut(prog(L, 3.4 + i * 0.12, 3.7 + i * 0.12));
+    d.style.opacity = p; d.style.transform = `translateX(${(1 - p) * -24}px)`;
+  });
+  const rp = eBack(prog(L, 4.0, 4.3));
+  const rls = root.querySelector('#rls');
+  rls.style.opacity = prog(L, 4.0, 4.1);
+  rls.style.transform = `scale(${0.8 + 0.2 * rp})`;
+  rls.style.boxShadow = `0 0 ${20 * prog(L, 4.1, 4.4) * (0.6 + 0.4 * Math.sin(L * 6))}px rgba(34,197,94,.5)`;
+}
+
+/* ===================== SCENE 4 · Refahi PWA ===================== */
+const SERV = [['🏊', 'استخر و ماساژ', 'سه‌شنبه‌ها'], ['🏋', 'باشگاه بدنسازی', 'ماهانه'], ['🎬', 'بلیت سینما', 'پنجشنبه ۱۹:۰۰'], ['🩺', 'مشاوره سلامت', 'آنلاین']];
+const REPORT = [['مریم توکلی', 'استخر', '۱۴۰۵/۰۷/۰۲', '۲۴۰٬۰۰۰'], ['حسین مرادی', 'باشگاه', '۱۴۰۵/۰۷/۰۳', '۹۰۰٬۰۰۰'], ['زهرا کاظمی', 'مشاوره', '۱۴۰۵/۰۷/۰۴', '۳۵۰٬۰۰۰'], ['علی نجفی', 'استخر', '۱۴۰۵/۰۷/۰۵', '۲۴۰٬۰۰۰'], ['سارا امینی', 'باشگاه', '۱۴۰۵/۰۷/۰۵', '۹۰۰٬۰۰۰'], ['شایان', 'بلیت سینما', '۱۴۰۵/۰۷/۰۶', '۱۸۰٬۰۰۰']];
+function scene4() {
+  const serv = SERV.map((s, i) => `<div class="fa" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;background:rgba(255,255,255,.05);margin-bottom:9px">
+    <div style="width:38px;height:38px;border-radius:11px;background:rgba(34,211,238,.12);display:grid;place-items:center;font-size:18px">${s[0]}</div>
+    <div style="flex:1"><div style="font-size:12.5px;font-weight:700;white-space:nowrap">${s[1]}</div><div style="font-size:11px;color:#94a3b8">${s[2]}</div></div>
+    <div class="bk" id="bk${i}" style="font-size:11.5px;font-weight:700;padding:6px 9px;border-radius:9px;background:linear-gradient(120deg,#06b6d4,#6366f1);color:#fff;min-width:58px;white-space:nowrap;text-align:center">رزرو</div></div>`).join('');
+  const rows = REPORT.map((r, i) => `<div class="fa rr" id="rr${i}" style="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;padding:9px 14px;font-size:12.5px;border-bottom:1px solid rgba(255,255,255,.05)"><span>${r[0]}</span><span style="color:#94a3b8">${r[1]}</span><span class="mono" style="color:#94a3b8">${r[2]}</span><span class="mono">${r[3]}</span></div>`).join('');
+  return win('refahi.app/<b>admin/reports</b>', 'rgba(52,211,153,.28)', `
+    <div class="abs card" style="left:340px;top:18px;width:640px;height:474px;overflow:hidden">
+      <div class="fa" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06)">
+        <b style="font-size:15px">گزارش سفارش‌ها — مهر ۱۴۰۵</b><div style="flex:1"></div>
+        <div class="btn" id="s4-xls" style="background:#16a34a;color:#fff;font-size:12.5px;box-shadow:0 8px 20px -8px rgba(22,163,74,.8)">⬇ خروجی Excel</div>
+      </div>
+      <div class="fa" style="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;padding:9px 14px;font-size:11.5px;color:#64748b"><span>نام</span><span>خدمت</span><span>تاریخ</span><span>مبلغ (ریال)</span></div>
+      ${rows}
+      <div class="abs" style="left:16px;right:16px;bottom:16px">
+        <div style="height:6px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden"><div id="s4-prog" style="height:100%;width:0;background:linear-gradient(90deg,#22c55e,#86efac)"></div></div>
+        <div class="mono" id="s4-file" style="margin-top:10px;display:inline-flex;gap:8px;align-items:center;font-size:12px;padding:7px 12px;border-radius:9px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#bbf7d0"><span style="background:#16a34a;color:#fff;border-radius:5px;padding:1px 5px;font-weight:700">X</span>report-1405-07.xlsx ✓</div>
+      </div>
+    </div>
+    <div class="abs" style="left:46px;top:-6px;width:262px;height:520px;border-radius:38px;background:#0b1222;border:9px solid #1e293b;box-shadow:0 40px 80px -20px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.08);overflow:hidden">
+      <div class="abs" style="left:50%;top:8px;transform:translateX(-50%);width:80px;height:20px;border-radius:12px;background:#000;z-index:3"></div>
+      <div class="fa" style="padding:40px 14px 0">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:15px">سامانه رفاهی</b><div class="av" style="background:#22d3ee">ش</div></div>
+        <div style="font-size:11.5px;color:#94a3b8;margin-bottom:14px">سلام شایان، امروز چه خدمتی لازم داری؟</div>
+        ${serv}
+        <div style="display:flex;gap:6px;margin-top:6px"><span class="pill" style="background:rgba(34,211,238,.12);color:#67e8f9">PWA</span><span class="pill" style="background:rgba(255,255,255,.06);color:#94a3b8">آفلاین فعال</span></div>
+      </div>
+      <div class="abs fa" id="push" style="left:8px;right:8px;top:8px;padding:10px 12px;border-radius:16px;background:rgba(30,41,59,.96);border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 30px rgba(0,0,0,.6);z-index:4">
+        <div style="display:flex;gap:8px;align-items:center;font-size:10.5px;color:#94a3b8"><span style="width:16px;height:16px;border-radius:4px;background:linear-gradient(120deg,#06b6d4,#6366f1)"></span>سامانه رفاهی · اکنون</div>
+        <div style="font-size:12.5px;font-weight:700;margin-top:4px">🔔 رزرو شما تأیید شد</div>
+        <div style="font-size:11.5px;color:#cbd5e1">بلیت سینما — پنجشنبه ۱۹:۰۰</div>
+      </div>
+    </div>`);
+}
+function update4(L, root) {
+  REPORT.forEach((r, i) => {
+    const at = i < 5 ? 0.2 + i * 0.18 : 2.1;
+    const p = eOut(prog(L, at, at + 0.3));
+    const el = root.querySelector('#rr' + i);
+    el.style.opacity = p;
+    el.style.transform = `translateY(${(1 - p) * 12}px)`;
+    if (i === 5) el.style.background = `rgba(34,211,238,${0.2 * (1 - prog(L, 2.6, 3.6))})`;
+  });
+  const bk = root.querySelector('#bk2');
+  if (L < 1.2) { bk.textContent = 'رزرو'; bk.style.background = 'linear-gradient(120deg,#06b6d4,#6366f1)'; }
+  else if (L < 1.7) { bk.textContent = '•••'.slice(0, 1 + Math.floor(L * 8) % 3); }
+  else { bk.textContent = '✓ رزرو شد'; bk.style.background = '#16a34a'; }
+  bk.style.transform = `scale(${L > 1.2 && L < 1.32 ? 0.9 : 1})`;
+  const pin = eBack(prog(L, 1.9, 2.25)), pout = eIO(prog(L, 3.1, 3.4));
+  const push = root.querySelector('#push');
+  push.style.transform = `translateY(${(1 - pin) * -110 - pout * 110}px)`;
+  push.style.opacity = pin > 0 ? 1 - pout : 0;
+  const xls = root.querySelector('#s4-xls');
+  xls.style.transform = `scale(${L > 3.4 && L < 3.52 ? 0.92 : 1})`;
+  root.querySelector('#s4-prog').style.width = (eIO(prog(L, 3.45, 4.25)) * 100) + '%';
+  const fp = eBack(prog(L, 4.3, 4.6));
+  const file = root.querySelector('#s4-file');
+  file.style.opacity = prog(L, 4.3, 4.4);
+  file.style.transform = `scale(${0.7 + 0.3 * fp})`;
+}
+
+/* ===================== Build ===================== */
+const SCENES = [
+  { build: scene0, update: update0, cap: ['Workflow Automation', 'n8n · AI Agent · Python · Postgres · Telegram'] },
+  { build: scene1, update: update1, cap: ['HamNeshin', 'Real-time transcription · Speaker diarization · AI summary'] },
+  { build: scene2, update: update2, cap: ['AdvertisingPanel', '7-role campaign workflow · Approvals · RBAC'] },
+  { build: scene3, update: update3, cap: ['Qaf LegalTech', 'Case management · Client portal · Row-level security'] },
+  { build: scene4, update: update4, cap: ['Refahi PWA', 'Mobile booking · Web Push · One-click Excel reports'] },
+];
+const sceneEls = SCENES.map((s, i) => {
+  const el = document.createElement('div');
+  el.className = 'scene'; el.id = 's' + i;
+  el.innerHTML = s.build();
+  document.getElementById('scenes').appendChild(el);
+  return el;
+});
+const capEls = SCENES.map((s, i) => {
+  const el = document.createElement('div');
+  el.className = 'cap';
+  el.innerHTML = `<div class="num">0${i + 1} / 0${N}</div><div class="title">${[...s.cap[0]].map(ch => `<span>${ch}</span>`).join('')}</div><div class="sub">${s.cap[1]}</div>`;
+  document.getElementById('caps').appendChild(el);
+  return el;
+});
+document.getElementById('dots').innerHTML = SCENES.map(() => '<div><b></b></div>').join('');
+
+/* ===================== Cursor path (resolved against real element positions) ===================== */
+function center(sel, sceneIdx) {
+  const el = sceneEls[sceneIdx].querySelector(sel);
+  const r = el.getBoundingClientRect();
+  return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+}
+const C = (x, y) => ({ x: SCENE_X + x, y: CONTENT_Y + y });
+let KF = [];
+function buildPath() {
+  const P = [
+    [ [0, C(520, 450)], [0.85, center('#s0-exec', 0), 'click'], [1.85, center('#n2', 0)], [2.55, center('#n4', 0)], [3.3, center('#n6', 0)], [4.0, center('#n7', 0)], [4.75, center('#s0-toast', 0)], [5.5, C(560, 420)] ],
+    [ [0, C(600, 300)], [0.6, center('#t0', 1)], [1.35, center('#l1', 1)], [2.3, C(690, 425)], [3.15, center('#s1-sum', 1), 'click'], [3.95, C(190, 400)], [4.7, C(190, 455)], [5.5, C(540, 260)] ],
+    [ [0, C(560, 300)], [0.85, { x: SCENE_X + COLX(2) + 90, y: CONTENT_Y + SLOTY(0) + 43 }, 'down'], [1.9, { x: SCENE_X + DROP.x + 90, y: CONTENT_Y + DROP.y + 43 }, 'up'], [2.65, C(DROP.x + 40, DROP.y + 64), 'click'], [3.6, C(330, 200)], [4.4, center('#ktoast', 2)], [5.4, C(600, 250)] ],
+    [ [0, C(450, 200)], [0.55, center('#st1', 3)], [1.35, C(560, 170)], [2.0, center('#r0', 3)], [2.45, center('#r1', 3)], [2.95, center('#r2', 3), 'click'], [3.8, C(175, 222)], [4.6, C(175, 470)], [5.5, C(620, 320)] ],
+    [ [0, C(500, 260)], [0.6, C(180, 150)], [1.15, center('#bk2', 4), 'click'], [2.2, C(180, 40)], [2.9, center('#rr5', 4)], [3.35, center('#s4-xls', 4), 'click'], [4.4, center('#s4-file', 4)], [5.4, C(560, 300)] ],
+  ];
+  const list = [];
+  P.forEach((pts, si) => pts.forEach(([t, pos, act]) => list.push({ t: si * D + t, x: pos.x, y: pos.y, act })));
+  KF = [...list.map(k => ({ ...k, t: k.t - TOTAL })), ...list, ...list.map(k => ({ ...k, t: k.t + TOTAL }))].sort((a, b) => a.t - b.t);
+}
+function cursorPos(t) {
+  let i = KF.findIndex(k => k.t > t);
+  const a = KF[i - 1], b = KF[i];
+  const span = b.t - a.t;
+  const mv = Math.min(0.5, span * 0.85);
+  const start = b.t - mv;
+  if (t <= start) {
+    // small idle drift while dwelling
+    return { x: a.x + Math.sin(t * 2.1) * 3, y: a.y + Math.cos(t * 1.7) * 3 };
+  }
+  const u = eIO((t - start) / mv);
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const arc = Math.sin(u * Math.PI) * 0.18;
+  return { x: a.x + dx * u - dy * arc, y: a.y + dy * u + dx * arc };
+}
+function isDown(t) {
+  // mouse held between a 'down' keyframe and the next 'up' keyframe
+  const tm = ((t % TOTAL) + TOTAL) % TOTAL;
+  return tm >= 2 * D + 0.95 && tm < 2 * D + 1.95;
+}
+
+/* ===================== Transitions (every hand-off uses a different move) ===================== */
+const TRANS = ['swing', 'zoom', 'circle', 'wipe', 'drop'];
+function applyTransition(el, kind, p, dir, origin) {
+  // dir: 'out' | 'in' ; p eased 0..1 progress of the transition
+  let tf = '', op = 1, filter = 'none', clip = 'none';
+  const q = 1 - p;
+  switch (kind) {
+    case 'swing':
+      if (dir === 'out') { tf = `perspective(1600px) translateX(${-p * 75}%) rotateY(${p * 55}deg) scale(${1 - 0.15 * p})`; op = 1 - p * 0.95; }
+      else { tf = `perspective(1600px) translateX(${q * 75}%) rotateY(${-q * 55}deg) scale(${0.85 + 0.15 * p})`; op = Math.min(1, p * 1.6); }
+      break;
+    case 'zoom':
+      if (dir === 'out') { tf = `scale(${1 + 1.5 * p})`; op = 1 - p; filter = `blur(${14 * p}px)`; }
+      else { tf = `scale(${0.5 + 0.5 * eBack(p)})`; op = Math.min(1, p * 1.4); filter = `blur(${8 * q}px)`; }
+      break;
+    case 'circle':
+      if (dir === 'out') { tf = `scale(${1 - 0.08 * p})`; filter = `brightness(${1 - 0.6 * p})`; }
+      else { clip = `circle(${p * 125}% at ${origin.x}px ${origin.y}px)`; tf = `scale(${1.06 - 0.06 * p})`; }
+      break;
+    case 'wipe': {
+      if (dir === 'out') { tf = `translateY(${-p * 14}%) rotate(${-p * 5}deg) scale(${1 - 0.1 * p})`; op = 1 - p; }
+      else { const e = -45 + p * 190; clip = `polygon(0 0, ${e}% 0, ${e - 45}% 100%, 0 100%)`; tf = `translateX(${-q * 6}%)`; }
+      break;
+    }
+    case 'drop':
+      if (dir === 'out') { tf = `translateY(${-p * 120}%) rotate(${-p * 8}deg) scale(${1 - 0.18 * p})`; }
+      else { tf = `translateY(${(1 - eBack(p)) * 115}%) rotate(${q * 6}deg)`; }
+      break;
+  }
+  el.style.transform = tf; el.style.opacity = op; el.style.filter = filter; el.style.clipPath = clip;
+}
+
+/* ===================== Caption entrances (also unique per project) ===================== */
+function updateCaption(i, L) {
+  const el = capEls[i];
+  const inP = prog(L, 0.1, 0.9), outP = prog(L, D - 0.75, D - 0.35);
+  const vis = L > -0.1 && L < D;
+  el.style.display = vis ? 'block' : 'none';
+  if (!vis) return;
+  const spans = el.querySelectorAll('.title span');
+  const num = el.querySelector('.num'), sub = el.querySelector('.sub'), title = el.querySelector('.title');
+  title.style.letterSpacing = '-0.02em'; title.style.filter = 'none'; title.style.transform = 'none'; title.style.clipPath = 'none';
+  spans.forEach(s => { s.style.transform = 'none'; s.style.opacity = 1; });
+  switch (i) {
+    case 0: spans.forEach((s, k) => { const p = eOut(prog(L, 0.1 + k * 0.025, 0.6 + k * 0.025)); s.style.transform = `translateY(${(1 - p) * 36}px) rotate(${(1 - p) * 12}deg)`; s.style.opacity = p; }); break;
+    case 1: title.style.letterSpacing = `${lerp(0.6, -0.02, eOut(inP))}em`; title.style.filter = `blur(${(1 - eOut(inP)) * 10}px)`; title.style.opacity = inP; break;
+    case 2: title.style.clipPath = `inset(0 ${100 - eOut5(inP) * 100}% 0 0)`; title.style.transform = `translateX(${(1 - eOut5(inP)) * -30}px)`; break;
+    case 3: title.style.transform = `scale(${lerp(1.5, 1, eOut5(inP))})`; title.style.transformOrigin = 'left center'; title.style.opacity = inP; break;
+    case 4: { const n = Math.floor(spans.length * prog(L, 0.15, 0.8)); spans.forEach((s, k) => s.style.opacity = k < n ? 1 : 0); break; }
+  }
+  num.style.opacity = prog(L, 0.05, 0.4);
+  sub.style.opacity = prog(L, 0.5, 0.95);
+  sub.style.transform = `translateY(${(1 - eOut(prog(L, 0.5, 0.95))) * 8}px)`;
+  el.style.opacity = 1 - outP;
+  el.style.transform = `translateY(${-outP * 14}px)`;
+}
+
+/* ===================== Background + FX canvas ===================== */
+const stars = Array.from({ length: 80 }, (_, i) => ({ x: (i * 397) % W, y: (i * 211 + 37) % H, r: 0.4 + (i % 5) * 0.3, m: 1 + (i % 4), ph: i * 1.7 }));
+const sctx = document.getElementById('stars').getContext('2d');
+const fx = document.getElementById('fx').getContext('2d');
+function drawBg(t) {
+  const w = TAU * t / TOTAL;
+  const pos = [[300, 200, 260, 120, 1, 0], [900, 420, 240, 140, 2, 1.3], [700, 120, 300, 90, 1, 2.6], [200, 560, 200, 80, 3, 4.1]];
+  ['b1', 'b2', 'b3', 'b4'].forEach((id, i) => {
+    const [cx, cy, rx, ry, n, ph] = pos[i];
+    const el = document.getElementById(id);
+    const s = el.offsetWidth / 2;
+    el.style.transform = `translate(${cx + rx * Math.cos(w * n + ph) - s}px, ${cy + ry * Math.sin(w * n * 1 + ph * 1.3) - s}px) scale(${1 + 0.15 * Math.sin(w * n + ph)})`;
+    el.style.opacity = 0.32 + 0.12 * Math.sin(w * (n + 1) + ph);
+  });
+  const off = (t / TOTAL) * 64 * 4 % 64;
+  document.getElementById('grid').style.transform = `translate(${off}px, ${off * 0.5}px)`;
+  sctx.clearRect(0, 0, W, H);
+  stars.forEach(s => {
+    const a = 0.25 + 0.55 * (0.5 + 0.5 * Math.sin(w * s.m * 3 + s.ph));
+    sctx.fillStyle = `rgba(165,243,252,${a})`;
+    sctx.beginPath(); sctx.arc(s.x, s.y, s.r, 0, TAU); sctx.fill();
+  });
+}
+function clicksNear(t) {
+  return KF.filter(k => k.act === 'click' || k.act === 'down').filter(k => t - k.t >= 0 && t - k.t < 0.8);
+}
+function drawOrb(t) {
+  fx.clearRect(0, 0, W, H);
+  fx.globalCompositeOperation = 'lighter';
+  // comet trail: dense glowing beads interpolated so the tube stays smooth at any speed
+  const SAMPLES = 40, SPAN = 0.42;
+  let prev = cursorPos(t), prevF = 1;
+  for (let k = 1; k <= SAMPLES; k++) {
+    const p = cursorPos(t - (k / SAMPLES) * SPAN);
+    const f = 1 - k / SAMPLES;
+    const dist = Math.hypot(p.x - prev.x, p.y - prev.y);
+    const steps = Math.max(1, Math.ceil(dist / 2.5));
+    for (let j = 0; j < steps; j++) {
+      const u = j / steps;
+      const ff = prevF + (f - prevF) * u;
+      const x = prev.x + (p.x - prev.x) * u, y = prev.y + (p.y - prev.y) * u;
+      const hue = 188 + (1 - ff) * 95;
+      fx.fillStyle = `hsla(${hue}, 95%, 66%, ${0.07 * ff * ff + 0.01})`;
+      fx.beginPath(); fx.arc(x, y, 1.5 + 9 * ff, 0, TAU); fx.fill();
+    }
+    prev = p; prevF = f;
+  }
+  // click ripples + sparks
+  clicksNear(t).forEach(k => {
+    const a = (t - k.t) / 0.8;
+    for (let r = 0; r < 2; r++) {
+      const aa = clamp(a - r * 0.15, 0, 1);
+      if (aa <= 0) continue;
+      fx.strokeStyle = `rgba(103,232,249,${(1 - aa) * 0.9})`;
+      fx.lineWidth = 2.5 * (1 - aa) + 0.5;
+      fx.beginPath(); fx.arc(k.x, k.y, 10 + eOut(aa) * 60, 0, TAU); fx.stroke();
+    }
+    for (let s = 0; s < 10; s++) {
+      const ang = s / 10 * TAU + k.t;
+      const d = 12 + eOut(a) * 48;
+      fx.fillStyle = `rgba(216,180,254,${(1 - a) * 0.9})`;
+      fx.beginPath(); fx.arc(k.x + Math.cos(ang) * d, k.y + Math.sin(ang) * d, 2.2 * (1 - a) + 0.4, 0, TAU); fx.fill();
+    }
+  });
+  fx.globalCompositeOperation = 'source-over';
+  // the orb itself, squashed along its velocity
+  const c = cursorPos(t), b = cursorPos(t - 0.016);
+  const vx = c.x - b.x, vy = c.y - b.y, sp = Math.min(Math.hypot(vx, vy), 40);
+  const press = clicksNear(t).some(k => t - k.t < 0.14) || isDown(t) ? 0.78 : 1;
+  const R = 12 * press;
+  fx.save();
+  fx.translate(c.x, c.y);
+  fx.rotate(Math.atan2(vy, vx));
+  fx.scale(1 + sp / 60, 1 / (1 + sp / 60));
+  const glow = fx.createRadialGradient(0, 0, 0, 0, 0, R * 4);
+  glow.addColorStop(0, 'rgba(103,232,249,.55)'); glow.addColorStop(0.4, 'rgba(139,92,246,.22)'); glow.addColorStop(1, 'rgba(139,92,246,0)');
+  fx.fillStyle = glow; fx.beginPath(); fx.arc(0, 0, R * 4, 0, TAU); fx.fill();
+  const g = fx.createRadialGradient(-R * 0.35, -R * 0.4, R * 0.1, 0, 0, R);
+  g.addColorStop(0, '#ffffff'); g.addColorStop(0.35, '#a5f3fc'); g.addColorStop(0.75, '#22d3ee'); g.addColorStop(1, '#7c3aed');
+  fx.fillStyle = g; fx.beginPath(); fx.arc(0, 0, R, 0, TAU); fx.fill();
+  fx.restore();
+  if (isDown(t)) {
+    fx.strokeStyle = 'rgba(244,114,182,.8)'; fx.lineWidth = 2;
+    fx.beginPath(); fx.arc(c.x, c.y, 22 + 2 * Math.sin(t * 20), 0, TAU); fx.stroke();
+  }
+}
+
+/* ===================== Frame ===================== */
+function render(t) {
+  t = ((t % TOTAL) + TOTAL) % TOTAL;
+  drawBg(t);
+  const cursorAtScene = i => L => cursorPos(i * D + L);
+  sceneEls.forEach((el, i) => {
+    let L = t - i * D;
+    if (i === 0 && t > TOTAL - TD) L = t - TOTAL;   // first project enters again at the loop seam
+    const visible = L > -TD && L < D;
+    el.style.display = visible ? 'block' : 'none';
+    if (!visible) return;
+    SCENES[i].update(clamp(L, 0, D), el, cursorAtScene(i));
+    el.style.zIndex = 1;
+    if (L < 0) {
+      const k = (i - 1 + N) % N;
+      const p = eIO((L + TD) / TD);
+      const c = cursorPos(i * D - TD + (i === 0 ? TOTAL : 0));
+      applyTransition(el, TRANS[k], p, 'in', { x: c.x - SCENE_X, y: c.y - SCENE_Y });
+      el.style.zIndex = TRANS[k] === 'zoom' ? 1 : 2;
+    } else if (L > D - TD) {
+      const p = eIO((L - (D - TD)) / TD);
+      applyTransition(el, TRANS[i], p, 'out');
+      el.style.zIndex = TRANS[i] === 'zoom' ? 2 : 1;
+    } else {
+      el.style.transform = 'none'; el.style.opacity = 1; el.style.filter = 'none'; el.style.clipPath = 'none';
+    }
+  });
+  capEls.forEach((el, i) => {
+    let L = t - i * D;
+    if (i === 0 && t > TOTAL - TD) L = t - TOTAL;
+    updateCaption(i, L);
+  });
+  document.querySelectorAll('#dots b').forEach((b, i) => {
+    const L = t - i * D;
+    b.style.width = (L < 0 ? 0 : L > D ? 100 : (L / D) * 100) + '%';
+    b.parentElement.style.width = (L >= 0 && L < D ? 40 : 22) + 'px';
+  });
+  drawOrb(t);
+}
+
+window.ready = (async () => {
+  await document.fonts.ready;
+  buildPath();
+  render(0);
+  return true;
+})();
+window.render = render;
+window.TOTAL = TOTAL;
+</script>
+</body>
+</html>
