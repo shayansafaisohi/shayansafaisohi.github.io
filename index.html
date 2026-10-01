@@ -10,9 +10,8 @@
 
   <script>document.documentElement.classList.add('js');</script>
 
-  <!-- Tailwind CSS CDN & Lucide Icons -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <!-- Lucide icons (Tailwind is prebuilt into assets/tailwind.css — see tools/tailwind) -->
+  <script defer src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 
   <!-- Fonts: Latin display + body + mono, Persian. Arabic / Chinese / Cyrillic load on demand -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,29 +19,6 @@
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@8.5/fonts/Estedad%5Bwght%5D.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['var(--font-body)'],
-            display: ['var(--font-display)'],
-            mono: ['var(--font-mono)'],
-          },
-          colors: {
-            brand: {
-              cyan: '#22d3ee',
-              blue: '#3b82f6',
-              violet: '#a78bfa',
-              emerald: '#34d399',
-              dark: '#05070d',
-            }
-          }
-        }
-      }
-    }
-  </script>
 
   <style>
     /* ---------- Typography system ---------- */
@@ -119,7 +95,7 @@
     html { scrollbar-color: #1e3a5f var(--bg); }
 
     /* ---------- Landmark background (cross-fading layers + slow ken burns) ---------- */
-    #landmark-background { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+    #landmark-background { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; contain: strict; }
     .bg-layer {
       position: absolute; inset: -4%;
       background-size: cover;
@@ -159,16 +135,18 @@
     }
 
     /* Aurora + grid + grain */
-    .aurora { position: fixed; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+    .aurora { position: fixed; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; contain: strict; }
     .aurora-inner { position: absolute; inset: 0; }
     .aurora span {
-      position: absolute; border-radius: 9999px; filter: blur(80px); opacity: 0.45; mix-blend-mode: screen;
+      position: absolute; border-radius: 9999px; opacity: 0.45; mix-blend-mode: screen;
+      /* pre-softened edge (looks like the old blur(80px) but costs no filter pass per frame) */
+      background: radial-gradient(circle closest-side, var(--c) 0%, var(--c) 32%, color-mix(in srgb, var(--c) 45%, transparent) 62%, transparent 100%);
       animation: drift 18s ease-in-out infinite alternate;
     }
-    .aurora span:nth-child(1) { width: 44vw; height: 44vw; background: #0891b2; top: -14vw; inset-inline-start: -10vw; }
-    .aurora span:nth-child(2) { width: 36vw; height: 36vw; background: #7c3aed; top: 28vh; inset-inline-start: 16vw; opacity: 0.32; }
-    .aurora span:nth-child(3) { width: 32vw; height: 32vw; background: #2563eb; bottom: -12vw; inset-inline-end: 8vw; opacity: 0.3; }
-    .aurora span:nth-child(4) { width: 22vw; height: 22vw; background: #db2777; top: 55vh; inset-inline-start: -6vw; opacity: 0.18; }
+    .aurora span:nth-child(1) { width: 70vw; height: 70vw; --c: #0891b2; top: -27vw; inset-inline-start: -23vw; }
+    .aurora span:nth-child(2) { width: 57.6vw; height: 57.6vw; --c: #7c3aed; top: calc(28vh - 10.8vw); inset-inline-start: 5.2vw; opacity: 0.32; }
+    .aurora span:nth-child(3) { width: 51.2vw; height: 51.2vw; --c: #2563eb; bottom: -21.6vw; inset-inline-end: -1.6vw; opacity: 0.3; }
+    .aurora span:nth-child(4) { width: 35.2vw; height: 35.2vw; --c: #db2777; top: calc(55vh - 6.6vw); inset-inline-start: -12.6vw; opacity: 0.18; }
     @keyframes drift {
       0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
       33%  { transform: translate3d(9vw, 6vh, 0) scale(1.18) rotate(40deg); }
@@ -181,12 +159,13 @@
     .aurora span:nth-child(2) { animation-duration: 23s, 48s; animation-delay: -6s, -12s; }
     .aurora span:nth-child(3) { animation-duration: 26s, 48s; animation-delay: -12s, -24s; }
     .aurora span:nth-child(4) { animation-duration: 20s, 48s; animation-delay: -3s, -36s; }
+    @property --c { syntax: '<color>'; inherits: false; initial-value: #0891b2; }
     @keyframes palette {
-      0%, 100% { background-color: #0891b2; }
-      20%      { background-color: #2563eb; }
-      40%      { background-color: #7c3aed; }
-      60%      { background-color: #c026d3; }
-      80%      { background-color: #0d9488; }
+      0%, 100% { --c: #0891b2; }
+      20%      { --c: #2563eb; }
+      40%      { --c: #7c3aed; }
+      60%      { --c: #c026d3; }
+      80%      { --c: #0d9488; }
     }
 
     /* Slowly rotating light beams behind the hero */
@@ -529,6 +508,7 @@
       a { color: #0284c7 !important; text-decoration: underline; }
     }
   </style>
+  <link rel="stylesheet" href="assets/tailwind.css">
 </head>
 <body>
 
@@ -1801,14 +1781,8 @@
 
       const glow = document.getElementById('cursor-glow');
       let gx = window.innerWidth / 2, gy = window.innerHeight / 2, tx = gx, ty = gy;
-      window.addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; glow.style.opacity = '1'; }, { passive: true });
+      window.addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; glow.style.opacity = '1'; wakeCursor(); }, { passive: true });
       document.addEventListener('pointerleave', () => { glow.style.opacity = '0'; });
-      (function followGlow() {
-        gx += (tx - gx) * 0.12;
-        gy += (ty - gy) * 0.12;
-        glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`;
-        requestAnimationFrame(followGlow);
-      })();
 
       // ----- Custom cursor: instant dot + lagging, velocity-stretched gradient ring + comet trail -----
       const root = document.documentElement;
@@ -1859,7 +1833,12 @@
         root.classList.toggle('cursor-text', !isHover && !!e.target.closest(textSel));
       });
 
-      (function cursorLoop() {
+      let cursorRaf = 0, trailDirty = false;
+      function wakeCursor() { if (!cursorRaf) cursorRaf = requestAnimationFrame(cursorLoop); }
+      function cursorLoop() {
+        gx += (tx - gx) * 0.12;
+        gy += (ty - gy) * 0.12;
+        glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`;
         rx += (tx - rx) * 0.18;
         ry += (ty - ry) * 0.18;
         const vx = rx - lastX, vy = ry - lastY;
@@ -1869,7 +1848,8 @@
         const stretch = 1 + speed / 60;
         ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) rotate(${angle}deg) scale(${stretch}, ${1 / stretch})`;
 
-        tctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        if (trailDirty || trail.length) tctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        trailDirty = trail.length > 1;
         for (let i = 0; i < trail.length; i++) trail[i].life -= 0.045;
         while (trail.length && trail[0].life <= 0) trail.shift();
         if (trail.length > 1) {
@@ -1886,15 +1866,17 @@
             tctx.stroke();
           }
         }
-        requestAnimationFrame(cursorLoop);
-      })();
+        const settled = Math.abs(tx - gx) < 0.3 && Math.abs(ty - gy) < 0.3 && Math.abs(tx - rx) < 0.3 && Math.abs(ty - ry) < 0.3 && !trail.length && !trailDirty;
+        cursorRaf = settled ? 0 : requestAnimationFrame(cursorLoop);
+      }
+      wakeCursor();
 
       // ----- Background parallax: photo follows the pointer slightly, aurora drifts the other way -----
+      const parallaxLayers = [document.getElementById('landmark-background'), document.querySelector('.aurora')];
       window.addEventListener('pointermove', (e) => {
         const px = (e.clientX / window.innerWidth - 0.5) * -18;
         const py = (e.clientY / window.innerHeight - 0.5) * -14;
-        root.style.setProperty('--px', `${px.toFixed(1)}px`);
-        root.style.setProperty('--py', `${py.toFixed(1)}px`);
+        parallaxLayers.forEach(el => { el.style.setProperty('--px', `${px.toFixed(1)}px`); el.style.setProperty('--py', `${py.toFixed(1)}px`); });
       }, { passive: true });
     }
 
@@ -2007,9 +1989,10 @@
         for (let j = i + 1; j < particles.length; j++) {
           const q = particles[j];
           const dx = p.x - q.x, dy = p.y - q.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < LINK_DIST) {
-            ctx.strokeStyle = `rgba(129, 140, 248, ${0.18 * (1 - dist / LINK_DIST)})`;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < LINK_DIST * LINK_DIST) {
+            ctx.globalAlpha = 0.18 * (1 - Math.sqrt(d2) / LINK_DIST);
+            ctx.strokeStyle = 'rgb(129, 140, 248)';
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
@@ -2017,9 +2000,11 @@
             ctx.stroke();
           }
         }
+        ctx.globalAlpha = 1;
         const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
-        const md = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (md < 180) {
+        const md2 = mdx * mdx + mdy * mdy;
+        if (md2 < 180 * 180) {
+          const md = Math.sqrt(md2);
           ctx.strokeStyle = `rgba(34, 211, 238, ${0.35 * (1 - md / 180)})`;
           ctx.lineWidth = 0.7;
           ctx.beginPath();
