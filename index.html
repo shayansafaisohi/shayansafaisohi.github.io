@@ -626,7 +626,7 @@
           <i data-lucide="printer" class="w-4 h-4"></i>
           <span class="hidden lg:inline" data-i18n="btnSavePdf">Save PDF</span>
         </button>
-        <a href="mailto:shayan.safai.sohi@gmail.com" class="h-9 px-3 rounded-xl bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 transition-colors flex items-center gap-1.5 text-xs font-semibold">
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shayan.safai.sohi@gmail.com" target="_blank" rel="noopener" data-email-link class="h-9 px-3 rounded-xl bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 transition-colors flex items-center gap-1.5 text-xs font-semibold">
           <i data-lucide="mail" class="w-4 h-4"></i>
           <span class="hidden sm:inline" data-i18n="navContactBtn">Contact</span>
         </a>
@@ -944,7 +944,7 @@
     <footer class="pt-10 border-t border-white/5 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
       <div class="text-xs text-slate-500 font-mono" data-i18n="footerText">© 2026 Shayan Safai Sohi</div>
       <div id="contact-links" class="flex items-center gap-2">
-        <a href="mailto:shayan.safai.sohi@gmail.com" aria-label="Email" title="Email" class="btn-ghost w-11 h-11 rounded-xl text-cyan-300 hover:text-white grid place-items-center">
+        <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shayan.safai.sohi@gmail.com" target="_blank" rel="noopener" data-email-link aria-label="Email" title="Email" class="btn-ghost w-11 h-11 rounded-xl text-cyan-300 hover:text-white grid place-items-center">
           <i data-lucide="mail" class="w-5 h-5"></i>
         </a>
         <a href="https://t.me/shayansafai" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram" class="btn-ghost w-11 h-11 rounded-xl text-sky-300 hover:text-white grid place-items-center">
@@ -1150,7 +1150,7 @@
         showDesc: 'مروری ۳۰ ثانیه‌ای بر پنج پروژه؛ از یک Workflow اتوماسیون با AI تا پنل‌ها و اپلیکیشن‌هایی که روی آن ساخته شده‌اند.',
         chatTitle: 'از شایان بپرسید', chatSub: 'دستیار هوش مصنوعی · پاسخ فوری', chatPlaceholder: 'سؤالتان را بنویسید…', chatGreeting: 'سلام! می‌توانم درباره پروژه‌ها و مهارت‌های شایان بگویم، یا اینکه چطور می‌شود یک فرایند کسب‌وکار شما را خودکار کرد. چه چیزی می‌خواهید بدانید؟', chatQ1: 'تخصص اصلی شایان چیست؟', chatQ2: 'درباره پروژه هم‌نشین بگو', chatQ3: 'می‌تواند فرایند کاری من را با n8n خودکار کند؟', chatError: 'مشکلی پیش آمد. لطفاً چند لحظه دیگر دوباره امتحان کنید.', chatBusy: 'پیام‌ها زیاد شد؛ لطفاً یک دقیقه صبر کنید.', chatOffline: 'دستیار هنوز متصل نشده است.',
         toastMsg: 'کپی شد',
-        footerText: '© ۲۰۲۶ شایان صفایی سوهی'
+        footerText: '© ۲۰۲۶ شایان صفایی سهی'
       },
       de: {
         dir: 'ltr', code: 'DE',
@@ -1547,6 +1547,14 @@
     }
 
     // ---------- Contact / toast ----------
+
+    // Email links open a ready-to-send Gmail draft on desktop; phones hand mailto: to the mail app
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      document.querySelectorAll('[data-email-link]').forEach(a => {
+        a.href = 'mailto:shayan.safai.sohi@gmail.com';
+        a.removeAttribute('target');
+      });
+    }
 
     // ---------- Count-up metrics (rendered with the active language's digits) ----------
     function formatCount(n) {
