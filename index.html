@@ -70,7 +70,6 @@
     }
     .glass-card:hover {
       border-color: rgba(99, 102, 241, 0.35);
-      transform: translateY(-4px);
       box-shadow: 0 20px 40px -15px rgba(56, 189, 248, 0.12);
     }
     .gradient-text {
@@ -86,9 +85,13 @@
     html[dir="rtl"] .space-x-7 > :not([hidden]) ~ :not([hidden]) {
       --tw-space-x-reverse: 1;
     }
+    /* Strictly enforce Flag on Left & Landmark on Right */
+    .cultural-wrapper {
+      direction: ltr !important;
+    }
     @media print {
       body { background: white !important; color: #111 !important; }
-      canvas, #particles-canvas, .no-print, header, footer, #lang-menu { display: none !important; }
+      canvas, #particles-canvas, .no-print, header, footer, #lang-menu, #cultural-banner { display: none !important; }
       .glass-card { border: 1px solid #ddd !important; background: none !important; box-shadow: none !important; transform: none !important; }
       .gradient-text { -webkit-text-fill-color: #1e293b !important; color: #1e293b !important; }
       a { color: #0284c7 !important; text-decoration: underline; }
@@ -188,10 +191,45 @@
     </nav>
   </header>
 
-  <main class="relative z-10 pt-32 pb-20 px-4 sm:px-6 max-w-6xl mx-auto space-y-24">
+  <main class="relative z-10 pt-28 sm:pt-32 pb-20 px-4 sm:px-6 max-w-6xl mx-auto space-y-16 sm:space-y-24">
+
+    <!-- CULTURAL HERITAGE DYNAMIC BANNER (Flag on Left, Landmark on Right) -->
+    <div id="cultural-banner" class="cultural-wrapper glass-card rounded-3xl p-4 sm:p-6 border border-cyan-500/20 shadow-2xl relative overflow-hidden transition-all duration-500">
+      <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-indigo-500/5 to-violet-500/10 opacity-70 pointer-events-none"></div>
+
+      <div class="flex items-center justify-between relative z-10 w-full">
+        <!-- LEFT: Flag of the Selected Country -->
+        <div class="flex items-center gap-3 sm:gap-4.5">
+          <div id="banner-flag" class="text-3xl sm:text-5xl p-2.5 sm:p-3.5 rounded-2xl bg-slate-800/90 border border-slate-700/80 shadow-xl flex items-center justify-center transform transition-transform hover:scale-105 duration-300">
+            🇺🇸
+          </div>
+          <div class="text-left">
+            <span class="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold block" id="banner-region-label">National Identity</span>
+            <span class="text-sm sm:text-lg md:text-xl font-bold text-white tracking-tight block" id="banner-country-name">United States</span>
+          </div>
+        </div>
+
+        <!-- CENTER BADGE: Compass / Global Indicator -->
+        <div class="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/70 text-[11px] font-mono text-slate-300">
+          <i data-lucide="globe-2" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span id="banner-heritage-title">Cultural Landmark</span>
+        </div>
+
+        <!-- RIGHT: Historic Landmark of that Country -->
+        <div class="flex items-center gap-3 sm:gap-4.5 text-right">
+          <div>
+            <span class="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold block" id="banner-city-name">New York, USA</span>
+            <span class="text-sm sm:text-lg md:text-xl font-bold text-white tracking-tight block" id="banner-landmark-name">Statue of Liberty</span>
+          </div>
+          <div id="banner-landmark-icon" class="text-3xl sm:text-5xl p-2.5 sm:p-3.5 rounded-2xl bg-slate-800/90 border border-slate-700/80 shadow-xl flex items-center justify-center transform transition-transform hover:scale-105 duration-300">
+            🗽
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- HERO SECTION -->
-    <section id="about" class="text-center pt-6 sm:pt-12 space-y-6">
+    <section id="about" class="text-center pt-2 sm:pt-4 space-y-6">
       <!-- Status Badge -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium tracking-wide">
         <span class="relative flex h-2 w-2">
@@ -536,8 +574,93 @@
     <span class="text-xs font-medium text-slate-200" id="toast-msg">Contact copied to clipboard!</span>
   </div>
 
-  <!-- MULTI-LANGUAGE TRANSLATION DICTIONARY -->
+  <!-- MULTI-LANGUAGE TRANSLATION DICTIONARY & LANDMARK DATA -->
   <script>
+    // Cultural Landmarks Database: Flag (Left) & Historic Monument (Right)
+    const landmarks = {
+      en: {
+        flag: "🇺🇸",
+        regionLabel: "National Identity",
+        countryName: "United States (English)",
+        landmarkName: "Statue of Liberty",
+        cityName: "New York City, USA",
+        landmarkIcon: "🗽",
+        heritageTitle: "Global Landmark"
+      },
+      fa: {
+        flag: "🇮🇷",
+        regionLabel: "هویت ملی و تمدن",
+        countryName: "ایران (Persian)",
+        landmarkName: "تخت جمشید (Persepolis)",
+        cityName: "شیراز، ایران",
+        landmarkIcon: "🏛️",
+        heritageTitle: "میراث تاریخی و تمدن باستان"
+      },
+      de: {
+        flag: "🇩🇪",
+        regionLabel: "Nationale Identität",
+        countryName: "Deutschland (German)",
+        landmarkName: "Brandenburger Tor",
+        cityName: "Berlin, Deutschland",
+        landmarkIcon: "🏛️",
+        heritageTitle: "Historisches Wahrzeichen"
+      },
+      fr: {
+        flag: "🇫🇷",
+        regionLabel: "Identité Nationale",
+        countryName: "France (Français)",
+        landmarkName: "Tour Eiffel",
+        cityName: "Paris, France",
+        landmarkIcon: "🗼",
+        heritageTitle: "Monument Historique"
+      },
+      ar: {
+        flag: "🇸🇦",
+        regionLabel: "الهوية والتراث",
+        countryName: "الوطن العربي (العربية)",
+        landmarkName: "أهرامات الجيزة (Pyramids)",
+        cityName: "الجيزة، مصر",
+        landmarkIcon: "🏜️",
+        heritageTitle: "معالم التاريخ الخالدة"
+      },
+      es: {
+        flag: "🇪🇸",
+        regionLabel: "Identidad Nacional",
+        countryName: "España (Español)",
+        landmarkName: "La Sagrada Família",
+        cityName: "Barcelona, España",
+        landmarkIcon: "⛪",
+        heritageTitle: "Monumento Histórico"
+      },
+      it: {
+        flag: "🇮🇹",
+        regionLabel: "Identità Nazionale",
+        countryName: "Italia (Italiano)",
+        landmarkName: "Colosseo (Colosseum)",
+        cityName: "Roma, Italia",
+        landmarkIcon: "🏟️",
+        heritageTitle: "Monumento Storico"
+      },
+      ru: {
+        flag: "🇷🇺",
+        regionLabel: "Национальная идентичность",
+        countryName: "Россия (Русский)",
+        landmarkName: "Храм Василия Блаженного",
+        cityName: "Москва, Россия",
+        landmarkIcon: "🏰",
+        heritageTitle: "Историческое наследие"
+      },
+      zh: {
+        flag: "🇨🇳",
+        regionLabel: "国家认同与文明",
+        countryName: "中国 (简体中文)",
+        landmarkName: "万里长城 (Great Wall)",
+        cityName: "北京，中国",
+        landmarkIcon: "🏯",
+        heritageTitle: "世界历史奇迹"
+      }
+    };
+
     const translations = {
       en: {
         dir: 'ltr', flag: '🇺🇸', code: 'EN',
@@ -949,13 +1072,31 @@
       localStorage.setItem('preferred_lang', lang);
 
       const data = translations[lang];
+      const lm = landmarks[lang] || landmarks.en;
 
       document.documentElement.lang = lang;
       document.documentElement.dir = data.dir;
 
+      // Update Header Button
       document.getElementById('current-flag').textContent = data.flag;
       document.getElementById('current-lang-code').textContent = data.code;
 
+      // Update Cultural Heritage Banner (Flag on Left, Landmark on Right)
+      const banner = document.getElementById('cultural-banner');
+      banner.classList.add('opacity-75');
+
+      setTimeout(() => {
+        document.getElementById('banner-flag').textContent = lm.flag;
+        document.getElementById('banner-region-label').textContent = lm.regionLabel;
+        document.getElementById('banner-country-name').textContent = lm.countryName;
+        document.getElementById('banner-landmark-name').textContent = lm.landmarkName;
+        document.getElementById('banner-city-name').textContent = lm.cityName;
+        document.getElementById('banner-landmark-icon').textContent = lm.landmarkIcon;
+        document.getElementById('banner-heritage-title').textContent = lm.heritageTitle;
+        banner.classList.remove('opacity-75');
+      }, 150);
+
+      // Update all translated elements
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (data[key]) {
