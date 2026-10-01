@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" dir="ltr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -19,7 +19,7 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'Vazirmatn', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'Vazirmatn', '"Noto Sans Arabic"', '"Noto Sans SC"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
@@ -59,6 +59,7 @@
       background-color: #06080e;
       color: #f1f5f9;
       overflow-x: hidden;
+      transition: all 0.25s ease;
     }
     .glass-card {
       background: rgba(13, 18, 32, 0.7);
@@ -77,24 +78,17 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .gradient-border {
-      position: relative;
+    html[dir="rtl"] {
+      font-family: 'Vazirmatn', '"Noto Sans Arabic"', sans-serif;
     }
-    .gradient-border::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, #06b6d4, #6366f1, #d946ef);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
+    html[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]),
+    html[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]),
+    html[dir="rtl"] .space-x-7 > :not([hidden]) ~ :not([hidden]) {
+      --tw-space-x-reverse: 1;
     }
     @media print {
       body { background: white !important; color: #111 !important; }
-      canvas, #particles-canvas, .no-print, header, footer { display: none !important; }
+      canvas, #particles-canvas, .no-print, header, footer, #lang-menu { display: none !important; }
       .glass-card { border: 1px solid #ddd !important; background: none !important; box-shadow: none !important; transform: none !important; }
       .gradient-text { -webkit-text-fill-color: #1e293b !important; color: #1e293b !important; }
       a { color: #0284c7 !important; text-decoration: underline; }
@@ -111,29 +105,80 @@
   <div class="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-violet-600/15 blur-[140px] pointer-events-none animate-blob animation-delay-4000"></div>
 
   <!-- Navigation Bar -->
-  <header class="fixed top-4 inset-x-0 mx-auto w-[92%] max-w-5xl z-50">
-    <nav class="glass-card rounded-2xl px-6 py-3 flex items-center justify-between shadow-2xl">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/30">
+  <header class="fixed top-4 inset-x-0 mx-auto w-[94%] max-w-5xl z-50">
+    <nav class="glass-card rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between shadow-2xl">
+      <div class="flex items-center space-x-3 rtl:space-x-reverse">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/30 shrink-0">
           SS
         </div>
         <div>
-          <span class="font-bold tracking-tight text-white block text-sm sm:text-base">Shayan Safai Sohi</span>
+          <span class="font-bold tracking-tight text-white block text-sm sm:text-base leading-tight">Shayan Safai Sohi</span>
           <span class="text-xs text-slate-400 font-mono">@shayansafaisohi</span>
         </div>
       </div>
 
-      <div class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-300">
-        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
-        <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
-        <a href="#skills" class="hover:text-cyan-400 transition-colors">Stack</a>
-        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      <div class="hidden md:flex items-center space-x-7 rtl:space-x-reverse text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-cyan-400 transition-colors" data-i18n="navAbout">About</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors" data-i18n="navProjects">Projects</a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors" data-i18n="navStack">Stack</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors" data-i18n="navContact">Contact</a>
       </div>
 
-      <div class="flex items-center space-x-3">
+      <!-- Action Items & Language Selector -->
+      <div class="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse">
+        
+        <!-- Language Switcher Dropdown -->
+        <div class="relative">
+          <button id="lang-btn" onclick="toggleLangMenu()" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 border border-slate-700 shadow-md transition-all">
+            <span id="current-flag">🌐</span>
+            <span id="current-lang-code" class="uppercase font-mono">EN</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="lang-menu" class="hidden absolute right-0 rtl:right-auto rtl:left-0 mt-2 w-48 rounded-2xl glass-card py-2 shadow-2xl border border-slate-700/80 z-50 text-xs backdrop-blur-2xl">
+            <button onclick="setLanguage('en')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors">
+              <span>🇺🇸 English</span>
+              <span class="text-[10px] font-mono text-slate-400">EN</span>
+            </button>
+            <button onclick="setLanguage('fa')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors font-['Vazirmatn']">
+              <span>🇮🇷 فارسی</span>
+              <span class="text-[10px] font-mono text-slate-400">FA</span>
+            </button>
+            <button onclick="setLanguage('de')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors">
+              <span>🇩🇪 Deutsch</span>
+              <span class="text-[10px] font-mono text-slate-400">DE</span>
+            </button>
+            <button onclick="setLanguage('fr')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors">
+              <span>🇫🇷 Français</span>
+              <span class="text-[10px] font-mono text-slate-400">FR</span>
+            </button>
+            <button onclick="setLanguage('ar')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors font-['Noto_Sans_Arabic']">
+              <span>🇸🇦 العربية</span>
+              <span class="text-[10px] font-mono text-slate-400">AR</span>
+            </button>
+            <button onclick="setLanguage('es')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors">
+              <span>🇪🇸 Español</span>
+              <span class="text-[10px] font-mono text-slate-400">ES</span>
+            </button>
+            <button onclick="setLanguage('it')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors">
+              <span>🇮🇹 Italiano</span>
+              <span class="text-[10px] font-mono text-slate-400">IT</span>
+            </button>
+            <button onclick="setLanguage('ru')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors">
+              <span>🇷🇺 Русский</span>
+              <span class="text-[10px] font-mono text-slate-400">RU</span>
+            </button>
+            <button onclick="setLanguage('zh')" class="w-full text-left rtl:text-right px-4 py-2 hover:bg-cyan-500/20 hover:text-cyan-300 flex items-center justify-between transition-colors font-['Noto_Sans_SC']">
+              <span>🇨🇳 简体中文</span>
+              <span class="text-[10px] font-mono text-slate-400">ZH</span>
+            </button>
+          </div>
+        </div>
+
         <button onclick="window.print()" class="no-print p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-all text-xs flex items-center gap-1.5 border border-slate-700">
           <i data-lucide="printer" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Save PDF</span>
+          <span class="hidden lg:inline" data-i18n="btnSavePdf">Save PDF</span>
         </button>
         <a href="https://github.com/shayansafaisohi" target="_blank" class="p-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all flex items-center gap-1.5 text-xs font-semibold">
           <i data-lucide="github" class="w-4 h-4"></i>
@@ -146,56 +191,54 @@
   <main class="relative z-10 pt-32 pb-20 px-4 sm:px-6 max-w-6xl mx-auto space-y-24">
 
     <!-- HERO SECTION -->
-    <section id="about" class="text-center pt-8 sm:pt-14 space-y-6">
+    <section id="about" class="text-center pt-6 sm:pt-12 space-y-6">
+      <!-- Status Badge -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium tracking-wide">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        Available for High-Impact Roles & Contracts
+        <span data-i18n="heroBadge">Available for High-Impact Roles & Contracts</span>
       </div>
 
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
-        Building Resilient <br class="hidden sm:inline"/>
-        <span class="gradient-text">Full-Stack & AI Systems</span>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.15]">
+        <span data-i18n="heroTitle1">Building Resilient</span> <br class="hidden sm:inline"/>
+        <span class="gradient-text" data-i18n="heroTitle2">Full-Stack & AI Systems</span>
       </h1>
 
-      <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg leading-relaxed">
-        Senior Engineer specializing in 
-        <span class="text-slate-200 font-semibold">Real-Time WebRTC</span>, 
-        <span class="text-slate-200 font-semibold">Edge ML Inference</span>, and 
-        <span class="text-slate-200 font-semibold">Enterprise ERP Architectures</span>.
-        Obsessed with bulletproof type safety, zero-trust security (RLS), and automated E2E testing.
+      <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg leading-relaxed" data-i18n="heroBio">
+        Senior Engineer specializing in Real-Time WebRTC, Edge ML Inference, and Enterprise ERP Architectures. Obsessed with bulletproof type safety, zero-trust security (RLS), and automated E2E testing.
       </p>
 
+      <!-- Action Buttons -->
       <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
         <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold text-sm shadow-xl shadow-cyan-500/25 hover:opacity-95 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
           <i data-lucide="layers" class="w-4 h-4"></i>
-          Explore Architecture
+          <span data-i18n="heroCtaProjects">Explore Architecture</span>
         </a>
         <button onclick="copyEmail()" id="copy-btn" class="px-6 py-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-medium text-sm border border-slate-700/80 hover:border-slate-600 transition-all flex items-center gap-2">
           <i data-lucide="mail" class="w-4 h-4"></i>
-          <span>Copy Contact</span>
+          <span data-i18n="heroCtaContact">Copy Contact</span>
         </button>
       </div>
 
       <!-- Quick Metrics Bar -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-10">
         <div class="glass-card rounded-2xl p-4 text-center">
-          <div class="text-2xl sm:text-3xl font-bold gradient-text">Next.js 16 & React 19</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Modern React Ecosystem</div>
+          <div class="text-2xl sm:text-3xl font-bold gradient-text" data-i18n="m1Val">Next.js 16 & React 19</div>
+          <div class="text-xs text-slate-400 font-mono mt-1" data-i18n="m1Lbl">Modern React Ecosystem</div>
         </div>
         <div class="glass-card rounded-2xl p-4 text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-cyan-400">LiveKit & ONNX</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Real-Time AI Streaming</div>
+          <div class="text-2xl sm:text-3xl font-bold text-cyan-400" data-i18n="m2Val">LiveKit & ONNX</div>
+          <div class="text-xs text-slate-400 font-mono mt-1" data-i18n="m2Lbl">Real-Time AI Streaming</div>
         </div>
         <div class="glass-card rounded-2xl p-4 text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-indigo-400">Playwright E2E</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Multi-Role Concurrency QA</div>
+          <div class="text-2xl sm:text-3xl font-bold text-indigo-400" data-i18n="m3Val">Playwright E2E</div>
+          <div class="text-xs text-slate-400 font-mono mt-1" data-i18n="m3Lbl">Multi-Role Concurrency QA</div>
         </div>
         <div class="glass-card rounded-2xl p-4 text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-emerald-400">pnpm Monorepo</div>
-          <div class="text-xs text-slate-400 font-mono mt-1">Modular Architecture</div>
+          <div class="text-2xl sm:text-3xl font-bold text-emerald-400" data-i18n="m4Val">pnpm Monorepo</div>
+          <div class="text-xs text-slate-400 font-mono mt-1" data-i18n="m4Lbl">Modular Architecture</div>
         </div>
       </div>
     </section>
@@ -204,16 +247,16 @@
     <section id="projects" class="space-y-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <span class="text-xs font-mono uppercase tracking-wider text-cyan-400">Selected Engineering Works</span>
-          <h2 class="text-3xl font-bold tracking-tight text-white mt-1">Featured Production Systems</h2>
+          <span class="text-xs font-mono uppercase tracking-wider text-cyan-400" data-i18n="projTag">Selected Engineering Works</span>
+          <h2 class="text-3xl font-bold tracking-tight text-white mt-1" data-i18n="projTitle">Featured Production Systems</h2>
         </div>
 
         <!-- Filter Chips -->
-        <div class="flex items-center gap-2 p-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-medium">
-          <button onclick="filterProjects('all')" class="filter-btn active px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-semibold" data-cat="all">All</button>
-          <button onclick="filterProjects('ai')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="ai">AI & Streaming</button>
-          <button onclick="filterProjects('erp')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="erp">Enterprise ERP</button>
-          <button onclick="filterProjects('monorepo')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="monorepo">Monorepo / SaaS</button>
+        <div class="flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-medium">
+          <button onclick="filterProjects('all')" class="filter-btn active px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-semibold" data-cat="all" data-i18n="filterAll">All</button>
+          <button onclick="filterProjects('ai')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="ai" data-i18n="filterAi">AI & Streaming</button>
+          <button onclick="filterProjects('erp')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="erp" data-i18n="filterErp">Enterprise ERP</button>
+          <button onclick="filterProjects('monorepo')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="monorepo" data-i18n="filterMonorepo">Monorepo / SaaS</button>
         </div>
       </div>
 
@@ -223,33 +266,33 @@
         <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="ai">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">AI Intelligence & WebRTC</span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" data-i18n="p1Tag">AI Intelligence & WebRTC</span>
               <a href="https://github.com/shayansafaisohi/HamNeshin" target="_blank" class="text-slate-400 hover:text-white transition-colors">
                 <i data-lucide="external-link" class="w-5 h-5"></i>
               </a>
             </div>
 
             <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-              HamNeshin (هم‌نشین)
+              <span data-i18n="p1Title">HamNeshin (هم‌نشین)</span>
               <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Private</span>
             </h3>
 
-            <p class="text-slate-400 text-sm leading-relaxed">
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p1Desc">
               Persian RTL conference intelligence platform for real-time recording, high-fidelity speech transcription, speaker identification, and automated action-item summarization.
             </p>
 
             <ul class="space-y-2 text-xs text-slate-300">
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
-                <span><strong>LiveKit Client & Server SDK:</strong> Low-latency bidirectional WebRTC audio/video streaming.</span>
+                <span data-i18n="p1B1"><strong>LiveKit Client & Server SDK:</strong> Low-latency bidirectional WebRTC audio/video streaming.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
-                <span><strong>ONNX Runtime Node:</strong> Embedded local ML inference for private edge speaker diarization.</span>
+                <span data-i18n="p1B2"><strong>ONNX Runtime Node:</strong> Embedded local ML inference for private edge speaker diarization.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
-                <span><strong>Automated VPS CLI:</strong> Custom Node toolchain for atomic leases, rollback, and SSH deployments.</span>
+                <span data-i18n="p1B3"><strong>Automated VPS CLI:</strong> Custom Node toolchain for atomic leases, rollback, and SSH deployments.</span>
               </li>
             </ul>
           </div>
@@ -268,33 +311,33 @@
         <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="erp">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">High-Concurrency ERP</span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20" data-i18n="p2Tag">High-Concurrency ERP</span>
               <a href="https://github.com/shayansafaisohi/AdvertisingPanel" target="_blank" class="text-slate-400 hover:text-white transition-colors">
                 <i data-lucide="external-link" class="w-5 h-5"></i>
               </a>
             </div>
 
             <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-              AdvertisingPanel
+              <span data-i18n="p2Title">AdvertisingPanel</span>
               <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Private</span>
             </h3>
 
-            <p class="text-slate-400 text-sm leading-relaxed">
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p2Desc">
               Mission-critical campaign ops & scenario workflow ERP synchronizing 7 independent organizational roles, approval hierarchies, and live marketing asset delivery.
             </p>
 
             <ul class="space-y-2 text-xs text-slate-300">
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
-                <span><strong>Multi-Role RBAC:</strong> Granular views for Supervisor, Scenario, Banner, Scriptwriter, and Admin.</span>
+                <span data-i18n="p2B1"><strong>Multi-Role RBAC:</strong> Granular views for Supervisor, Scenario, Banner, Scriptwriter, and Admin.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
-                <span><strong>Distributed Locking:</strong> Synchronized campaign ID counters preventing duplicate race conditions.</span>
+                <span data-i18n="p2B2"><strong>Distributed Locking:</strong> Synchronized campaign ID counters preventing duplicate race conditions.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
-                <span><strong>Playwright E2E:</strong> 5 concurrent role sessions automatically tested across desktop & mobile.</span>
+                <span data-i18n="p2B3"><strong>Playwright E2E:</strong> 5 concurrent role sessions automatically tested across desktop & mobile.</span>
               </li>
             </ul>
           </div>
@@ -313,33 +356,33 @@
         <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="monorepo">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20">Monorepo & Zero-Trust</span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20" data-i18n="p3Tag">Monorepo & Zero-Trust</span>
               <a href="https://github.com/shayansafaisohi/qaf" target="_blank" class="text-slate-400 hover:text-white transition-colors">
                 <i data-lucide="external-link" class="w-5 h-5"></i>
               </a>
             </div>
 
             <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-              Qaf LegalTech (قاف)
+              <span data-i18n="p3Title">Qaf LegalTech (قاف)</span>
               <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Monorepo</span>
             </h3>
 
-            <p class="text-slate-400 text-sm leading-relaxed">
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p3Desc">
               Enterprise legal platform structured as a high-performance pnpm monorepo with client portals, attorney dashboards, and strict Zero-Trust access control.
             </p>
 
             <ul class="space-y-2 text-xs text-slate-300">
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-violet-400 shrink-0 mt-0.5"></i>
-                <span><strong>pnpm Workspaces:</strong> Clean isolation of <code>apps/web</code>, <code>apps/panel</code>, and <code>packages/*</code>.</span>
+                <span data-i18n="p3B1"><strong>pnpm Workspaces:</strong> Clean isolation of <code>apps/web</code>, <code>apps/panel</code>, and <code>packages/*</code>.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-violet-400 shrink-0 mt-0.5"></i>
-                <span><strong>Row-Level Security (RLS):</strong> 44+ automated assertion tests verifying document isolation.</span>
+                <span data-i18n="p3B2"><strong>Row-Level Security (RLS):</strong> 44+ automated assertion tests verifying document isolation.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-violet-400 shrink-0 mt-0.5"></i>
-                <span><strong>Formal ADRs:</strong> Architecture Decision Records enforcing maintainable codebase evolution.</span>
+                <span data-i18n="p3B3"><strong>Formal ADRs:</strong> Architecture Decision Records enforcing maintainable codebase evolution.</span>
               </li>
             </ul>
           </div>
@@ -357,33 +400,33 @@
         <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="monorepo">
           <div class="space-y-4">
             <div class="flex items-center justify-between">
-              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Corporate PWA & Services</span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" data-i18n="p4Tag">Corporate PWA & Services</span>
               <a href="https://github.com/shayansafaisohi/refahi" target="_blank" class="text-slate-400 hover:text-white transition-colors">
                 <i data-lucide="external-link" class="w-5 h-5"></i>
               </a>
             </div>
 
             <h3 class="text-2xl font-bold text-white flex items-center gap-2">
-              Refahi Portal (سامانه رفاهی)
+              <span data-i18n="p4Title">Refahi Portal (سامانه رفاهی)</span>
               <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Next.js 16</span>
             </h3>
 
-            <p class="text-slate-400 text-sm leading-relaxed">
+            <p class="text-slate-400 text-sm leading-relaxed" data-i18n="p4Desc">
               Scalable corporate services and ordering application featuring SMS-based authentication, offline PWA capabilities, and live push notifications.
             </p>
 
             <ul class="space-y-2 text-xs text-slate-300">
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                <span><strong>Bleeding-Edge Stack:</strong> Built with Next.js 16, React 19, and Tailwind CSS v4.</span>
+                <span data-i18n="p4B1"><strong>Bleeding-Edge Stack:</strong> Built with Next.js 16, React 19, and Tailwind CSS v4.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                <span><strong>Multi-Device PWA:</strong> Service Worker offline cache & server-initiated Web Push alerts.</span>
+                <span data-i18n="p4B2"><strong>Multi-Device PWA:</strong> Service Worker offline cache & server-initiated Web Push alerts.</span>
               </li>
               <li class="flex items-start gap-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                <span><strong>Automated Excel Generator:</strong> Real-time reporting engine for administrative accounting.</span>
+                <span data-i18n="p4B3"><strong>Automated Excel Generator:</strong> Real-time reporting engine for administrative accounting.</span>
               </li>
             </ul>
           </div>
@@ -403,8 +446,8 @@
     <!-- TECHNICAL ARSENAL -->
     <section id="skills" class="space-y-8">
       <div>
-        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400">Technical Arsenal</span>
-        <h2 class="text-3xl font-bold tracking-tight text-white mt-1">Skills & Core Technologies</h2>
+        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400" data-i18n="stackTag">Technical Arsenal</span>
+        <h2 class="text-3xl font-bold tracking-tight text-white mt-1" data-i18n="stackTitle">Skills & Core Technologies</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -413,8 +456,8 @@
           <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center border border-cyan-500/20">
             <i data-lucide="layout" class="w-5 h-5"></i>
           </div>
-          <h3 class="text-lg font-bold text-white">Frontend & UI/UX</h3>
-          <p class="text-xs text-slate-400">Focusing on sub-second load times, responsive RTL designs, and reactive interfaces.</p>
+          <h3 class="text-lg font-bold text-white" data-i18n="stackFrontendTitle">Frontend & UI/UX</h3>
+          <p class="text-xs text-slate-400" data-i18n="stackFrontendDesc">Focusing on sub-second load times, responsive RTL designs, and reactive interfaces.</p>
           <div class="flex flex-wrap gap-1.5 font-mono text-xs">
             <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">Next.js 16</span>
             <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">React 19</span>
@@ -431,8 +474,8 @@
           <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center border border-indigo-500/20">
             <i data-lucide="server" class="w-5 h-5"></i>
           </div>
-          <h3 class="text-lg font-bold text-white">Backend & Streaming</h3>
-          <p class="text-xs text-slate-400">High-throughput microservices, WebSockets, and real-time audio/video pipelines.</p>
+          <h3 class="text-lg font-bold text-white" data-i18n="stackBackendTitle">Backend & Streaming</h3>
+          <p class="text-xs text-slate-400" data-i18n="stackBackendDesc">High-throughput microservices, WebSockets, and real-time audio/video pipelines.</p>
           <div class="flex flex-wrap gap-1.5 font-mono text-xs">
             <span class="px-2.5 py-1 rounded bg-slate-800/80 text-indigo-300">Fastify 5</span>
             <span class="px-2.5 py-1 rounded bg-slate-800/80 text-indigo-300">Python / Django</span>
@@ -448,8 +491,8 @@
           <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
             <i data-lucide="shield-check" class="w-5 h-5"></i>
           </div>
-          <h3 class="text-lg font-bold text-white">Data, Security & DevOps</h3>
-          <p class="text-xs text-slate-400">Strict data isolation, automated CI/CD pipelines, and end-to-end browser testing.</p>
+          <h3 class="text-lg font-bold text-white" data-i18n="stackDevopsTitle">Data, Security & DevOps</h3>
+          <p class="text-xs text-slate-400" data-i18n="stackDevopsDesc">Strict data isolation, automated CI/CD pipelines, and end-to-end browser testing.</p>
           <div class="flex flex-wrap gap-1.5 font-mono text-xs">
             <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">PostgreSQL</span>
             <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Supabase RLS</span>
@@ -465,8 +508,8 @@
     <!-- CONTACT & FOOTER -->
     <section id="contact" class="glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6">
       <div class="max-w-xl mx-auto space-y-3">
-        <h2 class="text-3xl font-bold text-white">Let’s Build Something Exceptional</h2>
-        <p class="text-slate-400 text-sm">
+        <h2 class="text-3xl font-bold text-white" data-i18n="contactTitle">Let’s Build Something Exceptional</h2>
+        <p class="text-slate-400 text-sm" data-i18n="contactDesc">
           Interested in collaborating on real-time systems, AI products, or scaling your enterprise stack? Reach out directly.
         </p>
       </div>
@@ -474,15 +517,15 @@
       <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
         <a href="https://github.com/shayansafaisohi" target="_blank" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-sm border border-slate-700 transition-all flex items-center gap-2">
           <i data-lucide="github" class="w-4 h-4"></i>
-          GitHub Profile
+          <span data-i18n="contactGithub">GitHub Profile</span>
         </a>
         <button onclick="copyEmail()" class="px-6 py-3 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-semibold text-sm border border-cyan-500/40 transition-all flex items-center gap-2">
           <i data-lucide="copy" class="w-4 h-4"></i>
-          Copy Contact Info
+          <span data-i18n="contactCopy">Copy Contact Info</span>
         </button>
       </div>
 
-      <div class="pt-8 border-t border-slate-800 text-xs text-slate-500 font-mono">
+      <div class="pt-8 border-t border-slate-800 text-xs text-slate-500 font-mono" data-i18n="footerText">
         Designed & Architected by Shayan Safai Sohi • Built with Modern Web Standards
       </div>
     </section>
@@ -490,17 +533,452 @@
   </main>
 
   <!-- Interactive Toast Notification -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-card px-5 py-3 rounded-2xl flex items-center gap-3 border border-emerald-500/40 shadow-2xl">
+  <div id="toast" class="fixed bottom-6 right-6 rtl:right-auto rtl:left-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-card px-5 py-3 rounded-2xl flex items-center gap-3 border border-emerald-500/40 shadow-2xl">
     <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
       <i data-lucide="check" class="w-4 h-4"></i>
     </div>
     <span class="text-xs font-medium text-slate-200" id="toast-msg">Contact copied to clipboard!</span>
   </div>
 
-  <!-- Interactive JavaScript -->
+  <!-- MULTI-LANGUAGE TRANSLATION DICTIONARY -->
   <script>
-    lucide.createIcons();
+    const translations = {
+      en: {
+        dir: 'ltr', flag: '🇺🇸', code: 'EN',
+        navAbout: 'About', navProjects: 'Projects', navStack: 'Stack', navContact: 'Contact', btnSavePdf: 'Save PDF',
+        heroBadge: 'Available for High-Impact Roles & Contracts',
+        heroTitle1: 'Building Resilient', heroTitle2: 'Full-Stack & AI Systems',
+        heroBio: 'Senior Engineer specializing in Real-Time WebRTC, Edge ML Inference, and Enterprise ERP Architectures. Obsessed with bulletproof type safety, zero-trust security (RLS), and automated E2E testing.',
+        heroCtaProjects: 'Explore Architecture', heroCtaContact: 'Copy Contact',
+        m1Val: 'Next.js 16 & React 19', m1Lbl: 'Modern React Ecosystem',
+        m2Val: 'LiveKit & ONNX', m2Lbl: 'Real-Time AI Streaming',
+        m3Val: 'Playwright E2E', m3Lbl: 'Multi-Role Concurrency QA',
+        m4Val: 'pnpm Monorepo', m4Lbl: 'Modular Architecture',
+        projTag: 'Selected Engineering Works', projTitle: 'Featured Production Systems',
+        filterAll: 'All', filterAi: 'AI & Streaming', filterErp: 'Enterprise ERP', filterMonorepo: 'Monorepo / SaaS',
+        p1Tag: 'AI Intelligence & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
+        p1Desc: 'Persian RTL conference intelligence platform for real-time recording, high-fidelity speech transcription, speaker identification, and automated action-item summarization.',
+        p1B1: '<strong>LiveKit Client & Server SDK:</strong> Low-latency bidirectional WebRTC audio/video streaming.',
+        p1B2: '<strong>ONNX Runtime Node:</strong> Embedded local ML inference for private edge speaker diarization.',
+        p1B3: '<strong>Automated VPS CLI:</strong> Custom Node toolchain for atomic leases, rollback, and SSH deployments.',
+        p2Tag: 'High-Concurrency ERP', p2Title: 'AdvertisingPanel',
+        p2Desc: 'Mission-critical campaign ops & scenario workflow ERP synchronizing 7 independent organizational roles, approval hierarchies, and live marketing asset delivery.',
+        p2B1: '<strong>Multi-Role RBAC:</strong> Granular views for Supervisor, Scenario, Banner, Scriptwriter, and Admin.',
+        p2B2: '<strong>Distributed Locking:</strong> Synchronized campaign ID counters preventing duplicate race conditions.',
+        p2B3: '<strong>Playwright E2E:</strong> 5 concurrent role sessions automatically tested across desktop & mobile.',
+        p3Tag: 'Monorepo & Zero-Trust', p3Title: 'Qaf LegalTech (قاف)',
+        p3Desc: 'Enterprise legal platform structured as a high-performance pnpm monorepo with client portals, attorney dashboards, and strict Zero-Trust access control.',
+        p3B1: '<strong>pnpm Workspaces:</strong> Clean isolation of apps/web, apps/panel, and packages/*.',
+        p3B2: '<strong>Row-Level Security (RLS):</strong> 44+ automated assertion tests verifying document isolation.',
+        p3B3: '<strong>Formal ADRs:</strong> Architecture Decision Records enforcing maintainable codebase evolution.',
+        p4Tag: 'Corporate PWA & Services', p4Title: 'Refahi Portal (سامانه رفاهی)',
+        p4Desc: 'Scalable corporate services and ordering application featuring SMS-based authentication, offline PWA capabilities, and live push notifications.',
+        p4B1: '<strong>Bleeding-Edge Stack:</strong> Built with Next.js 16, React 19, and Tailwind CSS v4.',
+        p4B2: '<strong>Multi-Device PWA:</strong> Service Worker offline cache & server-initiated Web Push alerts.',
+        p4B3: '<strong>Automated Excel Generator:</strong> Real-time reporting engine for administrative accounting.',
+        stackTag: 'Technical Arsenal', stackTitle: 'Skills & Core Technologies',
+        stackFrontendTitle: 'Frontend & UI/UX', stackFrontendDesc: 'Focusing on sub-second load times, responsive RTL designs, and reactive interfaces.',
+        stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'High-throughput microservices, WebSockets, and real-time audio/video pipelines.',
+        stackDevopsTitle: 'Data, Security & DevOps', stackDevopsDesc: 'Strict data isolation, automated CI/CD pipelines, and end-to-end browser testing.',
+        contactTitle: 'Let’s Build Something Exceptional', contactDesc: 'Interested in collaborating on real-time systems, AI products, or scaling your enterprise stack? Reach out directly.',
+        contactGithub: 'GitHub Profile', contactCopy: 'Copy Contact Info',
+        toastMsg: 'Contact copied to clipboard!',
+        footerText: 'Designed & Architected by Shayan Safai Sohi • Built with Modern Web Standards'
+      },
+      fa: {
+        dir: 'rtl', flag: '🇮🇷', code: 'FA',
+        navAbout: 'درباره من', navProjects: 'پروژه‌ها', navStack: 'مهارت‌ها', navContact: 'ارتباط', btnSavePdf: 'ذخیره PDF',
+        heroBadge: 'آماده همکاری در موقعیت‌های شغلی و پروژه‌های بزرگ',
+        heroTitle1: 'طراحی و توسعه سیستم‌های تاب‌آور', heroTitle2: 'فول‌استک و هوش مصنوعی',
+        heroBio: 'مهندس ارشد نرم‌افزار متخصص در سامانه‌های بلادرنگ WebRTC، استنتاج هوش مصنوعی لبه (Edge ML) و معماری‌های پیشرفته ERP سازمانی. متعهد به تایپ ایمن (Type-Safe)، امنیت Zero-Trust در دیتابیس (RLS) و تست‌های خودکار E2E.',
+        heroCtaProjects: 'مشاهده پروژه‌ها', heroCtaContact: 'کپی اطلاعات تماس',
+        m1Val: 'Next.js 16 و React 19', m1Lbl: 'اکوسیستم مدرن فرانت‌اند',
+        m2Val: 'LiveKit و ONNX', m2Lbl: 'استریمینگ بلادرنگ هوش مصنوعی',
+        m3Val: 'تست E2E با Playwright', m3Lbl: 'تضمین کیفیت هم‌زمانی نقش‌ها',
+        m4Val: 'مونوریپو با pnpm', m4Lbl: 'معماری ماژولار و مقیاس‌پذیر',
+        projTag: 'گزیده آثار مهندسی', projTitle: 'پروژه‌های شاخص در مقیاس سازمانی',
+        filterAll: 'همه', filterAi: 'هوش مصنوعی و استریم', filterErp: 'سامانه‌های ERP', filterMonorepo: 'مونوریپو و SaaS',
+        p1Tag: 'هوش مصنوعی و WebRTC', p1Title: 'هم‌نشین (HamNeshin)',
+        p1Desc: 'سامانه هوشمند ضبط، رونویسی، تفکیک گویندگان و خلاصه‌سازی خودکار جلسات سازمانی به زبان فارسی با رابط راست‌چین.',
+        p1B1: '<strong>کلاینت و سرور LiveKit:</strong> استریم بلادرنگ و پایدار صوت و تصویر مبتنی بر WebRTC با کمترین تاخیر.',
+        p1B2: '<strong>اجرای محلی با ONNX Runtime:</strong> استنتاج محلی مدل‌های صوتی روی سرور بدون خروج داده به سرویس‌های متفرقه.',
+        p1B3: '<strong>ابزار اختصاصی استقرار VPS:</strong> اسکریپت‌های سفارشی برای استقرار اتمیک، بازگردانی نسخه (Rollback) و مدیریت سرور.',
+        p2Tag: 'ERP سازمانی با هم‌زمانی بالا', p2Title: 'سامانه جامع تبلیغات (AdvertisingPanel)',
+        p2Desc: 'پنل یکپارچه مدیریت سناریو، بنر و کمپین‌های تبلیغاتی با هماهنگی دقیق ۷ نقش سازمانی مستقل و تاییدات چندمرحله‌ای.',
+        p2B1: '<strong>کنترل دسترسی پیشرفته (RBAC):</strong> پنل‌های تفکیک‌شده برای سرپرست، سناریونویس، سازنده لندینگ، بنر و ادمین.',
+        p2B2: '<strong>قفل‌گذاری توزیع‌شده:</strong> تولید شماره شناسایی کمپین به صورت تراکنشی برای جلوگیری از تداخل شناسه در ثبت هم‌زمان.',
+        p2B3: '<strong>تست خودکار Playwright:</strong> بررسی ۵ نشست هم‌زمان نقش‌های مختلف روی نسخه دسکتاپ و موبایل در CI/CD.',
+        p3Tag: 'مونوریپو و امنیت Zero-Trust', p3Title: 'پلتفرم حقوقی قاف (Qaf)',
+        p3Desc: 'پلتفرم سازمانی حقوقی با ساختار مونوریپو شامل پرتال عمومی موکلین، کارتابل وکلا و پنل مدیریت با جداسازی دقیق سطوح دسترسی.',
+        p3B1: '<strong>فضای کاری pnpm Workspaces:</strong> تفکیک مستقل اپلیکیشن‌های وب، پنل و پکیج‌های مشترک منطق و UI.',
+        p3B2: '<strong>امنیت سطح سطر (RLS):</strong> بیش از ۴۴ تست خودکار برای اثبات عدم دسترسی غیرمجاز به پرونده‌های موکلین.',
+        p3B3: '<strong>اسناد تصمیمات معماری (ADR):</strong> مستندسازی ساختارمند دلایل انتخاب ابزارها و تصمیمات کلیدی توسعه.',
+        p4Tag: 'وب‌اپلیکیشن شرکتی (PWA)', p4Title: 'سامانه رفاهی پرسنلی (Refahi)',
+        p4Desc: 'سامانه سفارش‌گذاری و رزرو خدمات پرسنلی با ورود پیامکی OTP، کارکرد آفلاین PWA و اعلان‌های وب‌پوش سراسری.',
+        p4B1: '<strong>استک پیشرفته:</strong> پیاده‌سازی شده با Next.js 16، React 19 و نسخه جدید Tailwind CSS v4.',
+        p4B2: '<strong>قابلیت‌های PWA:</strong> کش هوشمند با Service Worker و ارسال نوتیفیکیشن‌های سروری روی مرورگر و موبایل.',
+        p4B3: '<strong>موتور خروجی اکسل خودکار:</strong> گزارش‌گیری بلادرنگ مالی برای حسابداری در بازه‌های زمانی مختلف.',
+        stackTag: 'جعبه‌ابزار تخصصی', stackTitle: 'مهارت‌ها و فناوری‌های محوری',
+        stackFrontendTitle: 'فرانت‌اند و رابط کاربری', stackFrontendDesc: 'تمرکز بر سرعت بارگذاری زیر ۱ ثانیه، طراحی واکنش‌گرا و تجربه کاربری روان.',
+        stackBackendTitle: 'بک‌اند و استریمینگ', stackBackendDesc: 'میکروسرویس‌های توان‌بالا، ارتباط بلادرنگ سوکت و پایپ‌لاین‌های پردازش صوت و تصویر.',
+        stackDevopsTitle: 'داده، امنیت و دواپس', stackDevopsDesc: 'جداسازی داده‌ها، تست‌های خودکار یکپارچه و استقرار کانتینری در محیط پروداکشن.',
+        contactTitle: 'بیایید پروژه‌ای خارق‌العاده خلق کنیم', contactDesc: 'اگر به دنبال پیاده‌سازی سامانه‌های بلادرنگ، هوش مصنوعی، یا مقیاس‌پذیری ساختار نرم‌افزاری خود هستید، در ارتباط باشید.',
+        contactGithub: 'پروفایل گیت‌هاب', contactCopy: 'کپی اطلاعات تماس',
+        toastMsg: 'اطلاعات تماس در کلیپ‌بورد کپی شد!',
+        footerText: 'طراحی و توسعه توسط شایان صفایی سوهی • پیاده‌سازی بر اساس استانداردهای مدرن وب'
+      },
+      de: {
+        dir: 'ltr', flag: '🇩🇪', code: 'DE',
+        navAbout: 'Über mich', navProjects: 'Projekte', navStack: 'Stack', navContact: 'Kontakt', btnSavePdf: 'PDF Speichern',
+        heroBadge: 'Verfügbar für anspruchsvolle Rollen & Verträge',
+        heroTitle1: 'Entwicklung robuster', heroTitle2: 'Full-Stack & KI-Systeme',
+        heroBio: 'Senior Engineer spezialisiert auf Echtzeit-WebRTC, Edge-ML-Inferenz und Enterprise-ERP-Architekturen. Höchster Fokus auf Typsicherheit, Zero-Trust-Sicherheit (RLS) und automatisierte E2E-Tests.',
+        heroCtaProjects: 'Architektur Erkunden', heroCtaContact: 'Kontakt Kopieren',
+        m1Val: 'Next.js 16 & React 19', m1Lbl: 'Modernes React-Ökosystem',
+        m2Val: 'LiveKit & ONNX', m2Lbl: 'Echtzeit-KI-Streaming',
+        m3Val: 'Playwright E2E', m3Lbl: 'Multi-Rollen Concurrency QA',
+        m4Val: 'pnpm Monorepo', m4Lbl: 'Modulare Architektur',
+        projTag: 'Ausgewählte Ingenieurarbeiten', projTitle: 'Herausragende Produktionssysteme',
+        filterAll: 'Alle', filterAi: 'KI & Streaming', filterErp: 'Enterprise ERP', filterMonorepo: 'Monorepo / SaaS',
+        p1Tag: 'KI-Intelligenz & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
+        p1Desc: 'Konferenz-Intelligenzplattform für Echtzeitaufnahme, Transkription, Sprechererkennung und automatisierte KI-Zusammenfassungen.',
+        p1B1: '<strong>LiveKit SDK:</strong> Latenzarmes bidirektionales WebRTC-Audio/Video-Streaming.',
+        p1B2: '<strong>ONNX Runtime Node:</strong> Lokale ML-Inferenz für datenschutzkonforme Sprechertrennung.',
+        p1B3: '<strong>Automatisiertes VPS-CLI:</strong> Maßgeschneiderte Node-Toolchain für atomare Bereitstellung und Rollbacks.',
+        p2Tag: 'Hochleistungs-ERP', p2Title: 'AdvertisingPanel',
+        p2Desc: 'Kritisches Kampagnen- und Workflow-ERP zur Synchronisation von 7 Unternehmensrollen und Asset-Auslieferung.',
+        p2B1: '<strong>Multi-Rollen RBAC:</strong> Granulare Dashboards für Supervisoren, Autoren und Administratoren.',
+        p2B2: '<strong>Distributed Locking:</strong> Synchronisierte Kampagnen-ID-Zähler gegen Race-Conditions.',
+        p2B3: '<strong>Playwright E2E:</strong> 5 simultane Rollensitzungen vollautomatisch getestet.',
+        p3Tag: 'Monorepo & Zero-Trust', p3Title: 'Qaf LegalTech (قاف)',
+        p3Desc: 'Rechtliche Plattform mit pnpm-Monorepo, Mandantenportalen und strikter Zero-Trust-Zugriffskontrolle.',
+        p3B1: '<strong>pnpm Workspaces:</strong> Saubere Trennung von Apps und geteilten Core-Paketen.',
+        p3B2: '<strong>Row-Level Security (RLS):</strong> 44+ automatisierte Tests zur Überprüfung der Datenisolation.',
+        p3B3: '<strong>Formale ADRs:</strong> Nachvollziehbare Architekturentscheidungen.',
+        p4Tag: 'Enterprise PWA', p4Title: 'Refahi Portal (سامانه رفاهی)',
+        p4Desc: 'Skalierbare Mitarbeiter-Wohlfahrtsplattform mit SMS-OTP-Login, Offline-PWA und Web-Push-Benachrichtigungen.',
+        p4B1: '<strong>Modernster Stack:</strong> Next.js 16, React 19 und Tailwind CSS v4.',
+        p4B2: '<strong>Multi-Device PWA:</strong> Service Worker Offline-Cache & Push-Nachrichten.',
+        p4B3: '<strong>Excel-Engine:</strong> Echtzeit-Finanzberichterstattung für die Buchhaltung.',
+        stackTag: 'Technisches Arsenal', stackTitle: 'Fähigkeiten & Kerntechnologien',
+        stackFrontendTitle: 'Frontend & UI/UX', stackFrontendDesc: 'Fokus auf Ladezeiten unter einer Sekunde, reaktive Oberflächen und modernes Styling.',
+        stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'Hochdurchsatz-Microservices, WebSockets und Audio-/Videoverarbeitung.',
+        stackDevopsTitle: 'Daten, Sicherheit & DevOps', stackDevopsDesc: 'Strikte Datenisolation, automatisierte CI/CD-Pipelines und Browser-Tests.',
+        contactTitle: 'Lassen Sie uns Großes erschaffen', contactDesc: 'Interesse an einer Zusammenarbeit bei Echtzeitsystemen, KI-Produkten oder Skalierung? Kontaktieren Sie mich.',
+        contactGithub: 'GitHub Profil', contactCopy: 'Kontakt Kopieren',
+        toastMsg: 'Kontakt in die Zwischenablage kopiert!',
+        footerText: 'Konzipiert & Entwickelt von Shayan Safai Sohi • Gebaut mit modernen Webstandards'
+      },
+      fr: {
+        dir: 'ltr', flag: '🇫🇷', code: 'FR',
+        navAbout: 'À propos', navProjects: 'Projets', navStack: 'Compétences', navContact: 'Contact', btnSavePdf: 'Enregistrer PDF',
+        heroBadge: 'Disponible pour rôles stratégiques & contrats',
+        heroTitle1: 'Concevoir des Systèmes Résilients', heroTitle2: 'Full-Stack & Intelligence Artificielle',
+        heroBio: 'Ingénieur Senior spécialisé en WebRTC temps réel, inférence ML en périphérie (Edge) et architectures ERP d’entreprise. Passionné par la sécurité Zero-Trust (RLS) et les tests automatisés E2E.',
+        heroCtaProjects: 'Explorer l’Architecture', heroCtaContact: 'Copier Contact',
+        m1Val: 'Next.js 16 & React 19', m1Lbl: 'Écosystème React Moderne',
+        m2Val: 'LiveKit & ONNX', m2Lbl: 'Streaming IA Temps Réel',
+        m3Val: 'Playwright E2E', m3Lbl: 'Assurance Qualité Multi-Rôles',
+        m4Val: 'pnpm Monorepo', m4Lbl: 'Architecture Modulaire',
+        projTag: 'Travaux d’Ingénierie Choisis', projTitle: 'Systèmes de Production Phares',
+        filterAll: 'Tous', filterAi: 'IA & Streaming', filterErp: 'ERP d’Entreprise', filterMonorepo: 'Monorepo / SaaS',
+        p1Tag: 'Intelligence IA & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
+        p1Desc: 'Plateforme d’intelligence de conférence en temps réel pour l’enregistrement, transcription fidèle, identification des intervenants et synthèse automatique.',
+        p1B1: '<strong>SDK LiveKit:</strong> Streaming audio/vidéo WebRTC bidirectionnel à très faible latence.',
+        p1B2: '<strong>ONNX Runtime Node:</strong> Inférence locale pour diarisation vocale préservant la confidentialité.',
+        p1B3: '<strong>CLI VPS Automatisé:</strong> Outils Node personnalisés pour déploiements et rollbacks sécurisés.',
+        p2Tag: 'ERP Haute Concurrence', p2Title: 'AdvertisingPanel',
+        p2Desc: 'ERP de gestion de campagnes synchronisant 7 rôles d’entreprise, hiérarchies d’approbation et livraison d’actifs publicitaires.',
+        p2B1: '<strong>RBAC Multi-Rôles:</strong> Vues dédiées pour superviseurs, rédacteurs, créateurs de landing et administrateurs.',
+        p2B2: '<strong>Verrouillage Distribué:</strong> Compteurs d’identifiants de campagne synchronisés anti-collision.',
+        p2B3: '<strong>Tests Playwright:</strong> 5 sessions de rôles concurrentes testées automatiquement.',
+        p3Tag: 'Monorepo & Zero-Trust', p3Title: 'Qaf LegalTech (قاف)',
+        p3Desc: 'Plateforme juridique moderne en monorepo pnpm avec portails clients, tableaux de bord avocats et sécurité Zero-Trust.',
+        p3B1: '<strong>pnpm Workspaces:</strong> Séparation stricte des apps web et modules partagés.',
+        p3B2: '<strong>Row-Level Security (RLS):</strong> Plus de 44 tests vérifiant l’étanchéité des données.',
+        p3B3: '<strong>ADR Formels:</strong> Traçabilité des décisions d’architecture logicielle.',
+        p4Tag: 'PWA d’Entreprise', p4Title: 'Portail Refahi (سامانه رفاهی)',
+        p4Desc: 'Application de services pour employés avec connexion SMS OTP, fonctionnement hors-ligne PWA et notifications push.',
+        p4B1: '<strong>Technologies de Pointe:</strong> Conçu avec Next.js 16, React 19 et Tailwind CSS v4.',
+        p4B2: '<strong>PWA Multi-Appareils:</strong> Cache Service Worker et notifications push serveur.',
+        p4B3: '<strong>Moteur Excel Automatisé:</strong> Rapports financiers et comptables en temps réel.',
+        stackTag: 'Arsenal Technique', stackTitle: 'Compétences & Technologies Clés',
+        stackFrontendTitle: 'Frontend & UI/UX', stackFrontendDesc: 'Temps de chargement inférieurs à la seconde, interfaces réactives et design soigné.',
+        stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'Microservices à haut débit, WebSockets et flux multimédias en temps réel.',
+        stackDevopsTitle: 'Données, Sécurité & DevOps', stackDevopsDesc: 'Isolation stricte des données, pipelines CI/CD automatisés et tests E2E.',
+        contactTitle: 'Construisons Quelque Chose d’Exceptionnel', contactDesc: 'Intéressé par une collaboration sur des systèmes temps réel, des produits IA ou la mise à l’échelle de vos apps ? Contactez-moi.',
+        contactGithub: 'Profil GitHub', contactCopy: 'Copier Contact',
+        toastMsg: 'Contact copié dans le presse-papiers !',
+        footerText: 'Conçu & Développé par Shayan Safai Sohi • Normes Web Modernes'
+      },
+      ar: {
+        dir: 'rtl', flag: '🇸🇦', code: 'AR',
+        navAbout: 'عني', navProjects: 'المشاريع', navStack: 'التقنيات', navContact: 'اتصل بي', btnSavePdf: 'حفظ PDF',
+        heroBadge: 'متاح للفرص الاستراتيجية وعقود المشاريع الكبرى',
+        heroTitle1: 'بناء وتطوير أنظمة مرنة', heroTitle2: 'فل ستاك وذكاء اصطناعي',
+        heroBio: 'مهندس برمجيات أول متخصص في تقنيات WebRTC الفورية، استدلال نماذج الذكاء الاصطناعي على الحافة (Edge ML)، وبنى نظم ERP للمؤسسات. تركيز كامل على أمان Zero-Trust (RLS) والاختبارات الآلية E2E.',
+        heroCtaProjects: 'استكشاف المشاريع', heroCtaContact: 'نسخ معلومات الاتصال',
+        m1Val: 'Next.js 16 & React 19', m1Lbl: 'منظومة ريآكت الحديثة',
+        m2Val: 'LiveKit & ONNX', m2Lbl: 'بث الذكاء الاصطناعي المباشر',
+        m3Val: 'Playwright E2E', m3Lbl: 'ضمان جودة الأدوار المتزامنة',
+        m4Val: 'pnpm Monorepo', m4Lbl: 'معمارية معيارية قابلة للتوسع',
+        projTag: 'أعمال هندسية مختارة', projTitle: 'أنظمة إنتاجية مؤسسية بارزة',
+        filterAll: 'الكل', filterAi: 'ذكاء اصطناعي وبث', filterErp: 'أنظمة ERP', filterMonorepo: 'مونوريبو و SaaS',
+        p1Tag: 'ذكاء اصطناعي و WebRTC', p1Title: 'هم‌نشین (HamNeshin)',
+        p1Desc: 'منصة ذكاء اجتماعات لتسجيل وتفريغ الصوت بدقة عالية والتعرف على المتحدثين وتلخيص مخرجات الجلسات تلقائياً.',
+        p1B1: '<strong>حزم LiveKit للعميل والخادم:</strong> بث صوتي ومرئي ثنائي الاتجاه منخفض زمن الاستجابة عبر WebRTC.',
+        p1B2: '<strong>تشغيل محلي عبر ONNX Runtime:</strong> استدلال محلي لفصل المتحدثين لحماية خصوصية البيانات المؤسسية.',
+        p1B3: '<strong>أدوات نشر VPS مخصصة:</strong> نصوص برمجية خاصة لإدارة السيرفرات وإعادة الإصدارات (Rollback) بسلاسة.',
+        p2Tag: 'نظام ERP عالي التزامن', p2Title: 'AdvertisingPanel',
+        p2Desc: 'نظام إدارة حملات إعلانية متكامل ينسق أعمال 7 أدوار مؤسسية مختلفة مع تدفق موافقات آلي ودقيق.',
+        p2B1: '<strong>صلاحيات دقيقة (RBAC):</strong> واجهات مخصصة للمشرفين، مؤلفي السيناريو، مصممي الواجهات، والمديرين.',
+        p2B2: '<strong>أقفال قواعد البيانات الموزعة:</strong> توليد معرفات الحملات بشكل ترابطي لمنع تضارب المعرفات.',
+        p2B3: '<strong>اختبارات Playwright الشاملة:</strong> فحص 5 جلسات متزامنة لمختلف الأدوار تلقائياً على المتصفح.',
+        p3Tag: 'مونوريبو وأمان Zero-Trust', p3Title: 'منصة قاف القانونية (Qaf)',
+        p3Desc: 'منصة قانونية مؤسسية مبنية بنظام pnpm monorepo تضم بوابات للعملاء، لوحات للمحامين وتحكم صارم بالبيانات.',
+        p3B1: '<strong>مساحات عمل pnpm Workspaces:</strong> عزل تام لتطبيقات الويب والحزم المشتركة للواجهات والمنطق.',
+        p3B2: '<strong>أمان مستوى الصفوف (RLS):</strong> أكثر من 44 اختباراً آلياً للتحقق من عزل ملفات الموكلين.',
+        p3B3: '<strong>سجلات القرارات المعمارية (ADR):</strong> توثيق دقيق لاختيارات التقنيات والبنية التحتية.',
+        p4Tag: 'تطبيق ويب تقدمي (PWA)', p4Title: 'بوابة الرفاه المؤسسية (Refahi)',
+        p4Desc: 'منصة لإدارة خدمات الموظفين والطلبات بتسجيل دخول عبر رمز OTP، دعم العمل بلا إنترنت وإشعارات الويب الفورية.',
+        p4B1: '<strong>أحدث حزم التقنيات:</strong> مطور باستخدام Next.js 16، React 19 والإصدار الأحدث من Tailwind v4.',
+        p4B2: '<strong>تطبيق PWA متعدد الأجهزة:</strong> تخزين مؤقت عبر Service Worker وإشعارات دفع موجهة للمتصفح.',
+        p4B3: '<strong>مولد تقارير إكسل آلي:</strong> استخراج فوري للبيانات المالية لدعم أقسام المحاسبة والإدارة.',
+        stackTag: 'الترسانة التقنية', stackTitle: 'المهارات والتقنيات الأساسية',
+        stackFrontendTitle: 'الواجهات وتجربة المستخدم', stackFrontendDesc: 'تحميل خلال أجزاء من الثانية، واجهات تفاعلية تدعم اللغة العربية والاتجاه من اليمين لليسار.',
+        stackBackendTitle: 'الخلفية والبث الفوري', stackBackendDesc: 'خدمات مصغرة عالية السرعة، قنوات WebSockets ومعالجة الوسائط المتعددة.',
+        stackDevopsTitle: 'البيانات، الأمان والعمليات', stackDevopsDesc: 'عزل صارم للبيانات، خطوط أنابيب CI/CD آلية واختبارات متكاملة للمتصفحات.',
+        contactTitle: 'لنصنع معاً شيئاً استثنائياً', contactDesc: 'مهتم بالتعاون في مشاريع البث الفوري، تطبيقات الذكاء الاصطناعي أو توسيع أنظمتكم؟ تواصل معي مباشرة.',
+        contactGithub: 'ملف GitHub', contactCopy: 'نسخ معلومات الاتصال',
+        toastMsg: 'تم نسخ معلومات الاتصال بنجاح!',
+        footerText: 'تصميم وهندسة: شايان صفايي سوهي • مبني وفق أحدث معايير الويب'
+      },
+      es: {
+        dir: 'ltr', flag: '🇪🇸', code: 'ES',
+        navAbout: 'Sobre mí', navProjects: 'Proyectos', navStack: 'Habilidades', navContact: 'Contacto', btnSavePdf: 'Guardar PDF',
+        heroBadge: 'Disponible para roles de alto impacto y contratos',
+        heroTitle1: 'Construyendo Sistemas Resilientes', heroTitle2: 'Full-Stack e Inteligencia Artificial',
+        heroBio: 'Ingeniero Senior especializado en WebRTC en tiempo real, inferencia Edge ML y arquitecturas ERP empresariales. Enfoque riguroso en seguridad Zero-Trust (RLS) y pruebas E2E automatizadas.',
+        heroCtaProjects: 'Explorar Arquitectura', heroCtaContact: 'Copiar Contacto',
+        m1Val: 'Next.js 16 & React 19', m1Lbl: 'Ecosistema Moderno de React',
+        m2Val: 'LiveKit & ONNX', m2Lbl: 'Streaming IA en Tiempo Real',
+        m3Val: 'Playwright E2E', m3Lbl: 'QA Concurrente Multi-Rol',
+        m4Val: 'pnpm Monorepo', m4Lbl: 'Arquitectura Modular',
+        projTag: 'Obras de Ingeniería Seleccionadas', projTitle: 'Sistemas de Producción Destacados',
+        filterAll: 'Todos', filterAi: 'IA y Streaming', filterErp: 'ERP Empresarial', filterMonorepo: 'Monorepo / SaaS',
+        p1Tag: 'Inteligencia IA y WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
+        p1Desc: 'Plataforma de inteligencia de conferencias para grabación, transcripción precisa, identificación de ponentes y resúmenes automáticos con IA.',
+        p1B1: '<strong>SDK LiveKit:</strong> Streaming bidireccional WebRTC de audio y video con mínima latencia.',
+        p1B2: '<strong>ONNX Runtime Node:</strong> Inferencia local para separación de voz sin comprometer la privacidad.',
+        p1B3: '<strong>CLI VPS Automatizado:</strong> Herramientas Node personalizadas para despliegue y rollbacks atómicos.',
+        p2Tag: 'ERP de Alta Concurrencia', p2Title: 'AdvertisingPanel',
+        p2Desc: 'ERP de operaciones de campañas publicitarias que sincroniza 7 roles organizacionales y flujos de aprobación.',
+        p2B1: '<strong>RBAC Multi-Rol:</strong> Vistas específicas para supervisores, redactores, creadores de landing y administradores.',
+        p2B2: '<strong>Bloqueo Distribuido:</strong> Asignación transaccional de IDs de campaña sin condiciones de carrera.',
+        p2B3: '<strong>Pruebas Playwright:</strong> 5 sesiones de roles concurrentes validadas automáticamente.',
+        p3Tag: 'Monorepo y Zero-Trust', p3Title: 'Qaf LegalTech (قاف)',
+        p3Desc: 'Plataforma legal empresarial diseñada como monorepo pnpm con portales para clientes, abogados y seguridad Zero-Trust.',
+        p3B1: '<strong>pnpm Workspaces:</strong> Aislamiento limpio entre aplicaciones web y paquetes compartidos.',
+        p3B2: '<strong>Row-Level Security (RLS):</strong> Más de 44 aserciones automatizadas comprobando la privacidad de datos.',
+        p3B3: '<strong>ADR Formales:</strong> Registro riguroso de decisiones arquitectónicas.',
+        p4Tag: 'PWA Empresarial', p4Title: 'Portal Refahi (سامانه رفاهی)',
+        p4Desc: 'Aplicación corporativa de bienestar y pedidos con autenticación SMS OTP, soporte PWA offline y notificaciones push.',
+        p4B1: '<strong>Stack de Vanguardia:</strong> Construido con Next.js 16, React 19 y Tailwind CSS v4.',
+        p4B2: '<strong>PWA Multi-Dispositivo:</strong> Caché Service Worker y notificaciones push desde el servidor.',
+        p4B3: '<strong>Generador Excel Automatizado:</strong> Reportes contables y financieros en tiempo real.',
+        stackTag: 'Arsenal Técnico', stackTitle: 'Habilidades y Tecnologías Principales',
+        stackFrontendTitle: 'Frontend y UI/UX', stackFrontendDesc: 'Velocidad de carga inferior a un segundo, interfaces reactivas y diseño moderno.',
+        stackBackendTitle: 'Backend y Streaming', stackBackendDesc: 'Microservicios de alto rendimiento, WebSockets y procesamiento multimedia.',
+        stackDevopsTitle: 'Datos, Seguridad y DevOps', stackDevopsDesc: 'Aislamiento estricto de datos, pipelines CI/CD y pruebas automatizadas de navegador.',
+        contactTitle: 'Construyamos Algo Extraordinario', contactDesc: '¿Interesado en colaborar en sistemas de tiempo real, productos de IA o escalar sus aplicaciones? Contácteme directamente.',
+        contactGithub: 'Perfil de GitHub', contactCopy: 'Copiar Contacto',
+        toastMsg: '¡Contacto copiado al portapapeles!',
+        footerText: 'Diseñado y Desarrollado por Shayan Safai Sohi • Creado con Estándares Web Modernos'
+      },
+      it: {
+        dir: 'ltr', flag: '🇮🇹', code: 'IT',
+        navAbout: 'Chi sono', navProjects: 'Progetti', navStack: 'Competenze', navContact: 'Contatto', btnSavePdf: 'Salva PDF',
+        heroBadge: 'Disponibile per ruoli ad alto impatto & contratti',
+        heroTitle1: 'Creazione di Sistemi Resilienti', heroTitle2: 'Full-Stack & Intelligenza Artificiale',
+        heroBio: 'Senior Software Engineer specializzato in WebRTC in tempo reale, inferenza Edge ML e architetture ERP enterprise. Forte attenzione alla sicurezza Zero-Trust (RLS) e ai test E2E automatizzati.',
+        heroCtaProjects: 'Esplora l’Architettura', heroCtaContact: 'Copia Contatto',
+        m1Val: 'Next.js 16 & React 19', m1Lbl: 'Ecosistema React Moderno',
+        m2Val: 'LiveKit & ONNX', m2Lbl: 'Streaming IA in Tempo Reale',
+        m3Val: 'Playwright E2E', m3Lbl: 'QA Concorrente Multi-Ruolo',
+        m4Val: 'pnpm Monorepo', m4Lbl: 'Architettura Modulare',
+        projTag: 'Opere Ingegneristiche Selezionate', projTitle: 'Sistemi di Produzione di Rilievo',
+        filterAll: 'Tutti', filterAi: 'IA & Streaming', filterErp: 'ERP Enterprise', filterMonorepo: 'Monorepo / SaaS',
+        p1Tag: 'Intelligenza IA & WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
+        p1Desc: 'Piattaforma di conferenza intelligente per registrazione in tempo reale, trascrizione ad alta fedeltà, diarizzazione vocale e sintesi automatica con IA.',
+        p1B1: '<strong>SDK LiveKit:</strong> Streaming audio/video WebRTC bidirezionale a bassissima latenza.',
+        p1B2: '<strong>ONNX Runtime Node:</strong> Inferenza locale per la separazione degli speaker a tutela della privacy.',
+        p1B3: '<strong>CLI VPS Automatizzato:</strong> Tooling Node personalizzato per deploy e rollback sicuri.',
+        p2Tag: 'ERP ad Alta Concorrenza', p2Title: 'AdvertisingPanel',
+        p2Desc: 'ERP per la gestione di campagne operative che sincronizza 7 ruoli aziendali indipendenti e flussi di approvazione.',
+        p2B1: '<strong>RBAC Multi-Ruolo:</strong> Dashboard granulari per supervisori, sceneggiatori, creatori di landing e admin.',
+        p2B2: '<strong>Locking Distribuito:</strong> Generazione transazionale di ID campagna per prevenire collisioni.',
+        p2B3: '<strong>Test Playwright:</strong> 5 sessioni concorrenti testate automaticamente su desktop e mobile.',
+        p3Tag: 'Monorepo & Zero-Trust', p3Title: 'Qaf LegalTech (قاف)',
+        p3Desc: 'Piattaforma legale aziendale strutturata come monorepo pnpm con portali clienti, dashboard legali e sicurezza Zero-Trust.',
+        p3B1: '<strong>pnpm Workspaces:</strong> Netta separazione tra web app e package condivisi.',
+        p3B2: '<strong>Row-Level Security (RLS):</strong> Più di 44 asserzioni automatiche per garantire l’isolamento dei dati.',
+        p3B3: '<strong>ADR Formali:</strong> Tracciamento documentato delle scelte di architettura.',
+        p4Tag: 'PWA Aziendale', p4Title: 'Portale Refahi (سامانه رفاهی)',
+        p4Desc: 'Applicazione di welfare aziendale e prenotazioni con login SMS OTP, supporto offline PWA e notifiche push.',
+        p4B1: '<strong>Stack all’Avanguardia:</strong> Sviluppato con Next.js 16, React 19 e Tailwind CSS v4.',
+        p4B2: '<strong>PWA Multi-Dispositivo:</strong> Cache Service Worker e notifiche push lato server.',
+        p4B3: '<strong>Generatore Excel Automatico:</strong> Report finanziari e contabili generati in tempo reale.',
+        stackTag: 'Arsenale Tecnico', stackTitle: 'Competenze & Tecnologie Chiave',
+        stackFrontendTitle: 'Frontend & UI/UX', stackFrontendDesc: 'Tempi di caricamento inferiori al secondo, interfacce reattive e design curato.',
+        stackBackendTitle: 'Backend & Streaming', stackBackendDesc: 'Microservizi ad alto throughput, WebSockets e streaming multimediale.',
+        stackDevopsTitle: 'Dati, Sicurezza & DevOps', stackDevopsDesc: 'Isolamento rigoroso dei dati, pipeline CI/CD automatizzate e test browser E2E.',
+        contactTitle: 'Costruiamo Insieme Qualcosa di Straordinario', contactDesc: 'Interessato a collaborare su sistemi in tempo reale, prodotti AI o a scalare la tua infrastruttura? Contattami direttamente.',
+        contactGithub: 'Profilo GitHub', contactCopy: 'Copia Contatto',
+        toastMsg: 'Contatto copiato negli appunti!',
+        footerText: 'Progettato e Sviluppato da Shayan Safai Sohi • Creato con Moderni Standard Web'
+      },
+      ru: {
+        dir: 'ltr', flag: '🇷🇺', code: 'RU',
+        navAbout: 'Обо мне', navProjects: 'Проекты', navStack: 'Стек', navContact: 'Контакты', btnSavePdf: 'Сохранить PDF',
+        heroBadge: 'Открыт для интересных предложений и контрактов',
+        heroTitle1: 'Создание отказоустойчивых', heroTitle2: 'Full-Stack и AI систем',
+        heroBio: 'Ведущий инженер, специализирующийся на WebRTC в реальном времени, локальном выводе моделей машинного обучения (Edge ML) и архитектуре корпоративных ERP. Фокус на безопасности Zero-Trust (RLS) и автоматизированном E2E тестировании.',
+        heroCtaProjects: 'Архитектура решений', heroCtaContact: 'Скопировать контакт',
+        m1Val: 'Next.js 16 и React 19', m1Lbl: 'Современная экосистема React',
+        m2Val: 'LiveKit и ONNX', m2Lbl: 'AI стриминг в реальном времени',
+        m3Val: 'Playwright E2E', m3Lbl: 'Тестирование многопользовательских ролей',
+        m4Val: 'pnpm Monorepo', m4Lbl: 'Модульная масштабируемая архитектура',
+        projTag: 'Инженерные проекты', projTitle: 'Ключевые production-системы',
+        filterAll: 'Все', filterAi: 'ИИ и Стриминг', filterErp: 'ERP Системы', filterMonorepo: 'Монорепо / SaaS',
+        p1Tag: 'ИИ и WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
+        p1Desc: 'Платформа аналитики встреч для записи в реальном времени, точной транскрипции, разделения дикторов и автоматического создания итогов встреч.',
+        p1B1: '<strong>LiveKit SDK:</strong> Двунаправленный WebRTC аудио/видео стриминг с минимальной задержкой.',
+        p1B2: '<strong>ONNX Runtime Node:</strong> Локальный запуск ML-моделей для конфиденциальной диаризации речи.',
+        p1B3: '<strong>Кастомный VPS CLI:</strong> Инструменты Node для безопасных атомарных релизов и отката версий.',
+        p2Tag: 'Высоконагруженная ERP', p2Title: 'AdvertisingPanel',
+        p2Desc: 'ERP система управления маркетинговыми кампаниями, объединяющая 7 независимых корпоративных ролей и сложные цепочки согласования.',
+        p2B1: '<strong>Многоуровневый RBAC:</strong> Разграниченные панели для супервайзеров, сценаристов, лендингов и админов.',
+        p2B2: '<strong>Распределенные блокировки:</strong> Транзакционные счетчики номеров кампаний для исключения коллизий.',
+        p2B3: '<strong>Playwright E2E:</strong> Автоматизированное тестирование 5 параллельных пользовательских сессий.',
+        p3Tag: 'Монорепо и Zero-Trust', p3Title: 'Qaf LegalTech (قاف)',
+        p3Desc: 'Корпоративная юридическая платформа в виде pnpm монорепо с клиентскими порталами, рабочими местами юристов и строгой безопасностью.',
+        p3B1: '<strong>pnpm Workspaces:</strong> Четкая изоляция веб-приложений и общих библиотек логики/UI.',
+        p3B2: '<strong>Row-Level Security (RLS):</strong> Более 44 автотестов, подтверждающих надежную изоляцию клиентских данных.',
+        p3B3: '<strong>Архитектурные решения (ADR):</strong> Документирование ключевых инженерных решений.',
+        p4Tag: 'Корпоративное PWA', p4Title: 'Портал Refahi (سامانه رفاهی)',
+        p4Desc: 'Сервис корпоративного питания и бронирования с авторизацией по SMS OTP, поддержкой офлайн-режима PWA и push-уведомлениями.',
+        p4B1: '<strong>Передовой стек:</strong> Разработано на Next.js 16, React 19 и Tailwind CSS v4.',
+        p4B2: '<strong>Кроссплатформенное PWA:</strong> Кеширование Service Worker и серверные веб-push оповещения.',
+        p4B3: '<strong>Генератор Excel-отчетов:</strong> Формирование аналитических и финансовых сводок в реальном времени.',
+        stackTag: 'Технический арсенал', stackTitle: 'Навыки и ключевые технологии',
+        stackFrontendTitle: 'Фронтенд и интерфейсы', stackFrontendDesc: 'Быстрая загрузка, адаптивные и отзывчивые интерфейсы с современным дизайном.',
+        stackBackendTitle: 'Бэкенд и стриминг', stackBackendDesc: 'Высокопроизводительные микросервисы, WebSockets и потоковая обработка медиа.',
+        stackDevopsTitle: 'Базы данных, безопасность и DevOps', stackDevopsDesc: 'Строгая изоляция данных, автоматизированные CI/CD пайплайны и сквозное тестирование.',
+        contactTitle: 'Давайте создадим что-то выдающееся', contactDesc: 'Заинтересованы в сотрудничестве по проектам реального времени, ИИ или масштабированию инфраструктуры? Пишите напрямую.',
+        contactGithub: 'Профиль GitHub', contactCopy: 'Скопировать контакт',
+        toastMsg: 'Контакт скопирован в буфер обмена!',
+        footerText: 'Архитектура и разработка: Шаян Сафаи Сохи • Создано по современным веб-стандартам'
+      },
+      zh: {
+        dir: 'ltr', flag: '🇨🇳', code: 'ZH',
+        navAbout: '关于', navProjects: '项目', navStack: '技术栈', navContact: '联系', btnSavePdf: '保存 PDF',
+        heroBadge: '开放接受高价值全职与项目合作',
+        heroTitle1: '构建高韧性', heroTitle2: '全栈与人工智能系统',
+        heroBio: '资深全栈工程师，专注于实时 WebRTC 流媒体、边缘端机器学习推理（Edge ML）以及企业级 ERP 架构。深度践行类型安全、零信任安全（RLS）和全自动端到端（E2E）测试。',
+        heroCtaProjects: '探索系统架构', heroCtaContact: '复制联系方式',
+        m1Val: 'Next.js 16 与 React 19', m1Lbl: '现代 React 前端生态',
+        m2Val: 'LiveKit 与 ONNX', m2Lbl: '低延迟实时 AI 流媒体',
+        m3Val: 'Playwright E2E', m3Lbl: '多角色高并发质量保障',
+        m4Val: 'pnpm Monorepo', m4Lbl: '模块化高可扩展架构',
+        projTag: '精选工程作品', projTitle: '核心企业级生产系统',
+        filterAll: '全部', filterAi: 'AI 与流媒体', filterErp: '企业级 ERP', filterMonorepo: 'Monorepo / SaaS',
+        p1Tag: 'AI 智能与 WebRTC', p1Title: 'HamNeshin (هم‌نشین)',
+        p1Desc: '波斯语右至左（RTL）会议智能平台，具备实时会议录制、高精度语音转写、说话人辨识及自动化要点总结功能。',
+        p1B1: '<strong>LiveKit SDK 客户端与服务端：</strong> 基于 WebRTC 的超低延迟双向音视频流传输。',
+        p1B2: '<strong>ONNX Runtime 节点端推理：</strong> 本地嵌入式模型推理，确保语音分离不泄露企业私有数据。',
+        p1B3: '<strong>自动化 VPS 部署工具：</strong> 自研 Node 命令行工具，支持原子级租约、安全回滚与 SSH 自动化部署。',
+        p2Tag: '高并发企业级 ERP', p2Title: 'AdvertisingPanel',
+        p2Desc: '关键业务级广告战役与策划运营 ERP，协调 7 个独立的企业角色、多层级审批流及素材即时交付。',
+        p2B1: '<strong>细粒度 RBAC 权限：</strong> 为主管、文案策划、落地页制作人及管理员提供独立交互工作台。',
+        p2B2: '<strong>分布式并发锁：</strong> 事务级战役编号自增机制，彻底避免高并发下的编号冲突。',
+        p2B3: '<strong>Playwright 自动化测试：</strong> CI/CD 中针对 5 个并发角色会话进行端到端全流程模拟。',
+        p3Tag: 'Monorepo 与零信任安全', p3Title: 'Qaf 法律科技平台 (قاف)',
+        p3Desc: '基于 pnpm monorepo 构建的现代法律科技平台，包含客户门户、律师工作台及严格的数据行级安全隔离。',
+        p3B1: '<strong>pnpm Workspaces：</strong> 规范隔离 Web 应用、管理后台及共享核心业务逻辑与 UI 包。',
+        p3B2: '<strong>行级安全机制 (RLS)：</strong> 超过 44 项自动化安全断言，严格保障客户案件数据隐私。',
+        p3B3: '<strong>架构决策记录 (ADR)：</strong> 规范归档核心技术选型依据与架构演进历史。',
+        p4Tag: '企业级 PWA 平台', p4Title: 'Refahi 员工福利平台 (سامانه رفاهی)',
+        p4Desc: '企业级员工服务与点餐预约系统，集成短信验证码快捷登录、离线 PWA 支持及全平台 Web Push 推送。',
+        p4B1: '<strong>尖端技术组合：</strong> 基于 Next.js 16、React 19 以及最新的 Tailwind CSS v4 打造。',
+        p4B2: '<strong>跨设备 PWA 支持：</strong> Service Worker 离线缓存策略及服务端触发的浏览器通知。',
+        p4B3: '<strong>自动化 Excel 报表：</strong> 毫秒级生成多周期财务核算与销售统计报表。',
+        stackTag: '技术储备', stackTitle: '核心技能与专业技术',
+        stackFrontendTitle: '前端与用户体验', stackFrontendDesc: '专注毫秒级首屏加载、响应式 RTL 支持与平滑流畅的交互体验。',
+        stackBackendTitle: '后端与流式架构', stackBackendDesc: '高吞吐微服务、WebSockets 实时双向通讯与多媒体音视频处理管道。',
+        stackDevopsTitle: '数据、安全与运维', stackDevopsDesc: '严格的数据隔离、自动化 CI/CD 交付流水线与浏览器端到端测试。',
+        contactTitle: '携手创造卓越工程', contactDesc: '希望在实时流媒体系统、人工智能应用或高并发企业架构方面展开合作？欢迎直接与我联系。',
+        contactGithub: 'GitHub 主页', contactCopy: '复制联系方式',
+        toastMsg: '联系方式已复制至剪贴板！',
+        footerText: '由 Shayan Safai Sohi 架构设计与开发 • 基于现代 Web 规范构建'
+      }
+    };
 
+    let currentLang = 'en';
+
+    function toggleLangMenu() {
+      const menu = document.getElementById('lang-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const langBtn = document.getElementById('lang-btn');
+      const langMenu = document.getElementById('lang-menu');
+      if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+        langMenu.classList.add('hidden');
+      }
+    });
+
+    function setLanguage(lang) {
+      if (!translations[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('preferred_lang', lang);
+
+      const data = translations[lang];
+
+      // Update HTML attributes
+      document.documentElement.lang = lang;
+      document.documentElement.dir = data.dir;
+
+      // Update button visual
+      document.getElementById('current-flag').textContent = data.flag;
+      document.getElementById('current-lang-code').textContent = data.code;
+
+      // Update all data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (data[key]) {
+          el.innerHTML = data[key];
+        }
+      });
+
+      // Update toast message default
+      document.getElementById('toast-msg').textContent = data.toastMsg;
+
+      // Close menu
+      document.getElementById('lang-menu').classList.add('hidden');
+      
+      // Re-trigger lucide icons
+      lucide.createIcons();
+    }
+
+    // Load saved language on init
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('preferred_lang') || 'en';
+      setLanguage(saved);
+    });
+
+    // Copy to Clipboard
     function copyEmail() {
       navigator.clipboard.writeText("https://github.com/shayansafaisohi");
       const toast = document.getElementById("toast");
@@ -510,6 +988,7 @@
       }, 3000);
     }
 
+    // Project Category Filtering
     function filterProjects(category) {
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('active', 'bg-cyan-500/20', 'text-cyan-300', 'font-semibold');
