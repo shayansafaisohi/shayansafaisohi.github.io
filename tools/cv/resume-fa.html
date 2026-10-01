@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>شایان صفایی سهی — رزومه</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Estedad'; src: url('https://cdn.jsdelivr.net/gh/aminabedi68/Estedad@8.5/fonts/Estedad%5Bwght%5D.woff2') format('woff2'); font-weight: 100 900; font-display: block; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 210mm; height: 297mm; font-family: 'Estedad', sans-serif; color: #1e293b; font-size: 8.9pt; line-height: 1.62; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { position: relative; height: 297mm; padding: 12mm 15mm 12mm; overflow: hidden; }
+  .band { position: absolute; inset: 0 0 auto 0; height: 4.5mm; background: linear-gradient(270deg, #06b6d4, #6366f1 55%, #a855f7); }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #e2e8f0; padding-bottom: 3.5mm; margin-bottom: 3.5mm; }
+  h1 { font-size: 23pt; font-weight: 800; line-height: 1.2; color: #0f172a; }
+  .role { font-weight: 700; font-size: 11.5pt; margin-top: 1mm; color: #4f46e5; }
+  .contact { text-align: left; font-size: 8.6pt; color: #475569; line-height: 1.85; direction: ltr; }
+  .contact b { color: #0f172a; font-weight: 600; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #6366f1; margin: 3.2mm 0 1.6mm; display: flex; align-items: center; gap: 3mm; }
+  h2::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
+  .summary { font-size: 9.3pt; color: #334155; }
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4mm 6mm; }
+  .skills div b { display: block; font-size: 9pt; color: #0f172a; }
+  .skills div span { color: #475569; font-size: 8.5pt; direction: ltr; unicode-bidi: plaintext; display: block; text-align: right; }
+  .proj { margin-bottom: 2.2mm; break-inside: avoid; }
+  .proj-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .proj-head b { font-size: 11pt; font-weight: 800; color: #0f172a; }
+  .proj-head i { font-style: normal; font-size: 8.2pt; color: #6366f1; font-weight: 700; }
+  .proj p { color: #334155; margin: 0.3mm 0 0.6mm; }
+  .proj ul { padding-right: 4.2mm; color: #475569; }
+  .proj li::marker { color: #06b6d4; }
+  .stack { font-family: 'JetBrains Mono', monospace; font-size: 7.4pt; color: #64748b; direction: ltr; text-align: right; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+  .steps div { border: 1px solid #e2e8f0; border-radius: 2.5mm; padding: 2mm 2.8mm; }
+  .steps b { display: block; font-size: 9.4pt; color: #0f172a; }
+  .steps b em { font-style: normal; color: #06b6d4; margin-left: 1.5mm; }
+  .steps span { font-size: 8pt; color: #64748b; line-height: 1.55; display: block; }
+  footer { position: absolute; left: 15mm; right: 15mm; bottom: 9mm; display: flex; justify-content: space-between; font-size: 7.8pt; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 2.5mm; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="band"></div>
+  <header>
+    <div>
+      <h1>شایان صفایی سهی</h1>
+      <div class="role"><span class="ltr">AI Automation</span> و توسعه <span class="ltr">Full-Stack</span></div>
+    </div>
+    <div class="contact">
+      <b>shayan.safai.sohi@gmail.com</b><br>
+      Telegram <b>@shayansafai</b><br>
+      shayansafaisohi.github.io
+    </div>
+  </header>
+
+  <div class="summary">فرایندهای دستی و تکراری کسب‌وکار را که با AI یا Python قابل خودکارسازی‌اند شناسایی می‌کنم و سیستم کاملش را می‌سازم: از طراحی Workflow در n8n و توسعه Backend و API، تا Admin Panel و Web App، و در نهایت AI Integration با LLM و AI Agent روی سامانه‌های موجود. کد را با تایپ سخت‌گیرانه، امنیت سطح سطر و تست خودکار end-to-end تحویل می‌دهم. آماده همکاری تمام‌وقت و پروژه‌ای.</div>
+
+  <h2>مهارت‌های اصلی</h2>
+  <div class="skills">
+    <div><b>اتوماسیون و هوش مصنوعی</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
+    <div><b>فرانت‌اند</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
+    <div><b>بک‌اند و بلادرنگ</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
+    <div><b>داده، امنیت و استقرار</b><span>PostgreSQL, Supabase (RLS), Docker, Caddy, pnpm monorepos, Playwright, Vitest, Pytest</span></div>
+  </div>
+
+  <h2>پروژه‌های منتخب</h2>
+  <div class="proj">
+    <div class="proj-head"><b>هم‌نشین</b><i>هوش مصنوعی · بلادرنگ</i></div>
+    <p>جلسات فارسی را ضبط و پیاده می‌کند، مشخص می‌کند هر جمله را چه کسی گفته و خلاصه جلسه و فهرست اقدام‌ها را تحویل می‌دهد.</p>
+    <ul>
+      <li>صوت و تصویر هم‌زمان با SDK کلاینت و سرور LiveKit (WebRTC).</li>
+      <li>تشخیص گوینده روی سرور خود سازمان با ONNX Runtime؛ فایل‌های صوتی از زیرساخت سازمان خارج نمی‌شوند.</li>
+      <li>استقرار با یک دستور روی VPS با CLI اختصاصی Node، همراه با انتشار اتمیک و امکان بازگشت.</li>
+    </ul>
+    <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
+  </div>
+  <div class="proj">
+    <div class="proj-head"><b>پنل تبلیغات</b><i>سیستم گردش کار</i></div>
+    <p>ابزار داخلی که هر کمپین تبلیغاتی را از بریف تا انتشار بنر، بین هفت نقش و با مرحله تأیید هر نقش جلو می‌برد.</p>
+    <ul>
+      <li>دسترسی مبتنی بر نقش برای سرپرست، سناریونویس، فیلم‌نامه‌نویس، طراح بنر و مدیر سیستم.</li>
+      <li>بدون شناسه تکراری در ثبت هم‌زمان کمپین‌ها، با قفل‌گذاری در سطح دیتابیس.</li>
+      <li>تست‌های Playwright که پنج نقش را هم‌زمان در نمای دسکتاپ و موبایل اجرا می‌کنند.</li>
+    </ul>
+    <div class="stack">Python · Django · PostgreSQL · Docker · Playwright</div>
+  </div>
+  <div class="proj">
+    <div class="proj-head"><b>قاف</b><i>پلتفرم حقوقی</i></div>
+    <p>پلتفرم یک مجموعه حقوقی: پرتال موکل، داشبورد وکیل و پنل مدیریت روی یک کدبیس مشترک.</p>
+    <ul>
+      <li>مونوریپو با pnpm؛ اپ وب، پنل و پکیج‌های مشترک UI و منطق در کنار هم.</li>
+      <li>امنیت سطح سطر در Supabase با بیش از ۴۴ تست خودکار، تا هر موکل فقط پرونده‌های خودش را ببیند.</li>
+      <li>ثبت تصمیم‌های معماری (ADR) تا دلیل هر انتخاب فنی مهم مستند بماند.</li>
+    </ul>
+    <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
+  </div>
+  <div class="proj">
+    <div class="proj-head"><b>سامانه رفاهی</b><i>PWA</i></div>
+    <p>پرتال رفاهی کارکنان برای سفارش و رزرو خدمات از روی موبایل، با ورود پیامکی و اعلان‌های push.</p>
+    <ul>
+      <li>ورود با رمز یک‌بارمصرف پیامکی، اعلان Web Push از سمت سرور، قابل نصب و کارکرد آفلاین.</li>
+      <li>گزارش اکسل با یک کلیک برای واحد حسابداری، مستقیم از داده‌های زنده.</li>
+    </ul>
+    <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
+  </div>
+
+  <h2>روند کار</h2>
+  <div class="steps">
+    <div><b><em>۰۱</em>شناخت</b><span>بررسی فرایند و پیدا کردن کارهایی که AI یا Python انجام می‌دهد.</span></div>
+    <div><b><em>۰۲</em>طراحی</b><span>Workflow، مدل داده و صفحه‌ها با محدوده و زمان‌بندی توافق‌شده.</span></div>
+    <div><b><em>۰۳</em>ساخت</b><span>n8n، بک‌اند، پنل و لایه AI در گام‌های کوچک و قابل تست.</span></div>
+    <div><b><em>۰۴</em>راه‌اندازی و پشتیبانی</b><span>استقرار، مانیتورینگ، مستندسازی و تحویل.</span></div>
+  </div>
+
+  <footer><span>شایان صفایی سهی — رزومه</span><span class="ltr">shayansafaisohi.github.io</span></footer>
+</div>
+</body>
+</html>

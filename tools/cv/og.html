@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;600&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #05070d; font-family: 'Space Grotesk', sans-serif; color: #fff; position: relative; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .55; }
+  .grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(148,163,184,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.08) 1px, transparent 1px); background-size: 60px 60px; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 30% 40%, #000 20%, transparent 75%); }
+  .wrap { position: absolute; left: 80px; top: 92px; right: 80px; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; font: 600 18px 'JetBrains Mono'; color: #6ee7b7; background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); padding: 8px 16px; border-radius: 999px; }
+  .badge i { width: 10px; height: 10px; border-radius: 50%; background: #34d399; box-shadow: 0 0 12px #34d399; }
+  h1 { font-size: 92px; letter-spacing: -0.04em; line-height: 1; margin-top: 34px; }
+  h2 { font-size: 64px; letter-spacing: -0.035em; line-height: 1.05; margin-top: 8px; background: linear-gradient(110deg, #67e8f9, #818cf8 50%, #c084fc); -webkit-background-clip: text; color: transparent; }
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+  .chips span { font: 500 19px 'JetBrains Mono'; color: #cbd5e1; padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); }
+  .name { position: absolute; left: 80px; bottom: 48px; font: 600 22px 'JetBrains Mono'; color: #94a3b8; letter-spacing: .06em; }
+  .orb { position: absolute; right: 120px; top: 120px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #ecfeff, #67e8f9 25%, #6366f1 65%, #7c3aed); box-shadow: 0 0 120px rgba(103,232,249,.55), inset 0 -18px 40px rgba(76,29,149,.6); }
+  .ring { position: absolute; right: 95px; top: 95px; width: 200px; height: 200px; border-radius: 50%; border: 2px solid rgba(103,232,249,.35); }
+</style>
+</head>
+<body>
+  <div class="blob" style="width:620px;height:620px;background:#0891b2;left:-180px;top:-260px"></div>
+  <div class="blob" style="width:520px;height:520px;background:#7c3aed;right:-120px;bottom:-220px"></div>
+  <div class="blob" style="width:360px;height:360px;background:#2563eb;left:520px;top:300px;opacity:.35"></div>
+  <div class="grid"></div>
+  <div class="ring"></div><div class="orb"></div>
+  <div class="wrap">
+    <div class="badge"><i></i>Open to full-time roles &amp; freelance</div>
+    <h1>AI Automation</h1>
+    <h2>&amp; Full-Stack Development</h2>
+    <div class="chips"><span>n8n Workflows</span><span>Python</span><span>Backend &amp; APIs</span><span>Admin Panels</span><span>AI Integration</span></div>
+  </div>
+  <div class="name">SHAYAN SAFAI SOHI · shayansafaisohi.github.io</div>
+</body>
+</html>
