@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shayan Safai Sohi | Senior Full-Stack & AI Systems Architect</title>
+  <meta name="description" content="Portfolio & Resume of Shayan Safai Sohi - Senior Full-Stack & AI Systems Engineer" />
+
+  <!-- Tailwind CSS CDN & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Vazirmatn', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              cyan: '#06b6d4',
+              blue: '#3b82f6',
+              violet: '#8b5cf6',
+              emerald: '#10b981',
+              dark: '#080a10',
+              card: 'rgba(15, 23, 42, 0.65)',
+            }
+          },
+          animation: {
+            'blob': 'blob 8s infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #06080e;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(13, 18, 32, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(56, 189, 248, 0.12);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-border {
+      position: relative;
+    }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, #06b6d4, #6366f1, #d946ef);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    @media print {
+      body { background: white !important; color: #111 !important; }
+      canvas, #particles-canvas, .no-print, header, footer { display: none !important; }
+      .glass-card { border: 1px solid #ddd !important; background: none !important; box-shadow: none !important; transform: none !important; }
+      .gradient-text { -webkit-text-fill-color: #1e293b !important; color: #1e293b !important; }
+      a { color: #0284c7 !important; text-decoration: underline; }
+    }
+  </style>
+</head>
+<body class="selection:bg-cyan-500/20 selection:text-cyan-300">
+
+  <!-- Interactive Canvas Background -->
+  <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+  <!-- Ambient Glow Effects -->
+  <div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-600/15 blur-[120px] pointer-events-none animate-blob"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-violet-600/15 blur-[140px] pointer-events-none animate-blob animation-delay-4000"></div>
+
+  <!-- Navigation Bar -->
+  <header class="fixed top-4 inset-x-0 mx-auto w-[92%] max-w-5xl z-50">
+    <nav class="glass-card rounded-2xl px-6 py-3 flex items-center justify-between shadow-2xl">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-cyan-500/30">
+          SS
+        </div>
+        <div>
+          <span class="font-bold tracking-tight text-white block text-sm sm:text-base">Shayan Safai Sohi</span>
+          <span class="text-xs text-slate-400 font-mono">@shayansafaisohi</span>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors">Stack</a>
+        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="window.print()" class="no-print p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-all text-xs flex items-center gap-1.5 border border-slate-700">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Save PDF</span>
+        </button>
+        <a href="https://github.com/shayansafaisohi" target="_blank" class="p-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all flex items-center gap-1.5 text-xs font-semibold">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="relative z-10 pt-32 pb-20 px-4 sm:px-6 max-w-6xl mx-auto space-y-24">
+
+    <!-- HERO SECTION -->
+    <section id="about" class="text-center pt-8 sm:pt-14 space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium tracking-wide">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        Available for High-Impact Roles & Contracts
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
+        Building Resilient <br class="hidden sm:inline"/>
+        <span class="gradient-text">Full-Stack & AI Systems</span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg leading-relaxed">
+        Senior Engineer specializing in 
+        <span class="text-slate-200 font-semibold">Real-Time WebRTC</span>, 
+        <span class="text-slate-200 font-semibold">Edge ML Inference</span>, and 
+        <span class="text-slate-200 font-semibold">Enterprise ERP Architectures</span>.
+        Obsessed with bulletproof type safety, zero-trust security (RLS), and automated E2E testing.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+        <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold text-sm shadow-xl shadow-cyan-500/25 hover:opacity-95 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          Explore Architecture
+        </a>
+        <button onclick="copyEmail()" id="copy-btn" class="px-6 py-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-medium text-sm border border-slate-700/80 hover:border-slate-600 transition-all flex items-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span>Copy Contact</span>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-10">
+        <div class="glass-card rounded-2xl p-4 text-center">
+          <div class="text-2xl sm:text-3xl font-bold gradient-text">Next.js 16 & React 19</div>
+          <div class="text-xs text-slate-400 font-mono mt-1">Modern React Ecosystem</div>
+        </div>
+        <div class="glass-card rounded-2xl p-4 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-cyan-400">LiveKit & ONNX</div>
+          <div class="text-xs text-slate-400 font-mono mt-1">Real-Time AI Streaming</div>
+        </div>
+        <div class="glass-card rounded-2xl p-4 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-indigo-400">Playwright E2E</div>
+          <div class="text-xs text-slate-400 font-mono mt-1">Multi-Role Concurrency QA</div>
+        </div>
+        <div class="glass-card rounded-2xl p-4 text-center">
+          <div class="text-2xl sm:text-3xl font-bold text-emerald-400">pnpm Monorepo</div>
+          <div class="text-xs text-slate-400 font-mono mt-1">Modular Architecture</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SHOWCASE -->
+    <section id="projects" class="space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-wider text-cyan-400">Selected Engineering Works</span>
+          <h2 class="text-3xl font-bold tracking-tight text-white mt-1">Featured Production Systems</h2>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex items-center gap-2 p-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-medium">
+          <button onclick="filterProjects('all')" class="filter-btn active px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-semibold" data-cat="all">All</button>
+          <button onclick="filterProjects('ai')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="ai">AI & Streaming</button>
+          <button onclick="filterProjects('erp')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="erp">Enterprise ERP</button>
+          <button onclick="filterProjects('monorepo')" class="filter-btn px-3 py-1.5 rounded-lg hover:text-slate-200 text-slate-400" data-cat="monorepo">Monorepo / SaaS</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- PROJECT 1: HamNeshin -->
+        <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="ai">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">AI Intelligence & WebRTC</span>
+              <a href="https://github.com/shayansafaisohi/HamNeshin" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="external-link" class="w-5 h-5"></i>
+              </a>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+              HamNeshin (هم‌نشین)
+              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Private</span>
+            </h3>
+
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Persian RTL conference intelligence platform for real-time recording, high-fidelity speech transcription, speaker identification, and automated action-item summarization.
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                <span><strong>LiveKit Client & Server SDK:</strong> Low-latency bidirectional WebRTC audio/video streaming.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                <span><strong>ONNX Runtime Node:</strong> Embedded local ML inference for private edge speaker diarization.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                <span><strong>Automated VPS CLI:</strong> Custom Node toolchain for atomic leases, rollback, and SSH deployments.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-800/80 flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">TypeScript</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">React 19</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Fastify 5</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">LiveKit</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">ONNX</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">WebSockets</span>
+          </div>
+        </div>
+
+        <!-- PROJECT 2: AdvertisingPanel -->
+        <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="erp">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">High-Concurrency ERP</span>
+              <a href="https://github.com/shayansafaisohi/AdvertisingPanel" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="external-link" class="w-5 h-5"></i>
+              </a>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+              AdvertisingPanel
+              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Private</span>
+            </h3>
+
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Mission-critical campaign ops & scenario workflow ERP synchronizing 7 independent organizational roles, approval hierarchies, and live marketing asset delivery.
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                <span><strong>Multi-Role RBAC:</strong> Granular views for Supervisor, Scenario, Banner, Scriptwriter, and Admin.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                <span><strong>Distributed Locking:</strong> Synchronized campaign ID counters preventing duplicate race conditions.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                <span><strong>Playwright E2E:</strong> 5 concurrent role sessions automatically tested across desktop & mobile.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-800/80 flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Python</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Django</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">PostgreSQL</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Docker</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Playwright</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Ruff/Mypy</span>
+          </div>
+        </div>
+
+        <!-- PROJECT 3: Qaf Platform -->
+        <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="monorepo">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20">Monorepo & Zero-Trust</span>
+              <a href="https://github.com/shayansafaisohi/qaf" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="external-link" class="w-5 h-5"></i>
+              </a>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+              Qaf LegalTech (قاف)
+              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Monorepo</span>
+            </h3>
+
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Enterprise legal platform structured as a high-performance pnpm monorepo with client portals, attorney dashboards, and strict Zero-Trust access control.
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-violet-400 shrink-0 mt-0.5"></i>
+                <span><strong>pnpm Workspaces:</strong> Clean isolation of <code>apps/web</code>, <code>apps/panel</code>, and <code>packages/*</code>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-violet-400 shrink-0 mt-0.5"></i>
+                <span><strong>Row-Level Security (RLS):</strong> 44+ automated assertion tests verifying document isolation.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-violet-400 shrink-0 mt-0.5"></i>
+                <span><strong>Formal ADRs:</strong> Architecture Decision Records enforcing maintainable codebase evolution.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-800/80 flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Next.js</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">TypeScript Strict</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Supabase RLS</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">shadcn/ui</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Vitest</span>
+          </div>
+        </div>
+
+        <!-- PROJECT 4: Refahi -->
+        <div class="project-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between" data-category="monorepo">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Corporate PWA & Services</span>
+              <a href="https://github.com/shayansafaisohi/refahi" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="external-link" class="w-5 h-5"></i>
+              </a>
+            </div>
+
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+              Refahi Portal (سامانه رفاهی)
+              <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Next.js 16</span>
+            </h3>
+
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Scalable corporate services and ordering application featuring SMS-based authentication, offline PWA capabilities, and live push notifications.
+            </p>
+
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Bleeding-Edge Stack:</strong> Built with Next.js 16, React 19, and Tailwind CSS v4.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Multi-Device PWA:</strong> Service Worker offline cache & server-initiated Web Push alerts.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span><strong>Automated Excel Generator:</strong> Real-time reporting engine for administrative accounting.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-slate-800/80 flex flex-wrap gap-1.5 font-mono text-[11px]">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Next.js 16</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">React 19</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Supabase SSR</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Tailwind v4</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/70 text-slate-300">Web Push</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECHNICAL ARSENAL -->
+    <section id="skills" class="space-y-8">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-wider text-indigo-400">Technical Arsenal</span>
+        <h2 class="text-3xl font-bold tracking-tight text-white mt-1">Skills & Core Technologies</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Frontend -->
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center border border-cyan-500/20">
+            <i data-lucide="layout" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Frontend & UI/UX</h3>
+          <p class="text-xs text-slate-400">Focusing on sub-second load times, responsive RTL designs, and reactive interfaces.</p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">Next.js 16</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-cyan-300">React 19</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">TypeScript</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">Tailwind CSS v4</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">shadcn/ui</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">Vite</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">PWA</span>
+          </div>
+        </div>
+
+        <!-- Backend & Real-time -->
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center border border-indigo-500/20">
+            <i data-lucide="server" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Backend & Streaming</h3>
+          <p class="text-xs text-slate-400">High-throughput microservices, WebSockets, and real-time audio/video pipelines.</p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-indigo-300">Fastify 5</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-indigo-300">Python / Django</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">LiveKit WebRTC</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">ONNX Runtime</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">WebSockets</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">Node.js</span>
+          </div>
+        </div>
+
+        <!-- Data & DevOps -->
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Data, Security & DevOps</h3>
+          <p class="text-xs text-slate-400">Strict data isolation, automated CI/CD pipelines, and end-to-end browser testing.</p>
+          <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">PostgreSQL</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-emerald-300">Supabase RLS</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">Playwright E2E</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">Docker & Caddy</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">pnpm Workspaces</span>
+            <span class="px-2.5 py-1 rounded bg-slate-800/80 text-slate-300">Pytest / Vitest</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & FOOTER -->
+    <section id="contact" class="glass-card rounded-3xl p-8 sm:p-12 text-center space-y-6">
+      <div class="max-w-xl mx-auto space-y-3">
+        <h2 class="text-3xl font-bold text-white">Let’s Build Something Exceptional</h2>
+        <p class="text-slate-400 text-sm">
+          Interested in collaborating on real-time systems, AI products, or scaling your enterprise stack? Reach out directly.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <a href="https://github.com/shayansafaisohi" target="_blank" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-sm border border-slate-700 transition-all flex items-center gap-2">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          GitHub Profile
+        </a>
+        <button onclick="copyEmail()" class="px-6 py-3 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-semibold text-sm border border-cyan-500/40 transition-all flex items-center gap-2">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+          Copy Contact Info
+        </button>
+      </div>
+
+      <div class="pt-8 border-t border-slate-800 text-xs text-slate-500 font-mono">
+        Designed & Architected by Shayan Safai Sohi • Built with Modern Web Standards
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-card px-5 py-3 rounded-2xl flex items-center gap-3 border border-emerald-500/40 shadow-2xl">
+    <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+      <i data-lucide="check" class="w-4 h-4"></i>
+    </div>
+    <span class="text-xs font-medium text-slate-200" id="toast-msg">Contact copied to clipboard!</span>
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    lucide.createIcons();
+
+    function copyEmail() {
+      navigator.clipboard.writeText("https://github.com/shayansafaisohi");
+      const toast = document.getElementById("toast");
+      toast.classList.remove("translate-y-20", "opacity-0");
+      setTimeout(() => {
+        toast.classList.add("translate-y-20", "opacity-0");
+      }, 3000);
+    }
+
+    function filterProjects(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-cyan-500/20', 'text-cyan-300', 'font-semibold');
+        btn.classList.add('text-slate-400');
+        if (btn.getAttribute('data-cat') === category) {
+          btn.classList.add('active', 'bg-cyan-500/20', 'text-cyan-300', 'font-semibold');
+          btn.classList.remove('text-slate-400');
+        }
+      });
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // High Performance Interactive Canvas Background
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      draw() {
+        ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 55; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
