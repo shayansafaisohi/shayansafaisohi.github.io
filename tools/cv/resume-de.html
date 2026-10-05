@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Shayan Safai Sohi — Resume</title>
+<title>Shayan Safai Sohi — Lebenslauf</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=block" rel="stylesheet">
 <style>
   @page { size: A4; margin: 0; }
@@ -36,6 +36,14 @@
   .steps b em { font-style: normal; color: #06b6d4; margin-right: 1.5mm; }
   .steps span { font-size: 8.2pt; color: #64748b; line-height: 1.4; display: block; margin-top: 0.6mm; }
   footer { position: absolute; left: 15mm; right: 15mm; bottom: 9mm; display: flex; justify-content: space-between; font-size: 8pt; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 2.5mm; }
+  /* tighter fit for longer text */
+  body { font-size: 8.75pt; line-height: 1.36; }
+  .summary { font-size: 9.1pt; }
+  h2 { margin: 3.2mm 0 1.6mm; }
+  .proj { margin-bottom: 2.1mm; }
+  .proj p { margin: 0.2mm 0 0.4mm; }
+  .skills div span { font-size: 8.5pt; }
+  .steps span { font-size: 7.9pt; line-height: 1.35; }
 </style>
 </head>
 <body>
@@ -44,7 +52,7 @@
   <header>
     <div>
       <h1>Shayan Safai Sohi</h1>
-      <div class="role">AI Automation &amp; Full-Stack Developer</div>
+      <div class="role">AI Automation &amp; Full-Stack-Entwicklung</div>
     </div>
     <div class="contact">
       <b>shayan.safai.sohi@gmail.com</b><br>
@@ -53,66 +61,66 @@
     </div>
   </header>
 
-  <div class="summary">I find the manual, repetitive work in a business that AI or Python can take over — and build the complete system that runs it: n8n workflows, backend and APIs, admin panels and web apps, and AI integration with LLMs and agents. I ship with strict types, row-level security and automated end-to-end tests. Open to full-time roles and freelance projects.</div>
+  <div class="summary">Ich finde die manuellen, wiederkehrenden Prozesse eines Unternehmens, die sich mit AI oder Python automatisieren lassen – und baue das komplette System dafür: n8n-Workflows, Backend &amp; APIs, Admin-Panels und Web-Apps sowie AI-Integration mit LLMs und Agents. Offen für Festanstellung und Freelance-Projekte.</div>
 
-  <h2>Core skills</h2>
+  <h2>Kernkompetenzen</h2>
   <div class="skills">
-    <div><b>Automation &amp; AI</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
-    <div><b>Frontend</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL interfaces</span></div>
-    <div><b>Backend &amp; real-time</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
-    <div><b>Data, security &amp; delivery</b><span>PostgreSQL, Supabase (RLS), Docker, Caddy, pnpm monorepos, Playwright, Vitest, Pytest</span></div>
+    <div><b>Automatisierung &amp; KI</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
+    <div><b>Frontend</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
+    <div><b>Backend &amp; Echtzeit</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
+    <div><b>Daten, Sicherheit &amp; Delivery</b><span>PostgreSQL, Supabase (RLS), Docker, Caddy, pnpm monorepos, Playwright, Vitest, Pytest</span></div>
   </div>
 
-  <h2>Selected projects</h2>
+  <h2>Ausgewählte Projekte</h2>
   <div class="proj">
-    <div class="proj-head"><b>HamNeshin</b><i>AI · Real-time</i></div>
-    <p>Records Persian-language meetings, transcribes them, identifies who said what, and delivers a summary with action items.</p>
+    <div class="proj-head"><b>HamNeshin</b><i>KI · Echtzeit</i></div>
+    <p>Zeichnet persischsprachige Meetings auf, transkribiert sie, erkennt, wer was gesagt hat, und liefert eine Zusammenfassung mit Aufgaben.</p>
     <ul>
-      <li>Real-time audio and video with the LiveKit (WebRTC) client and server SDKs.</li>
-      <li>On-premise speaker diarization with ONNX Runtime — recordings never leave the organisation’s infrastructure.</li>
-      <li>One-command VPS deploys through a custom Node CLI with atomic releases and rollback.</li>
+      <li>Audio und Video in Echtzeit mit den LiveKit-SDKs (WebRTC) für Client und Server.</li>
+      <li>Sprechererkennung auf eigenen Servern mit ONNX Runtime – Aufnahmen verlassen nie die Infrastruktur der Organisation.</li>
+      <li>Deployment mit einem Befehl auf einen VPS über ein eigenes Node-CLI mit atomaren Releases und Rollback.</li>
     </ul>
     <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
   </div>
   <div class="proj">
-    <div class="proj-head"><b>AdvertisingPanel</b><i>Workflow system</i></div>
-    <p>Internal tool that moves every ad campaign from brief to published banner through seven roles, each with its own view and approval step.</p>
+    <div class="proj-head"><b>AdvertisingPanel</b><i>Workflow-System</i></div>
+    <p>Internes Tool, das jede Werbekampagne vom Briefing bis zum veröffentlichten Banner durch sieben Rollen führt – jede mit eigener Ansicht und Freigabe.</p>
     <ul>
-      <li>Role-based access for supervisors, scenario writers, scriptwriters, banner designers and admins.</li>
-      <li>No duplicate campaign IDs under concurrent submissions, thanks to database-level locking.</li>
-      <li>Playwright tests drive five roles at once on desktop and mobile layouts.</li>
+      <li>Rollenbasierter Zugriff für Supervisor, Szenario-Autoren, Drehbuchautoren, Banner-Designer und Admins.</li>
+      <li>Keine doppelten Kampagnen-IDs bei gleichzeitigen Einreichungen dank Sperren auf Datenbankebene.</li>
+      <li>Playwright-Tests steuern fünf Rollen gleichzeitig auf Desktop- und Mobile-Layouts.</li>
     </ul>
     <div class="stack">Python · Django · PostgreSQL · Docker · Playwright</div>
   </div>
   <div class="proj">
-    <div class="proj-head"><b>Qaf</b><i>LegalTech platform</i></div>
-    <p>Platform for a law practice: a client portal, an attorney dashboard and an admin panel sharing one codebase.</p>
+    <div class="proj-head"><b>Qaf</b><i>LegalTech-Plattform</i></div>
+    <p>Plattform für eine Kanzlei: Mandantenportal, Anwalts-Dashboard und Admin-Panel in einer gemeinsamen Codebasis.</p>
     <ul>
-      <li>pnpm monorepo — web app, panel and shared UI / logic packages versioned together.</li>
-      <li>Row-level security in Supabase, verified by 44+ automated tests so clients only ever see their own files.</li>
-      <li>Architecture Decision Records document why each major technical choice was made.</li>
+      <li>pnpm-Monorepo – Web-App, Panel und gemeinsame UI- und Logik-Pakete gemeinsam versioniert.</li>
+      <li>Row-Level-Security in Supabase, abgesichert durch über 44 automatisierte Tests, damit Mandanten nur ihre eigenen Akten sehen.</li>
+      <li>Architecture Decision Records dokumentieren, warum jede wichtige technische Entscheidung getroffen wurde.</li>
     </ul>
     <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
   </div>
   <div class="proj">
     <div class="proj-head"><b>Refahi</b><i>PWA</i></div>
-    <p>Employee benefits portal where staff order and book services from their phone, with SMS sign-in and push notifications.</p>
+    <p>Mitarbeiterportal, über das Beschäftigte Leistungen per Smartphone bestellen und buchen – mit SMS-Login und Push-Benachrichtigungen.</p>
     <ul>
-      <li>SMS one-time-password login and server-sent Web Push notifications; installable and offline-capable.</li>
-      <li>One-click Excel reports for the accounting team, generated from live data.</li>
+      <li>Login per SMS-Einmalcode und serverseitige Web-Push-Benachrichtigungen.</li>
+      <li>Excel-Berichte per Klick für die Buchhaltung, direkt aus Live-Daten.</li>
     </ul>
     <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
   </div>
 
-  <h2>How I work</h2>
+  <h2>So arbeite ich</h2>
   <div class="steps">
-    <div><b><em>01</em>Discover</b><span>Map the process and find what AI or Python can take over.</span></div>
-    <div><b><em>02</em>Design</b><span>Workflow, data model and screens, with an agreed scope and timeline.</span></div>
-    <div><b><em>03</em>Build</b><span>n8n, backend, panels and the AI layer in small, testable steps.</span></div>
-    <div><b><em>04</em>Launch &amp; support</b><span>Deployed, monitored, documented and handed over.</span></div>
+    <div><b><em>01</em>Analyse</b><span>Prozess erfassen und finden, was AI oder Python übernehmen kann.</span></div>
+    <div><b><em>02</em>Konzept</b><span>Workflow, Datenmodell und Oberflächen – mit abgestimmtem Umfang und Zeitplan.</span></div>
+    <div><b><em>03</em>Umsetzung</b><span>n8n, Backend, Panels und AI-Schicht in kleinen, testbaren Schritten.</span></div>
+    <div><b><em>04</em>Launch &amp; Support</b><span>Deployt, überwacht, dokumentiert und übergeben.</span></div>
   </div>
 
-  <footer><span>Shayan Safai Sohi — Resume</span><span>Live portfolio &amp; project walkthrough: shayansafaisohi.github.io</span></footer>
+  <footer><span>Shayan Safai Sohi — Lebenslauf</span><span>Live-Portfolio &amp; Projekt-Rundgang: shayansafaisohi.github.io</span></footer>
 </div>
 </body>
 </html>

@@ -9,7 +9,7 @@ Personal portfolio — AI automation & full-stack development. Served by GitHub 
 | `index.html` | The whole site: markup, styles, translations (9 languages) and scripts |
 | `assets/tailwind.css` | Prebuilt Tailwind utilities used by `index.html` |
 | `assets/showcase.mp4`, `assets/showcase-poster.jpg` | Project showcase video and its poster frame |
-| `assets/resume-en.pdf`, `assets/resume-fa.pdf` | One-page resume (English / Persian), linked from the nav |
+| `assets/resume-<lang>.pdf` | One-page resume in each of the 9 site languages, linked from the nav for the current language |
 | `assets/og-image.jpg` | Link-preview image (Open Graph / Twitter card) |
 | `sitemap.xml`, `robots.txt` | For search engines |
 | `tools/tailwind/` | Tailwind config and input for building `assets/tailwind.css` |
@@ -43,14 +43,14 @@ FFMPEG=/path/to/ffmpeg node render.js video ../../assets/showcase.mp4 30
 
 ## Rebuilding the resumes and preview image
 
-Edit `tools/cv/resume-en.html`, `tools/cv/resume-fa.html` or `tools/cv/og.html`, then from the repo root:
+Edit `tools/cv/resume-<lang>.html` (one per site language) or `tools/cv/og.html`, then from the repo root:
 
 ```bash
 npm install puppeteer-core@23
 node tools/cv/build.js
 ```
 
-It writes the two PDFs and `assets/og-image.jpg`, and warns if a resume no longer fits on one page.
+It writes the nine PDFs and `assets/og-image.jpg`, and warns if a resume no longer fits on one page.
 
 ## AI chat assistant
 

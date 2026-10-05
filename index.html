@@ -1589,8 +1589,9 @@
       });
       document.getElementById('toast-msg').textContent = data.toastMsg;
       const cv = document.getElementById('cv-link');
-      cv.href = currentLang === 'fa' ? 'assets/resume-fa.pdf' : 'assets/resume-en.pdf';
-      cv.setAttribute('download', currentLang === 'fa' ? 'Shayan-Safai-Sohi-Resume-FA.pdf' : 'Shayan-Safai-Sohi-Resume.pdf');
+      // One resume per site language (assets/resume-<lang>.pdf); English keeps the plain file name.
+      cv.href = `assets/resume-${currentLang}.pdf`;
+      cv.setAttribute('download', currentLang === 'en' ? 'Shayan-Safai-Sohi-Resume.pdf' : `Shayan-Safai-Sohi-Resume-${currentLang.toUpperCase()}.pdf`);
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const k = el.dataset.i18nPlaceholder; if (data[k]) el.placeholder = data[k]; });
       renderCounts();
 
