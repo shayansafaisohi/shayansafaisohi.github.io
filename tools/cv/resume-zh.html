@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Shayan Safai Sohi — 简历</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=block" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 210mm; height: 297mm; font-family: 'Noto Sans SC', sans-serif; color: #1e293b; font-size: 9.2pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { position: relative; height: 297mm; padding: 13mm 15mm 12mm; overflow: hidden; }
+  .band { position: absolute; inset: 0 0 auto 0; height: 4.5mm; background: linear-gradient(90deg, #06b6d4, #6366f1 55%, #a855f7); }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #e2e8f0; padding-bottom: 4mm; margin-bottom: 4mm; }
+  h1 { font-family: 'Noto Sans SC', sans-serif; font-size: 25pt; letter-spacing: -0.03em; line-height: 1.05; color: #0f172a; }
+  .role { font-family: 'Noto Sans SC', sans-serif; font-weight: 600; font-size: 12pt; margin-top: 1.5mm; background: linear-gradient(90deg, #0891b2, #6366f1); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .contact { text-align: right; font-size: 8.8pt; color: #475569; line-height: 1.75; }
+  .contact b { color: #0f172a; font-weight: 600; }
+  h2 { font-family: 'Noto Sans SC', sans-serif; font-size: 9.5pt; letter-spacing: 0.08em; color: #6366f1; margin: 3.8mm 0 2mm; display: flex; align-items: center; gap: 3mm; }
+  h2::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
+  .summary { font-size: 9.6pt; color: #334155; }
+  .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 6mm; }
+  .skills div b { display: block; font-size: 8.8pt; color: #0f172a; margin-bottom: 0.6mm; }
+  .skills div span { color: #475569; font-size: 8.9pt; }
+  .proj { margin-bottom: 2.6mm; break-inside: avoid; }
+  .proj-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .proj-head b { font-family: 'Noto Sans SC', sans-serif; font-size: 11pt; color: #0f172a; }
+  .proj-head i { font-style: normal; font-size: 8.2pt; color: #6366f1; font-weight: 600; }
+  .proj p { color: #334155; margin: 0.3mm 0 0.6mm; }
+  .proj ul { padding-left: 4.2mm; color: #475569; }
+  .proj li { margin-bottom: 0.1mm; }
+  .proj li::marker { color: #06b6d4; }
+  .stack { font-family: 'JetBrains Mono', monospace; font-size: 7.6pt; color: #64748b; margin-top: 0.8mm; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+  .steps div { border: 1px solid #e2e8f0; border-radius: 2.5mm; padding: 2.4mm 2.8mm; }
+  .steps b { display: block; font-family: 'Noto Sans SC', sans-serif; font-size: 9.4pt; color: #0f172a; }
+  .steps b em { font-style: normal; color: #06b6d4; margin-right: 1.5mm; }
+  .steps span { font-size: 8.2pt; color: #64748b; line-height: 1.4; display: block; margin-top: 0.6mm; }
+  footer { position: absolute; left: 15mm; right: 15mm; bottom: 9mm; display: flex; justify-content: space-between; font-size: 8pt; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 2.5mm; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="band"></div>
+  <header>
+    <div>
+      <h1>Shayan Safai Sohi</h1>
+      <div class="role">AI 自动化与全栈开发</div>
+    </div>
+    <div class="contact">
+      <b>shayan.safai.sohi@gmail.com</b><br>
+      Telegram <b>@shayan_assistantBot</b><br>
+      shayansafaisohi.github.io
+    </div>
+  </header>
+
+  <div class="summary">我擅长找出企业中可以交给 AI 或 Python 完成的手工、重复性流程，并搭建完整的系统来执行：n8n 工作流、后端与 API、管理后台与 Web 应用，以及基于 LLM 和 AI Agent 的智能化集成。可接受全职职位与自由职业项目。</div>
+
+  <h2>核心技能</h2>
+  <div class="skills">
+    <div><b>自动化与 AI</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
+    <div><b>前端</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
+    <div><b>后端与实时</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
+    <div><b>数据、安全与交付</b><span>PostgreSQL, Supabase (RLS), Docker, Caddy, pnpm monorepos, Playwright, Vitest, Pytest</span></div>
+  </div>
+
+  <h2>精选项目</h2>
+  <div class="proj">
+    <div class="proj-head"><b>HamNeshin</b><i>AI · 实时</i></div>
+    <p>录制波斯语会议并转写成文字，识别每句话的说话人，最后生成包含待办事项的摘要。</p>
+    <ul>
+      <li>实时音视频：基于 LiveKit（WebRTC）客户端与服务端 SDK。</li>
+      <li>在自有服务器上识别说话人：使用 ONNX Runtime，录音不会离开机构的基础设施。</li>
+      <li>一条命令完成部署：自研 Node CLI 部署到 VPS，支持原子发布与回滚。</li>
+    </ul>
+    <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
+  </div>
+  <div class="proj">
+    <div class="proj-head"><b>AdvertisingPanel</b><i>工作流系统</i></div>
+    <p>内部工具，让每个广告活动从需求简报到横幅发布依次经过七个角色，每个角色都有独立视图和审批环节。</p>
+    <ul>
+      <li>基于角色的权限：覆盖主管、场景策划、编剧、横幅设计师和管理员。</li>
+      <li>并发提交不产生重复活动编号：依靠数据库级锁实现。</li>
+      <li>Playwright 测试同时驱动五个角色，覆盖桌面端和移动端。</li>
+    </ul>
+    <div class="stack">Python · Django · PostgreSQL · Docker · Playwright</div>
+  </div>
+  <div class="proj">
+    <div class="proj-head"><b>Qaf</b><i>法律科技平台</i></div>
+    <p>为律所打造的平台：客户门户、律师工作台和管理后台共用一套代码库。</p>
+    <ul>
+      <li>pnpm Monorepo：Web 应用、后台和共享的 UI / 逻辑包统一管理版本。</li>
+      <li>Supabase 行级安全：由 44+ 项自动化测试验证，确保每位客户只能看到自己的案卷。</li>
+      <li>架构决策记录（ADR）：记录每项重要技术选择的原因。</li>
+    </ul>
+    <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
+  </div>
+  <div class="proj">
+    <div class="proj-head"><b>Refahi</b><i>PWA</i></div>
+    <p>员工福利门户，员工可用手机下单和预约服务，支持短信登录和推送通知。</p>
+    <ul>
+      <li>短信一次性验证码登录，以及服务端发送的 Web Push 通知。</li>
+      <li>一键生成 Excel 报表：直接基于实时数据，供财务使用。</li>
+    </ul>
+    <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
+  </div>
+
+  <h2>我的工作方式</h2>
+  <div class="steps">
+    <div><b><em>01</em>梳理</b><span>梳理流程，找出可以交给 AI 或 Python 的工作。</span></div>
+    <div><b><em>02</em>设计</b><span>工作流、数据模型与界面，范围和时间表提前确认。</span></div>
+    <div><b><em>03</em>构建</b><span>以小步、可测试的方式构建 n8n、后端、管理后台和 AI 层。</span></div>
+    <div><b><em>04</em>上线与支持</b><span>部署、监控、编写文档并完成交付。</span></div>
+  </div>
+
+  <footer><span>Shayan Safai Sohi — 简历</span><span>在线作品集与项目演示：shayansafaisohi.github.io</span></footer>
+</div>
+</body>
+</html>

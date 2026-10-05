@@ -1,4 +1,4 @@
-// Builds assets/resume-en.pdf, assets/resume-fa.pdf and assets/og-image.jpg from the HTML templates here.
+// Builds assets/resume-<lang>.pdf (one per site language) and assets/og-image.jpg from the HTML templates here.
 // Needs puppeteer-core and Google Chrome:  npm install puppeteer-core@23  then  node tools/cv/build.js  (from repo root)
 const puppeteer = require('puppeteer-core');
 const path = require('path');
@@ -11,7 +11,7 @@ const src = f => 'file:///' + path.resolve(__dirname, f).replace(/\\/g, '/');
   const browser = await puppeteer.launch({ executablePath: CHROME, headless: true });
   const page = await browser.newPage();
 
-  for (const lang of ['en', 'fa']) {
+  for (const lang of ['en', 'fa', 'de', 'fr', 'ar', 'es', 'it', 'ru', 'zh']) {
     await page.goto(src(`resume-${lang}.html`), { waitUntil: 'networkidle0' });
     await page.evaluate(() => document.fonts.ready);
     await page.pdf({ path: out(`resume-${lang}.pdf`), format: 'A4', printBackground: true, preferCSSPageSize: true });
