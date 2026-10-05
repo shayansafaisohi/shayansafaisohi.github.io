@@ -55,7 +55,9 @@ It writes the two PDFs and `assets/og-image.jpg`, and warns if a resume no longe
 ## AI chat assistant
 
 The chat widget posts to a Cloudflare Worker (`tools/chat-worker/`) that runs a model on the free Workers AI allocation; no API key lives in the site.
-The Worker only accepts requests from the site's origin and rate-limits per IP. Its system prompt holds the portfolio facts — update it when the content changes, then redeploy:
+The Worker only accepts requests from the site's origin and rate-limits per IP. Its system prompt holds the portfolio facts — update it when the content changes.
+
+The Worker is connected to this repository with Cloudflare Workers Builds (root directory `tools/chat-worker`, watch path `tools/chat-worker/*`), so pushing a change under `tools/chat-worker/` to `main` redeploys it. To deploy by hand instead:
 
 ```bash
 cd tools/chat-worker
