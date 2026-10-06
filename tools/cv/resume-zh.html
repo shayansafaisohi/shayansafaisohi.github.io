@@ -15,13 +15,14 @@
   .role { font-family: 'Noto Sans SC', sans-serif; font-weight: 600; font-size: 12pt; margin-top: 1.5mm; background: linear-gradient(90deg, #0891b2, #6366f1); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .contact { text-align: right; font-size: 8.8pt; color: #475569; line-height: 1.75; }
   .contact b { color: #0f172a; font-weight: 600; }
-  h2 { font-family: 'Noto Sans SC', sans-serif; font-size: 9.5pt; letter-spacing: 0.08em; color: #6366f1; margin: 3.8mm 0 2mm; display: flex; align-items: center; gap: 3mm; }
+  h2 { font-family: 'Noto Sans SC', sans-serif; font-size: 9.5pt; letter-spacing: 0.08em; color: #6366f1; margin: 3.2mm 0 1.8mm; display: flex; align-items: center; gap: 3mm; }
   h2::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
   .summary { font-size: 9.6pt; color: #334155; }
   .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 6mm; }
+  .skills .wide { grid-column: 1 / -1; }
   .skills div b { display: block; font-size: 8.8pt; color: #0f172a; margin-bottom: 0.6mm; }
   .skills div span { color: #475569; font-size: 8.9pt; }
-  .proj { margin-bottom: 2.6mm; break-inside: avoid; }
+  .proj { margin-bottom: 2.1mm; break-inside: avoid; }
   .proj-head { display: flex; justify-content: space-between; align-items: baseline; }
   .proj-head b { font-family: 'Noto Sans SC', sans-serif; font-size: 11pt; color: #0f172a; }
   .proj-head i { font-style: normal; font-size: 8.2pt; color: #6366f1; font-weight: 600; }
@@ -44,7 +45,7 @@
   <header>
     <div>
       <h1>Shayan Safai Sohi</h1>
-      <div class="role">AI 自动化与全栈开发</div>
+      <div class="role">AI 专家 · AI 赋能与解决方案</div>
     </div>
     <div class="contact">
       <b>shayan.safai.sohi@gmail.com</b><br>
@@ -53,10 +54,21 @@
     </div>
   </header>
 
-  <div class="summary">我擅长找出企业中可以交给 AI 或 Python 完成的手工、重复性流程，并搭建完整的系统来执行：n8n 工作流、后端与 API、管理后台与 Web 应用，以及基于 LLM 和 AI Agent 的智能化集成。可接受全职职位与自由职业项目。</div>
+  <div class="summary">AI 专家，借助 AI 编程智能体（Claude Code、Codex）为组织搭建真正投入使用的系统，并改进其周边流程——从团队日常如何使用 AI，到他们赖以工作的内部工具。正在寻找远程的 AI Enablement、AI Solutions 或 AI Operations 职位，也接受自由职业项目。</div>
+
+  <h2>工作经历</h2>
+  <div class="proj">
+    <div class="proj-head"><b>AI 专家</b><i>控股集团 · 至今</i></div>
+    <ul>
+      <li>发现员工使用 AI 聊天的方式有误（冗长、混杂、缺乏上下文），并向团队讲解上下文窗口和 RAG 的原理。</li>
+      <li>为每个部门配置专属助手：固定的指令，加上由部门办公室负责人每月更新的知识库，即使人员在部门间调动，回答也保持准确。回复更快，幻觉大幅减少。</li>
+      <li>借助 AI 编程智能体（Claude Code、Codex）搭建并上线了下列内部系统，从需求到部署和自动化测试。</li>
+    </ul>
+  </div>
 
   <h2>核心技能</h2>
   <div class="skills">
+    <div class="wide"><b>AI 赋能</b><span>Claude Code, Codex, instruction design, RAG knowledge bases, context-window management, team training</span></div>
     <div><b>自动化与 AI</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
     <div><b>前端</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
     <div><b>后端与实时</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
@@ -70,7 +82,6 @@
     <ul>
       <li>实时音视频：基于 LiveKit（WebRTC）客户端与服务端 SDK。</li>
       <li>在自有服务器上识别说话人：使用 ONNX Runtime，录音不会离开机构的基础设施。</li>
-      <li>一条命令完成部署：自研 Node CLI 部署到 VPS，支持原子发布与回滚。</li>
     </ul>
     <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
   </div>
@@ -90,7 +101,6 @@
     <ul>
       <li>pnpm Monorepo：Web 应用、后台和共享的 UI / 逻辑包统一管理版本。</li>
       <li>Supabase 行级安全：由 44+ 项自动化测试验证，确保每位客户只能看到自己的案卷。</li>
-      <li>架构决策记录（ADR）：记录每项重要技术选择的原因。</li>
     </ul>
     <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
   </div>
@@ -104,13 +114,6 @@
     <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
   </div>
 
-  <h2>我的工作方式</h2>
-  <div class="steps">
-    <div><b><em>01</em>梳理</b><span>梳理流程，找出可以交给 AI 或 Python 的工作。</span></div>
-    <div><b><em>02</em>设计</b><span>工作流、数据模型与界面，范围和时间表提前确认。</span></div>
-    <div><b><em>03</em>构建</b><span>以小步、可测试的方式构建 n8n、后端、管理后台和 AI 层。</span></div>
-    <div><b><em>04</em>上线与支持</b><span>部署、监控、编写文档并完成交付。</span></div>
-  </div>
 
   <footer><span>Shayan Safai Sohi — 简历</span><span>在线作品集与项目演示：shayansafaisohi.github.io</span></footer>
 </div>

@@ -15,13 +15,14 @@
   .role { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 12pt; margin-top: 1.5mm; background: linear-gradient(90deg, #0891b2, #6366f1); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .contact { text-align: right; font-size: 8.8pt; color: #475569; line-height: 1.75; }
   .contact b { color: #0f172a; font-weight: 600; }
-  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 9.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6366f1; margin: 3.8mm 0 2mm; display: flex; align-items: center; gap: 3mm; }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 9.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6366f1; margin: 3.2mm 0 1.8mm; display: flex; align-items: center; gap: 3mm; }
   h2::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
   .summary { font-size: 9.6pt; color: #334155; }
   .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 6mm; }
+  .skills .wide { grid-column: 1 / -1; }
   .skills div b { display: block; font-size: 8.8pt; color: #0f172a; margin-bottom: 0.6mm; }
   .skills div span { color: #475569; font-size: 8.9pt; }
-  .proj { margin-bottom: 2.6mm; break-inside: avoid; }
+  .proj { margin-bottom: 2.1mm; break-inside: avoid; }
   .proj-head { display: flex; justify-content: space-between; align-items: baseline; }
   .proj-head b { font-family: 'Space Grotesk', sans-serif; font-size: 11pt; color: #0f172a; }
   .proj-head i { font-style: normal; font-size: 8.2pt; color: #6366f1; font-weight: 600; }
@@ -40,7 +41,7 @@
   body { font-size: 8.75pt; line-height: 1.36; }
   .summary { font-size: 9.1pt; }
   h2 { margin: 3.2mm 0 1.6mm; }
-  .proj { margin-bottom: 2.1mm; }
+  .proj { margin-bottom: 1.7mm; }
   .proj p { margin: 0.2mm 0 0.4mm; }
   .skills div span { font-size: 8.5pt; }
   .steps span { font-size: 7.9pt; line-height: 1.35; }
@@ -52,7 +53,7 @@
   <header>
     <div>
       <h1>Shayan Safai Sohi</h1>
-      <div class="role">AI Automation y desarrollo Full-Stack</div>
+      <div class="role">Especialista en IA · AI Enablement y soluciones</div>
     </div>
     <div class="contact">
       <b>shayan.safai.sohi@gmail.com</b><br>
@@ -61,10 +62,21 @@
     </div>
   </header>
 
-  <div class="summary">Detecto el trabajo manual y repetitivo de una empresa que puede asumir la IA o Python, y construyo el sistema completo que lo ejecuta: workflows en n8n, backend y APIs, paneles de administración y aplicaciones web, e integración de IA con LLM y agentes. Disponible para empleo a tiempo completo y proyectos freelance.</div>
+  <div class="summary">Especialista en IA que construye sistemas reales para una organización con agentes de programación con IA (Claude Code, Codex) y mejora los procesos a su alrededor: desde cómo usan los equipos la IA a diario hasta las herramientas internas con las que trabajan. Busco un puesto remoto en AI Enablement, AI Solutions o AI Operations, y estoy abierto a proyectos freelance.</div>
+
+  <h2>Experiencia</h2>
+  <div class="proj">
+    <div class="proj-head"><b>Especialista en IA</b><i>Holding · actualidad</i></div>
+    <ul>
+      <li>Detecté que el personal usaba mal los chats de IA —conversaciones largas y mezcladas, sin contexto— y expliqué a los equipos cómo funcionan la ventana de contexto y el RAG.</li>
+      <li>Di a cada área su propio asistente, con instrucciones fijas y una base de conocimiento que el responsable de oficina del área actualiza cada mes, para que las respuestas sigan siendo correctas cuando las personas cambian de área. Respuestas más rápidas y con muchas menos alucinaciones.</li>
+      <li>Construí y puse en marcha los sistemas internos de abajo con agentes de programación con IA (Claude Code, Codex), desde los requisitos hasta el despliegue y las pruebas automatizadas.</li>
+    </ul>
+  </div>
 
   <h2>Competencias clave</h2>
   <div class="skills">
+    <div class="wide"><b>AI enablement</b><span>Claude Code, Codex, instruction design, RAG knowledge bases, context-window management, team training</span></div>
     <div><b>Automatización e IA</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
     <div><b>Frontend</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
     <div><b>Backend y tiempo real</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
@@ -78,7 +90,6 @@
     <ul>
       <li>Audio y vídeo en tiempo real con los SDK de LiveKit (WebRTC) para cliente y servidor.</li>
       <li>Identificación de hablantes en servidores propios con ONNX Runtime: las grabaciones nunca salen de la infraestructura de la organización.</li>
-      <li>Despliegue con un solo comando a un VPS mediante una CLI propia en Node, con releases atómicas y rollback.</li>
     </ul>
     <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
   </div>
@@ -98,7 +109,6 @@
     <ul>
       <li>Monorepo con pnpm: app web, panel y paquetes compartidos de UI y lógica, versionados juntos.</li>
       <li>Seguridad a nivel de fila en Supabase, verificada con más de 44 pruebas automatizadas para que cada cliente vea solo sus expedientes.</li>
-      <li>Architecture Decision Records que documentan por qué se tomó cada decisión técnica importante.</li>
     </ul>
     <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
   </div>
@@ -112,13 +122,6 @@
     <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
   </div>
 
-  <h2>Cómo trabajo</h2>
-  <div class="steps">
-    <div><b><em>01</em>Descubrir</b><span>Mapear el proceso y detectar qué puede asumir la IA o Python.</span></div>
-    <div><b><em>02</em>Diseñar</b><span>Workflow, modelo de datos y pantallas, con alcance y plazos acordados.</span></div>
-    <div><b><em>03</em>Construir</b><span>n8n, backend, paneles y capa de IA en pasos pequeños y comprobables.</span></div>
-    <div><b><em>04</em>Lanzar y mantener</b><span>Desplegado, monitorizado, documentado y entregado.</span></div>
-  </div>
 
   <footer><span>Shayan Safai Sohi — Currículum</span><span>Portafolio en línea y recorrido por los proyectos: shayansafaisohi.github.io</span></footer>
 </div>

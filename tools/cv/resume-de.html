@@ -15,13 +15,14 @@
   .role { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 12pt; margin-top: 1.5mm; background: linear-gradient(90deg, #0891b2, #6366f1); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .contact { text-align: right; font-size: 8.8pt; color: #475569; line-height: 1.75; }
   .contact b { color: #0f172a; font-weight: 600; }
-  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 9.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6366f1; margin: 3.8mm 0 2mm; display: flex; align-items: center; gap: 3mm; }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 9.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6366f1; margin: 3.2mm 0 1.8mm; display: flex; align-items: center; gap: 3mm; }
   h2::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
   .summary { font-size: 9.6pt; color: #334155; }
   .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 6mm; }
+  .skills .wide { grid-column: 1 / -1; }
   .skills div b { display: block; font-size: 8.8pt; color: #0f172a; margin-bottom: 0.6mm; }
   .skills div span { color: #475569; font-size: 8.9pt; }
-  .proj { margin-bottom: 2.6mm; break-inside: avoid; }
+  .proj { margin-bottom: 2.1mm; break-inside: avoid; }
   .proj-head { display: flex; justify-content: space-between; align-items: baseline; }
   .proj-head b { font-family: 'Space Grotesk', sans-serif; font-size: 11pt; color: #0f172a; }
   .proj-head i { font-style: normal; font-size: 8.2pt; color: #6366f1; font-weight: 600; }
@@ -52,7 +53,7 @@
   <header>
     <div>
       <h1>Shayan Safai Sohi</h1>
-      <div class="role">AI Automation &amp; Full-Stack-Entwicklung</div>
+      <div class="role">AI Specialist · AI Enablement &amp; Lösungen</div>
     </div>
     <div class="contact">
       <b>shayan.safai.sohi@gmail.com</b><br>
@@ -61,10 +62,21 @@
     </div>
   </header>
 
-  <div class="summary">Ich finde die manuellen, wiederkehrenden Prozesse eines Unternehmens, die sich mit AI oder Python automatisieren lassen – und baue das komplette System dafür: n8n-Workflows, Backend &amp; APIs, Admin-Panels und Web-Apps sowie AI-Integration mit LLMs und Agents. Offen für Festanstellung und Freelance-Projekte.</div>
+  <div class="summary">AI-Spezialist, der mit KI-Coding-Agents (Claude Code, Codex) funktionierende Systeme für ein Unternehmen baut und die Prozesse drumherum verbessert – vom täglichen KI-Einsatz der Teams bis zu den internen Tools, mit denen sie arbeiten. Suche Remote-Rollen in AI Enablement, AI Solutions oder AI Operations; offen für Freelance-Projekte.</div>
+
+  <h2>Berufserfahrung</h2>
+  <div class="proj">
+    <div class="proj-head"><b>AI Specialist</b><i>Holding · heute</i></div>
+    <ul>
+      <li>Erkannt, dass Mitarbeitende KI-Chats falsch nutzten – lange, vermischte Unterhaltungen ohne Kontext – und Teams erklärt, wie Kontextfenster und RAG funktionieren.</li>
+      <li>Jeder Abteilung einen eigenen Assistenten mit festen Anweisungen und einer Wissensbasis gegeben, die das Abteilungssekretariat monatlich aktualisiert – so bleiben Antworten korrekt, auch wenn Personen die Abteilung wechseln. Antworten kamen schneller, mit deutlich weniger Halluzinationen.</li>
+      <li>Die internen Systeme unten mit KI-Coding-Agents (Claude Code, Codex) gebaut und ausgeliefert – von den Anforderungen bis zu Deployment und automatisierten Tests.</li>
+    </ul>
+  </div>
 
   <h2>Kernkompetenzen</h2>
   <div class="skills">
+    <div class="wide"><b>AI Enablement</b><span>Claude Code, Codex, instruction design, RAG knowledge bases, context-window management, team training</span></div>
     <div><b>Automatisierung &amp; KI</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
     <div><b>Frontend</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
     <div><b>Backend &amp; Echtzeit</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
@@ -78,7 +90,6 @@
     <ul>
       <li>Audio und Video in Echtzeit mit den LiveKit-SDKs (WebRTC) für Client und Server.</li>
       <li>Sprechererkennung auf eigenen Servern mit ONNX Runtime – Aufnahmen verlassen nie die Infrastruktur der Organisation.</li>
-      <li>Deployment mit einem Befehl auf einen VPS über ein eigenes Node-CLI mit atomaren Releases und Rollback.</li>
     </ul>
     <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
   </div>
@@ -98,7 +109,6 @@
     <ul>
       <li>pnpm-Monorepo – Web-App, Panel und gemeinsame UI- und Logik-Pakete gemeinsam versioniert.</li>
       <li>Row-Level-Security in Supabase, abgesichert durch über 44 automatisierte Tests, damit Mandanten nur ihre eigenen Akten sehen.</li>
-      <li>Architecture Decision Records dokumentieren, warum jede wichtige technische Entscheidung getroffen wurde.</li>
     </ul>
     <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
   </div>
@@ -112,13 +122,6 @@
     <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
   </div>
 
-  <h2>So arbeite ich</h2>
-  <div class="steps">
-    <div><b><em>01</em>Analyse</b><span>Prozess erfassen und finden, was AI oder Python übernehmen kann.</span></div>
-    <div><b><em>02</em>Konzept</b><span>Workflow, Datenmodell und Oberflächen – mit abgestimmtem Umfang und Zeitplan.</span></div>
-    <div><b><em>03</em>Umsetzung</b><span>n8n, Backend, Panels und AI-Schicht in kleinen, testbaren Schritten.</span></div>
-    <div><b><em>04</em>Launch &amp; Support</b><span>Deployt, überwacht, dokumentiert und übergeben.</span></div>
-  </div>
 
   <footer><span>Shayan Safai Sohi — Lebenslauf</span><span>Live-Portfolio &amp; Projekt-Rundgang: shayansafaisohi.github.io</span></footer>
 </div>

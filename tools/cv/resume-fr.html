@@ -15,13 +15,14 @@
   .role { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 12pt; margin-top: 1.5mm; background: linear-gradient(90deg, #0891b2, #6366f1); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .contact { text-align: right; font-size: 8.8pt; color: #475569; line-height: 1.75; }
   .contact b { color: #0f172a; font-weight: 600; }
-  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 9.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6366f1; margin: 3.8mm 0 2mm; display: flex; align-items: center; gap: 3mm; }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 9.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: #6366f1; margin: 3.2mm 0 1.8mm; display: flex; align-items: center; gap: 3mm; }
   h2::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
   .summary { font-size: 9.6pt; color: #334155; }
   .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6mm 6mm; }
+  .skills .wide { grid-column: 1 / -1; }
   .skills div b { display: block; font-size: 8.8pt; color: #0f172a; margin-bottom: 0.6mm; }
   .skills div span { color: #475569; font-size: 8.9pt; }
-  .proj { margin-bottom: 2.6mm; break-inside: avoid; }
+  .proj { margin-bottom: 2.1mm; break-inside: avoid; }
   .proj-head { display: flex; justify-content: space-between; align-items: baseline; }
   .proj-head b { font-family: 'Space Grotesk', sans-serif; font-size: 11pt; color: #0f172a; }
   .proj-head i { font-style: normal; font-size: 8.2pt; color: #6366f1; font-weight: 600; }
@@ -40,7 +41,7 @@
   body { font-size: 8.75pt; line-height: 1.36; }
   .summary { font-size: 9.1pt; }
   h2 { margin: 3.2mm 0 1.6mm; }
-  .proj { margin-bottom: 2.1mm; }
+  .proj { margin-bottom: 1.7mm; }
   .proj p { margin: 0.2mm 0 0.4mm; }
   .skills div span { font-size: 8.5pt; }
   .steps span { font-size: 7.9pt; line-height: 1.35; }
@@ -52,7 +53,7 @@
   <header>
     <div>
       <h1>Shayan Safai Sohi</h1>
-      <div class="role">AI Automation &amp; développement Full-Stack</div>
+      <div class="role">Spécialiste IA · AI Enablement &amp; solutions</div>
     </div>
     <div class="contact">
       <b>shayan.safai.sohi@gmail.com</b><br>
@@ -61,10 +62,21 @@
     </div>
   </header>
 
-  <div class="summary">J’identifie les tâches manuelles et répétitives qu’une entreprise peut confier à l’IA ou à Python, puis je construis le système complet : workflows n8n, backend et API, panneaux d’administration et applications web, et intégration de l’IA avec des LLM et des agents. Disponible pour un poste à temps plein ou des missions freelance.</div>
+  <div class="summary">Spécialiste IA qui construit des systèmes opérationnels pour une organisation avec des agents de code IA (Claude Code, Codex) et améliore les processus autour d’eux – de l’usage quotidien de l’IA par les équipes jusqu’aux outils internes qu’elles utilisent. Je cherche un poste en télétravail en AI Enablement, AI Solutions ou AI Operations, et reste ouvert aux missions freelance.</div>
+
+  <h2>Expérience</h2>
+  <div class="proj">
+    <div class="proj-head"><b>Spécialiste IA</b><i>Holding · aujourd’hui</i></div>
+    <ul>
+      <li>Constaté que les équipes utilisaient mal les chats IA – longues conversations mélangées, sans contexte – et expliqué le fonctionnement des fenêtres de contexte et du RAG.</li>
+      <li>Donné à chaque service son propre assistant, avec des instructions fixes et une base de connaissances que l’assistant(e) de direction du service met à jour chaque mois, pour que les réponses restent justes quand les personnes changent de service. Réponses plus rapides, avec beaucoup moins d’hallucinations.</li>
+      <li>Construit et mis en production les systèmes internes ci-dessous avec des agents de code IA (Claude Code, Codex), du besoin au déploiement et aux tests automatisés.</li>
+    </ul>
+  </div>
 
   <h2>Compétences clés</h2>
   <div class="skills">
+    <div class="wide"><b>AI enablement</b><span>Claude Code, Codex, instruction design, RAG knowledge bases, context-window management, team training</span></div>
     <div><b>Automatisation &amp; IA</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
     <div><b>Frontend</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
     <div><b>Backend &amp; temps réel</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
@@ -78,7 +90,6 @@
     <ul>
       <li>Audio et vidéo en temps réel avec les SDK LiveKit (WebRTC) côté client et serveur.</li>
       <li>Identification des locuteurs sur site avec ONNX Runtime — les enregistrements ne quittent jamais l’infrastructure de l’organisation.</li>
-      <li>Déploiement en une commande sur un VPS via une CLI Node maison, avec releases atomiques et rollback.</li>
     </ul>
     <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
   </div>
@@ -98,7 +109,6 @@
     <ul>
       <li>Monorepo pnpm — application web, panneau et packages UI / logique partagés, versionnés ensemble.</li>
       <li>Sécurité au niveau des lignes dans Supabase, vérifiée par plus de 44 tests automatisés : chaque client ne voit que ses propres dossiers.</li>
-      <li>Architecture Decision Records pour documenter la raison de chaque choix technique important.</li>
     </ul>
     <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
   </div>
@@ -112,13 +122,6 @@
     <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
   </div>
 
-  <h2>Ma façon de travailler</h2>
-  <div class="steps">
-    <div><b><em>01</em>Analyse</b><span>Cartographier le processus et repérer ce que l’IA ou Python peut prendre en charge.</span></div>
-    <div><b><em>02</em>Conception</b><span>Workflow, modèle de données et écrans, avec un périmètre et un calendrier validés.</span></div>
-    <div><b><em>03</em>Développement</b><span>n8n, backend, panneaux et couche IA, par petites étapes testables.</span></div>
-    <div><b><em>04</em>Mise en ligne &amp; suivi</b><span>Déployé, supervisé, documenté et transmis.</span></div>
-  </div>
 
   <footer><span>Shayan Safai Sohi — CV</span><span>Portfolio en ligne et présentation des projets : shayansafaisohi.github.io</span></footer>
 </div>

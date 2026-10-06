@@ -15,7 +15,7 @@ const src = f => 'file:///' + path.resolve(__dirname, f).replace(/\\/g, '/');
     await page.goto(src(`resume-${lang}.html`), { waitUntil: 'networkidle0' });
     await page.evaluate(() => document.fonts.ready);
     await page.pdf({ path: out(`resume-${lang}.pdf`), format: 'A4', printBackground: true, preferCSSPageSize: true });
-    const gap = await page.evaluate(() => document.querySelector('footer').getBoundingClientRect().top - document.querySelector('.steps').getBoundingClientRect().bottom);
+    const gap = await page.evaluate(() => document.querySelector('footer').getBoundingClientRect().top - [...document.querySelectorAll('.proj')].pop().getBoundingClientRect().bottom);
     console.log(`resume-${lang}.pdf`, gap < 4 ? `WARNING: content runs into the footer (${gap.toFixed(0)}px)` : `ok (${gap.toFixed(0)}px spare)`);
   }
 

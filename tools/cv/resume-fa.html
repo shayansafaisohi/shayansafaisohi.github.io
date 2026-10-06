@@ -21,6 +21,7 @@
   h2::after { content: ""; flex: 1; height: 1px; background: #e2e8f0; }
   .summary { font-size: 9.3pt; color: #334155; }
   .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4mm 6mm; }
+  .skills .wide { grid-column: 1 / -1; }
   .skills div b { display: block; font-size: 9pt; color: #0f172a; }
   .skills div span { color: #475569; font-size: 8.5pt; direction: ltr; unicode-bidi: plaintext; display: block; text-align: right; }
   .proj { margin-bottom: 2.2mm; break-inside: avoid; }
@@ -45,7 +46,7 @@
   <header>
     <div>
       <h1>شایان صفایی سهی</h1>
-      <div class="role"><span class="ltr">AI Automation</span> و توسعه <span class="ltr">Full-Stack</span></div>
+      <div class="role">متخصص هوش مصنوعی · <span class="ltr">AI Enablement</span> و راهکارهای <span class="ltr">AI</span></div>
     </div>
     <div class="contact">
       <b>shayan.safai.sohi@gmail.com</b><br>
@@ -54,10 +55,21 @@
     </div>
   </header>
 
-  <div class="summary">فرایندهای دستی و تکراری کسب‌وکار را که با AI یا Python قابل خودکارسازی‌اند شناسایی می‌کنم و سیستم کاملش را می‌سازم: از طراحی Workflow در n8n و توسعه Backend و API، تا Admin Panel و Web App، و در نهایت AI Integration با LLM و AI Agent روی سامانه‌های موجود. کد را با تایپ سخت‌گیرانه، امنیت سطح سطر و تست خودکار end-to-end تحویل می‌دهم. آماده همکاری تمام‌وقت و پروژه‌ای.</div>
+  <div class="summary">متخصص هوش مصنوعی که با ایجنت‌های کدنویسی <span class="ltr">AI</span> (<span class="ltr">Claude Code</span>، <span class="ltr">Codex</span>) سیستم‌های واقعی برای سازمان می‌سازد و فرایندهای اطرافشان را درست می‌کند؛ از نحوه‌ی استفاده‌ی روزانه‌ی تیم‌ها از <span class="ltr">AI</span> تا ابزارهای داخلی‌ای که با آن‌ها کار می‌کنند. به دنبال نقش ریموت در <span class="ltr">AI Enablement</span>، <span class="ltr">AI Solutions</span> یا <span class="ltr">AI Operations</span> و پذیرای پروژه‌های فریلنس.</div>
+
+  <h2>سابقه‌ی کار</h2>
+  <div class="proj">
+    <div class="proj-head"><b>متخصص هوش مصنوعی</b><i>هلدینگ · تاکنون</i></div>
+    <ul>
+      <li>دیدم کارکنان از چت‌های AI اشتباه استفاده می‌کنند (گفتگوهای طولانی و درهم بدون زمینه) و مفهوم context window و RAG را به تیم‌ها آموزش دادم.</li>
+      <li>برای هر واحد یک دستیار با دستورالعمل ثابت و پایگاه دانشی ساختم که مسئول دفتر واحد هر ماه به‌روزش می‌کند، تا با جابه‌جایی افراد بین واحدها پاسخ‌ها درست بمانند. پاسخ‌ها سریع‌تر شد و توهم‌ها خیلی کمتر.</li>
+      <li>سیستم‌های داخلی زیر را با ایجنت‌های کدنویسی AI (Claude Code، Codex) از نیازسنجی تا استقرار و تست خودکار ساختم و راه انداختم.</li>
+    </ul>
+  </div>
 
   <h2>مهارت‌های اصلی</h2>
   <div class="skills">
+    <div class="wide"><b>توانمندسازی با هوش مصنوعی</b><span>Claude Code, Codex, instruction design, RAG knowledge bases, context-window management, team training</span></div>
     <div><b>اتوماسیون و هوش مصنوعی</b><span>n8n workflows, LLM / AI agents, webhooks, REST APIs, Python scripting</span></div>
     <div><b>فرانت‌اند</b><span>TypeScript, React 19, Next.js 16, Tailwind CSS v4, shadcn/ui, Vite, PWA, RTL</span></div>
     <div><b>بک‌اند و بلادرنگ</b><span>Node.js, Fastify 5, Python / Django, WebSockets, LiveKit (WebRTC), ONNX Runtime</span></div>
@@ -71,7 +83,6 @@
     <ul>
       <li>صوت و تصویر هم‌زمان با SDK کلاینت و سرور LiveKit (WebRTC).</li>
       <li>تشخیص گوینده روی سرور خود سازمان با ONNX Runtime؛ فایل‌های صوتی از زیرساخت سازمان خارج نمی‌شوند.</li>
-      <li>استقرار با یک دستور روی VPS با CLI اختصاصی Node، همراه با انتشار اتمیک و امکان بازگشت.</li>
     </ul>
     <div class="stack">TypeScript · React 19 · Fastify 5 · LiveKit · ONNX · WebSockets</div>
   </div>
@@ -91,7 +102,6 @@
     <ul>
       <li>مونوریپو با pnpm؛ اپ وب، پنل و پکیج‌های مشترک UI و منطق در کنار هم.</li>
       <li>امنیت سطح سطر در Supabase با بیش از ۴۴ تست خودکار، تا هر موکل فقط پرونده‌های خودش را ببیند.</li>
-      <li>ثبت تصمیم‌های معماری (ADR) تا دلیل هر انتخاب فنی مهم مستند بماند.</li>
     </ul>
     <div class="stack">Next.js · TypeScript (strict) · Supabase RLS · shadcn/ui · Vitest</div>
   </div>
@@ -105,13 +115,6 @@
     <div class="stack">Next.js 16 · React 19 · Supabase SSR · Tailwind v4 · Web Push</div>
   </div>
 
-  <h2>روند کار</h2>
-  <div class="steps">
-    <div><b><em>۰۱</em>شناخت</b><span>بررسی فرایند و پیدا کردن کارهایی که AI یا Python انجام می‌دهد.</span></div>
-    <div><b><em>۰۲</em>طراحی</b><span>Workflow، مدل داده و صفحه‌ها با محدوده و زمان‌بندی توافق‌شده.</span></div>
-    <div><b><em>۰۳</em>ساخت</b><span>n8n، بک‌اند، پنل و لایه AI در گام‌های کوچک و قابل تست.</span></div>
-    <div><b><em>۰۴</em>راه‌اندازی و پشتیبانی</b><span>استقرار، مانیتورینگ، مستندسازی و تحویل.</span></div>
-  </div>
 
   <footer><span>شایان صفایی سهی — رزومه</span><span class="ltr">shayansafaisohi.github.io</span></footer>
 </div>
