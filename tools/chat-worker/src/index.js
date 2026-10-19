@@ -103,7 +103,7 @@ function toTextStream(sse) {
 async function claudeStream(env, messages) {
   const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1 });
   const events = client.messages.stream({
-    model: env.CLAUDE_MODEL,
+    model: env.CLAUDE_MODEL || 'claude-haiku-5-5', // default if the variable is missing
     max_tokens: 2000, // thinking counts toward this too
     system: SYSTEM_PROMPT,
     messages,
