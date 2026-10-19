@@ -3,5 +3,11 @@ name = "portfolio-chat"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
 
+[vars]
+# Claude model and effort for the chat replies; the key goes in the ANTHROPIC_API_KEY secret.
+CLAUDE_MODEL = "claude-haiku-5-5"
+CLAUDE_EFFORT = "medium"
+
+# Fallback when Claude is unreachable or no key is set (free Workers AI allocation).
 [ai]
 binding = "AI"
