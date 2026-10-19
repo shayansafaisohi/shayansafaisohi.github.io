@@ -54,7 +54,7 @@ It writes the nine PDFs and `assets/og-image.jpg`, and warns if a resume no long
 
 ## AI chat assistant
 
-The chat widget posts to a Cloudflare Worker (`tools/chat-worker/`) that runs a model on the free Workers AI allocation; no API key lives in the site.
+The chat widget posts to a Cloudflare Worker (`tools/chat-worker/`) that answers with Claude (`CLAUDE_MODEL` / `CLAUDE_EFFORT` in its `wrangler.toml`, default Claude Haiku 5.5 at `medium`) using the `ANTHROPIC_API_KEY` secret set on the Worker in Cloudflare; when no key is set or Claude is unreachable, it falls back to a model on the free Workers AI allocation. No API key lives in the site.
 The Worker only accepts requests from the site's origin and rate-limits per IP. Its system prompt holds the portfolio facts — update it when the content changes.
 
 The Worker is connected to this repository with Cloudflare Workers Builds (root directory `tools/chat-worker`, watch path `tools/chat-worker/*`), so pushing a change under `tools/chat-worker/` to `main` redeploys it. To deploy by hand instead:

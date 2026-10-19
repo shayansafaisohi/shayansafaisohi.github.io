@@ -1,8 +1,14 @@
-// Portfolio chat assistant — Cloudflare Worker using the free Workers AI allocation.
+// Portfolio chat assistant — Cloudflare Worker.
 // The site (GitHub Pages) POSTs { messages: [{ role, content }...] } and gets the reply back
-// as a plain-text stream. No API key lives in the browser; the model runs on Cloudflare.
+// as a plain-text stream. No API key lives in the browser.
+// Replies come from Claude (CLAUDE_MODEL / CLAUDE_EFFORT in wrangler.toml, key in the
+// ANTHROPIC_API_KEY secret); if Claude is unreachable or no key is set, the free Workers AI
+// model answers instead.
 
-const MODEL = '@cf/google/gemma-4-26b-a4b-it';
+import Anthropic from '@anthropic-ai/sdk';
+
+const FALLBACK_MODEL = '@cf/google/gemma-4-26b-a4b-it';
+const encoder = new TextEncoder();
 
 const ALLOWED_ORIGINS = [
   'https://shayansafaisohi.github.io',
@@ -71,7 +77,6 @@ function cleanMessages(input) {
 // Re-emit only the answer text so the browser can append it directly.
 function toTextStream(sse) {
   const decoder = new TextDecoder();
-  const encoder = new TextEncoder();
   let buffer = '';
   return sse.pipeThrough(new TransformStream({
     transform(chunk, controller) {
@@ -93,6 +98,56 @@ function toTextStream(sse) {
   }));
 }
 
+// Streams Claude's answer text. The first event is awaited before returning, so a bad key, an
+// outage or a rate limit throws here and the caller can still fall back to Workers AI.
+async function claudeStream(env, messages) {
+  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1 });
+  const events = client.messages.stream({
+    model: env.CLAUDE_MODEL,
+    max_tokens: 2000, // thinking counts toward this too
+    system: SYSTEM_PROMPT,
+    messages,
+    output_config: { effort: env.CLAUDE_EFFORT || 'medium' },
+  })[Symbol.asyncIterator]();
+  const first = await events.next();
+
+  let wrote = false;
+  // Returns the bytes to send for one event, or null. Only answer text is forwarded;
+  // thinking blocks arrive empty and are skipped.
+  const bytesOf = event => {
+    if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
+      wrote = true;
+      return encoder.encode(event.delta.text);
+    }
+    if (event.type === 'message_delta' && event.delta.stop_reason === 'refusal' && !wrote) {
+      return encoder.encode('Sorry, I can\'t help with that here. You can reach Shayan by email (shayan.safai.sohi@gmail.com) or on Telegram (@shayan_assistantBot).');
+    }
+    return null;
+  };
+
+  let pending = first;
+  return new ReadableStream({
+    // Keep reading until there is something to send: a pull that enqueues nothing stalls the stream.
+    async pull(controller) {
+      try {
+        for (;;) {
+          const { value, done } = pending || await events.next();
+          pending = null;
+          if (done) return controller.close();
+          const bytes = bytesOf(value);
+          if (bytes) return controller.enqueue(bytes);
+        }
+      } catch (err) {
+        console.error('Claude stream broke:', err.message);
+        controller.close();
+      }
+    },
+    cancel() {
+      events.return?.();
+    },
+  });
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
@@ -110,17 +165,24 @@ export default {
     const messages = cleanMessages(body.messages);
     if (!messages) return new Response('Bad request', { status: 400, headers });
 
+    const textHeaders = { ...headers, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' };
+    if (env.ANTHROPIC_API_KEY) {
+      try {
+        return new Response(await claudeStream(env, messages), { headers: textHeaders });
+      } catch (err) {
+        console.error('Claude failed, falling back to Workers AI:', err.message);
+      }
+    }
+
     try {
-      const stream = await env.AI.run(MODEL, {
+      const stream = await env.AI.run(FALLBACK_MODEL, {
         messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
         stream: true,
         max_tokens: 600,
         temperature: 0.5,
         chat_template_kwargs: { enable_thinking: false },
       });
-      return new Response(toTextStream(stream), {
-        headers: { ...headers, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
-      });
+      return new Response(toTextStream(stream), { headers: textHeaders });
     } catch (err) {
       // The free daily allocation is used up, or the model is unavailable
       return new Response('AI unavailable', { status: 503, headers });
